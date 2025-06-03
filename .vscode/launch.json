@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ComicrentalApplication<comicrental>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "teamB.comicrental.ComicrentalApplication",
+            "projectName": "comicrental",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
