@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>読む - 漫画レンタル</title>
+    <style>
+        body {
+            font-family: "Helvetica", sans-serif;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 2em auto;
+            background-color: #fff;
+            padding: 2em;
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5em;
+        }
+
+        .comic-content img {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .back-button {
+            text-align: center;
+            margin-top: 2em;
+        }
+
+        .back-button button {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .back-button button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>漫画を読む</h1>
+</header>
+
+<main>
+    <h2>進撃の巨人 第1巻</h2> <!-- 漫画タイトルは動的に変更可能 -->
+
+    <div class="comic-content">
+        <!-- 漫画本文：1ページずつ画像として表示（例） -->
+        <img src="images/page1.jpg" alt="漫画ページ1">
+        <img src="images/page2.jpg" alt="漫画ページ2">
+        <img src="images/page3.jpg" alt="漫画ページ3">
+        <!-- 必要なだけページを追加 -->
+    </div>
+
+    <div class="back-button">
+        <button onclick="history.back()">戻る</button>
+    </div>
+</main>
+
+</body>
+</html>
