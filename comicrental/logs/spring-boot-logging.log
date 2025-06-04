@@ -1,0 +1,19 @@
+2025-06-03T16:09:32.512+09:00  INFO 19136 --- [restartedMain] t.comicrental.ComicrentalApplication     : Starting ComicrentalApplication using Java 21.0.7 with PID 19136 (C:\tutorial\team_b\comicrental\build\classes\java\main started by 3054 in C:\tutorial\team_b\comicrental)
+2025-06-03T16:09:32.532+09:00  INFO 19136 --- [restartedMain] t.comicrental.ComicrentalApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-06-03T16:09:32.778+09:00  INFO 19136 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-06-03T16:09:32.841+09:00  INFO 19136 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-06-03T16:09:35.048+09:00  INFO 19136 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-06-03T16:09:35.085+09:00  INFO 19136 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 0 JDBC repository interfaces.
+2025-06-03T16:09:35.419+09:00  WARN 19136 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[teamB.comicrental]' package. Please check your configuration.
+2025-06-03T16:09:35.430+09:00  INFO 19136 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=3a1145cb-ef8b-3c68-b1f1-9d7edcd47b0e
+2025-06-03T16:09:36.528+09:00  INFO 19136 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-06-03T16:09:36.582+09:00  INFO 19136 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-03T16:09:36.606+09:00  INFO 19136 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-06-03T16:09:36.698+09:00  INFO 19136 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-03T16:09:36.698+09:00  INFO 19136 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3853 ms
+2025-06-03T16:09:38.455+09:00  INFO 19136 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-03T16:09:39.101+09:00  INFO 19136 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@29896ac3
+2025-06-03T16:09:39.105+09:00  INFO 19136 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-03T16:09:40.050+09:00  INFO 19136 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-06-03T16:09:40.606+09:00  INFO 19136 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-06-03T16:09:40.703+09:00  INFO 19136 --- [restartedMain] t.comicrental.ComicrentalApplication     : Started ComicrentalApplication in 10.001 seconds (process running for 13.011)
