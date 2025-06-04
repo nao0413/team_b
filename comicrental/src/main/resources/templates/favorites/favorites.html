@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>お気に入り一覧 - 漫画レンタル</title>
+    <style>
+        body {
+            font-family: "Helvetica", sans-serif;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2em auto;
+            background-color: white;
+            padding: 2em;
+            border-radius: 8px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 0.5em;
+        }
+
+        .favorite-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .favorite-info a {
+            font-weight: bold;
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .favorite-info a:hover {
+            text-decoration: underline;
+        }
+
+        .action-buttons button {
+            margin-left: 1em;
+            padding: 0.5em 1em;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-cart {
+            background-color: #28a745;
+        }
+
+        .btn-cart:hover {
+            background-color: #218838;
+        }
+
+        .btn-read {
+            background-color: #17a2b8;
+        }
+
+        .btn-read:hover {
+            background-color: #138496;
+        }
+
+        .back-button {
+            text-align: center;
+            margin-top: 2em;
+        }
+
+        .back-button button {
+            background-color: #6c757d;
+            color: white;
+            padding: 0.8em 1.5em;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .back-button button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>お気に入り一覧</h1>
+</header>
+
+<main>
+    <h2>お気に入り登録された漫画</h2>
+
+    <!-- 漫画1（レンタル中） -->
+    <div class="favorite-item">
+        <div class="favorite-info">
+            <a href="comic-detail.html">進撃の巨人</a> - 諫山創
+        </div>
+        <div class="action-buttons">
+            <button class="btn-read" onclick="location.href='read.html'">レンタル中：読む</button>
+        </div>
+    </div>
+
+    <!-- 漫画2（未レンタル） -->
+    <div class="favorite-item">
+        <div class="favorite-info">
+            <a href="comic-detail.html">約束のネバーランド</a> - 出水ぽすか
+        </div>
+        <div class="action-buttons">
+            <button class="btn-cart">買い物かごへ</button>
+        </div>
+    </div>
+
+    <!-- 他の漫画も同様に追加 -->
+
+    <div class="back-button">
+        <button onclick="history.back()">戻る</button>
+    </div>
+</main>
+
+</body>
+</html>
