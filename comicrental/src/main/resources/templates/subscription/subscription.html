@@ -8,16 +8,18 @@
     <title>サブスクリプション状況確認画面</title>
 </head>
 <body>
-    <h1>サブスクリプション状況</h1>
-    <h4 class="mypage">会員番号</h4>
-    <h4 class="mypage">名前</h4>
-    <h4 class="mypage">サブスクリプション状況</h4>
+    <h1 th:text="${page.title}">サブスクリプション状況</h1>
+    <div class="mypage">
+    <h4 th:if="${page.id !=null}"> 会員番号:<span th:text="${page.id}"></span></h4>
+    <h4 th:if="${page.name !=null}">名前:<span th:text="${page.name}"></span></h4>
+    <h4>サブスクリプション状況:<span th:text="${page.subscribed ? '加入済み':'未加入'}"></span></h4>
     <h5>マイページへ</h5>
+    </div>
     <hr>
     <h2 class="join">サブスクリプション　加入</h2>
-    <button>加入</button>
+    <a href="subscriptionJoin.html">加入ページへ</a>
     <hr>
     <h2 class="Withdrawal">サブスクリプション　退会</h2>
-    <button>退会</button>
+    <a href="subscriptionWithdrawal.html">退会ページへ</a> 
 </body>
 </html>
