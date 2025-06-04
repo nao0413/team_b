@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>検索結果 - 漫画レンタル</title>
+    <style>
+        body {
+            font-family: "Helvetica", sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        main {
+            max-width: 800px;
+            margin: 2em auto;
+            background: white;
+            padding: 2em;
+            border-radius: 8px;
+        }
+        h2 {
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 0.5em;
+        }
+        .result-item {
+            border-bottom: 1px solid #eee;
+            padding: 1em 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .result-item a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .result-item a:hover {
+            text-decoration: underline;
+        }
+        .btn-cart {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-cart:hover {
+            background-color: #218838;
+        }
+        .no-result {
+            color: red;
+            text-align: center;
+            margin: 2em 0;
+        }
+        .back-button {
+            display: block;
+            text-align: center;
+            margin-top: 2em;
+        }
+        .back-button a {
+            background-color: #6c757d;
+            color: white;
+            padding: 0.6em 1.2em;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-button a:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>検索結果</h1>
+</header>
+
+<main>
+    <h2>検索結果一覧</h2>
+
+    <!-- 検索結果がある場合 -->
+    <div class="result-item">
+        <div>
+            <a href="comic-detail.html">進撃の巨人</a> - 諫山創
+        </div>
+        <button class="btn-cart">買い物かごへ</button>
+    </div>
+
+    <div class="result-item">
+        <div>
+            <a href="comic-detail.html">鋼の錬金術師</a> - 荒川弘
+        </div>
+        <button class="btn-cart">買い物かごへ</button>
+    </div>
+
+    <!-- 検索結果がない場合（下記divのコメントを外して表示） -->
+    <!--
+    <div class="no-result">
+        お探しのものは見つかりませんでした。
+    </div>
+    -->
+
+    <div class="back-button">
+        <a href="search.html">検索画面へ戻る</a>
+    </div>
+</main>
+
+</body>
+</html>
+
