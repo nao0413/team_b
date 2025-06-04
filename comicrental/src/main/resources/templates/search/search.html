@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>検索 - 漫画レンタル</title>
+    <style>
+        body {
+            font-family: "Helvetica", sans-serif;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #222;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+        main {
+            max-width: 600px;
+            margin: 3em auto;
+            background-color: #fff;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+        input[type="text"], select {
+            padding: 0.8em;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 0.8em;
+            font-size: 1em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            text-align: center;
+            margin-top: 3em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>漫画を検索</h1>
+</header>
+
+<main>
+    <h2>漫画タイトルで検索</h2>
+    <form action="search-result.html" method="get">
+        <label for="keyword">キーワード（タイトル）</label>
+        <input type="text" id="keyword" name="keyword" placeholder="例：進撃の巨人" required>
+
+        <!-- 任意機能：ジャンル・著者での絞り込み -->
+        <!--
+        <label for="genre">ジャンル</label>
+        <select id="genre" name="genre">
+            <option value="">選択してください</option>
+            <option value="action">戦闘系</option>
+            <option value="romance">恋愛系</option>
+            <option value="sf">SF系</option>
+        </select>
+
+        <label for="author">著者名</label>
+        <input type="text" id="author" name="author" placeholder="例：諫山創">
+        -->
+
+        <button type="submit">検索</button>
+    </form>
+</main>
+
+<footer>
+    &copy; 2025 漫画レンタルサービス
+</footer>
+
+</body>
+</html>
