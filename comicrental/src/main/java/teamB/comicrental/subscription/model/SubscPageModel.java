@@ -14,6 +14,7 @@ public class SubscPageModel {
     private Integer id;
     private String name;
     private boolean subscribed;
+    //public String massege;
     
     public String getTitle() {
         return title;
@@ -45,5 +46,11 @@ public class SubscPageModel {
     public void setSubscribed(boolean subscribed) {
         this.subscribed = subscribed;
     }
+    // public String getMassege() {
+    //     return massege;
+    // }
+    // public void setMassege(String massege) {
+    //     this.massege = massege;
+    // }
     
 }
