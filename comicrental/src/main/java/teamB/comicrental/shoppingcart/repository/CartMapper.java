@@ -4,14 +4,16 @@ import org.apache.ibatis.annotations.*;
 import teamB.comicrental.shoppingcart.model.Cart;
 import java.util.List;
 
-// MyBatisのMapper：カート情報をDBとやりとりする
 @Mapper
 public interface CartMapper {
 
-    // 顧客IDからカート一覧を取得
+    // 顧客IDからカート一覧を取得（画像URLとタイトルをJOINで取得）
     @Select("""
-                SELECT * FROM cart
-                WHERE customer_id = #{customer_id} AND is_deleted = false
+                SELECT c.*, cm.comic_image AS imageUrl, cm.title AS title
+                FROM cart c
+                JOIN comic cm ON c.comic_id = cm.comic_id
+                WHERE c.customer_id = #{customer_id}
+                AND c.is_deleted = false
             """)
     List<Cart> findCartByCustomerId(@Param("customer_id") int customer_id);
 

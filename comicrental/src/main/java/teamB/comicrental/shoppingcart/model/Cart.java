@@ -1,15 +1,21 @@
+// Cart.java（修正後）
 package teamB.comicrental.shoppingcart.model;
 
 import java.util.Date;
 
 public class Cart {
-    private int cart_id; // カートID（主キー）
-    private int customer_id; // 顧客ID（外部キー）
-    private int comic_id; // 漫画ID（外部キー）
-    private int volume; // 巻数
-    private Date rental_expire; // 閲覧可能期限
-    private Boolean is_deleted; // 削除フラグ（
+    private int cart_id;
+    private int customer_id;
+    private int comic_id;
+    private int volume;
+    private Date rental_expire;
+    private Boolean is_deleted;
 
+    // 表示用フィールド（DBにはない）
+    private String title;
+    private String imageUrl;
+
+    // --- getter & setter ---
     public int getCart_id() {
         return cart_id;
     }
@@ -18,7 +24,7 @@ public class Cart {
         this.cart_id = cart_id;
     }
 
-    public Integer getCustomer_id() {
+    public int getCustomer_id() {
         return customer_id;
     }
 
@@ -56,5 +62,21 @@ public class Cart {
 
     public void setIs_deleted(Boolean is_deleted) {
         this.is_deleted = is_deleted;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
