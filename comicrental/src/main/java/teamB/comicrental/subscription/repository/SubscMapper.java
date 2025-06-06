@@ -20,7 +20,9 @@ public interface SubscMapper {
     @Select("select customer_id,customer_name,is_subscribed from customer where customer_id=#{customerId} limit 1")
     public Optional<SubscModel> findById(@Param("customerId") int customerId);
 
-    @Update("UPDATE customer SET is_subscribed=#{is_subscribed},plan_type=#{plan_type},credit_number=#{credit_number},credit_name=#{credit_name},credit_date=#{credit_date},security_code=#{security_code},subscription_start_date=#{subscription_start_date} WHERE customer_id=#{customer_id}")
+    @Update("UPDATE customer SET is_subscribed=#{is_subscribed},subscription_plan_id=#{subscription_plan_id},credit_number=#{credit_number},credit_name=#{credit_name},credit_date=#{credit_date},security_code=#{security_code},subscription_start_date=#{subscription_start_date} WHERE customer_id=#{customer_id}")
             public void updateSubscriptionInfo(SubscModel subscModel);
-            
+     
+    @Update("UPDATE customer SET is_subscribed=FALSE,subscription_plan_id=NULL,credit_number=NULL,credit_name=NULL,credit_date=NULL,security_code=NULL WHERE customer_id=#{customer_id}")
+            public void unsubscribe(@Param("customer_id") int customer_id);
 }

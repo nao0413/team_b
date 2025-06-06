@@ -8,7 +8,7 @@
     <title>サブスクリプション加入画面</title>
 </head>
 <body>
-    <h1 th:text="${page.title}">サブスクリプション　加入</h2>
+    <h1 th:text="${page.title}">サブスクリプション　加入</h1>
     <h2>シングルプラン　月額８００円　上限３０冊</h2>
     <div th:if="${errorMessage}">
         <p th:text="${errorMessage}"></p>
@@ -17,24 +17,28 @@
         <p th:text="${successMessage}"></p>
     </div>
     <form action="/subscription/doJoin" method="post">
+    <input type="hidden" name="customerId" th:value="${page.id}">
     <h2>クレジットカード情報</h2>
     <h4>クレジットカード番号</h4>
-    <input type="text" name="cardNumber" placeholder="例: 1234-5678-9012-3456" required>
+    <input type="text" name="cardNumber" placeholder="例: 1234-5678-9012-3456" th:value="${page.cardNumber}" required>
     <h4>使用名義</h4>
-    <input type="text" name="cardHolderName" placeholder="例: YAMADA TARO" required>
+    <input type="text" name="cardHolderName" placeholder="例: YAMADA TARO" th:value="${page.cardHolderName}" required>
     <h4>有効期限</h4>
-    <input type="text" name="expiryDate" placeholder="例: MM/YY" required>
+    <input type="text" name="expiryDate" placeholder="例: MM/YY" th:value="${page.expiryDate}" required>
     <h4>セキュリティコード</h4>
-    <input type="password" name="securityCode" placeholder="例: 123" required>
+    <input type="password" name="securityCode" placeholder="例: 123" th:value="${page.securityCode}" required>
 
     <button type="submit">加入</button>
-</form>
+    </form>
 
 <div th:if="${page.subscribed}">
     <h3>加入済です</h3>
 </div>
 
     <hr>
-    <a href="subscription.html">サブスクリプション状況確認画面</a><h5>マイページへ</h5>
+    <form action="/subscription/list" method="get">
+    <button type="submit">サブスクリプション状況確認画面へ</button>
+    <input type="hidden" name="customerId" th:value="${page.id}">
+    </form>
 </body>
 </html>
