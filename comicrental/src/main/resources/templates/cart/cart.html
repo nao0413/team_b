@@ -10,7 +10,6 @@
             width: 100%;
             height: 100%;
             font-family: sans-serif;
-            
         }
 
         .container {
@@ -123,10 +122,10 @@
             <td><img th:src="@{${item.imageUrl}}" alt="漫画画像" class="cart-image"></td>
             <td th:text="${item.title}"></td>
             <td th:text="${item.volume} + '巻'"></td>
-            <td th:text="${#dates.format(item.rentalExpire, 'yyyy年MM月dd日')}"></td>
+            <td th:text="${#dates.format(item.rental_expire, 'yyyy年MM月dd日')}"></td>
             <td>
                 <form method="post" th:action="@{/cart/delete}">
-                    <input type="hidden" name="cartId" th:value="${item.cartId}" />
+                    <input type="hidden" name="cart_id" th:value="${item.cart_id}" />
                     <button type="submit">削除</button>
                 </form>
             </td>

@@ -28,7 +28,7 @@ public class CartController {
         model.addAttribute("cartList", cartList);
         model.addAttribute("totalCount", cartService.getTotalCount(cartList)); // 合計冊数
         model.addAttribute("remainingLimit", cartService.getRemainingLimit(customer_id, maxLimit)); // 残りレンタル可能冊数
-        return "cart"; // cart.html を表示
+        return "cart/cart"; // cart.html を表示
     }
 
     // 指定されたアイテムをカートから削除
@@ -53,7 +53,7 @@ public class CartController {
     public String confirmCart(Model model) {
         List<Cart> cartList = cartService.getCartList(customer_id); // カート内容を取得
         model.addAttribute("cartList", cartList); // テンプレートに渡す
-        return "cart_confirm"; // cart_confirm.html を表示
+        return "cart/cart_confirm"; // cart_confirm.html を表示
     }
 
     // レンタル完了処理を実行し、完了画面を表示する
@@ -61,6 +61,6 @@ public class CartController {
     @PostMapping("/complete")
     public String completeRental() {
         cartService.deleteAllCart(customer_id); // レンタル完了＝カート全削除
-        return "cart_complete"; // 完了画面(cart_complete.html)を表示
+        return "cart/cart_complete"; // 完了画面(cart_complete.html)を表示
     }
 }
