@@ -7,10 +7,16 @@
     <title>サブスクリプション退会通知画面</title>
 </head>
 <body>
-    <h1>サブスクリプション　退会</h2>
+    <h1 th:text="${page.title}">サブスクリプション　退会</h1>
+    <div th:if="${successMessage}" >
+        <p th:text="${successMessage}"></p>
+    </div>
     <h2 class="notification">サブスクリプションを退会しました。</h2>
     <h2 class="notification">ご利用ありがとうございました。</h2>
-    <h5>サブスクリプション状況確認画面へ戻る</h5>
+    <form action="/subscription/list" method="get">
+    <button type="submit">サブスクリプション状況確認画面へ</button>
+    <input type="hidden" name="customerId" th:value="${page.id}">
+    </form>
     <h5>マイページへ戻る</h5>
 </body>
 </html>
