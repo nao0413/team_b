@@ -1,30 +1,61 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>漫画一覧</title>
 </head>
+
 <body>
-<h1>漫画一覧</h1>
-<h2>買い物かごページへ</h2>
-<table>
-    <thead>
-        <th>タイトル</th>
-        <th>著者</th>
-        <th>ジャンル</th>
-        <th>漫画個別ページへ</th>
-        <th>表紙</th>
-        
-    <tbody>
-        
-            <td>タイトル</td>
-            <td>著者</td>
-            <td>ジャンル</td>
-            <td>漫画個別ページへ</td>
-            <td>表紙</td>
-    </tbody>
-</table>
+    <h1>漫画一覧</h1>
+    <form action="/cart/table" method="get">
+    <button type="submit">買い物かごページへ</button>
+    <input type="hidden" name="customerId" th:value="${customerId}">
+    </form>
+    <div th:if="${errorMessage}">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <div th:if="${successMessage}" >
+        <p th:text="${successMessage}"></p>
+    </div>
+    <table>
+        <thead>
+            <th>タイトル</th>
+            <th>著者</th>
+            <th>ジャンル</th>
+            <th>レンタル状況</th>
+            <th>カートに追加</th>
+            <th>漫画個別ページへ</th>
+            <th>表紙</th>
+        </thead>
+        <tbody>
+            <tr th:if="${#lists.isEmpty(comicList)}">
+                <td colspan="7">漫画が見つかりませんでした。</td>
+            </tr>
+            <tr th:each="comic:${comicList}">
+                <td th:text="${comic.title}">タイトル</td>
+                <td th:text="${comic.author}">著者</td>
+                <td th:text="${comic.category_name}">ジャンル</td>
+                <td>
+                    <span th:if="${comic.isRented}">レンタル中</span>
+                    <span th:unless="${comic.isRented}">未レンタル</span>
+                </td>
+                <td>
+                    <form action="/comics/addToCart" method="post">
+                        <input type="hidden" name="comicId" th:value="${comic.comic_id}">
+                        <input type="hidden" name="customerId" th:value="${customerId}">
+                        <button type="submit" class="add-to-cart-button">買い物かごへ入れる</button>
+                    </form>
+                </td>
+                <td><a th:href="'/comic/'+${comic.comic_id}">詳細ページへ</a></td>
+                <td>
+                    <img th:src="${comic.comic_image}" alt="表紙画像" class="comic-image">
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
+
 </html>
