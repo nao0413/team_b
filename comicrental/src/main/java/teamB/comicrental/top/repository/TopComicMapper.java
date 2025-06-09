@@ -1,9 +1,10 @@
 package teamB.comicrental.top.repository;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import teamB.comicrental.top.model.Comic;
+
+import java.util.List;
 
 @Mapper
 public interface TopComicMapper {
@@ -12,3 +13,4 @@ public interface TopComicMapper {
             "FROM comic ORDER BY rentaltimes DESC LIMIT 5")
     List<Comic> findTopComics();
 }
+

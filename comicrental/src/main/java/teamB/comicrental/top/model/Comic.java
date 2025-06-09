@@ -6,7 +6,6 @@ public class Comic {
     private String comicImage;
     private int rentaltimes;
 
-    // Getter / Setter
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
 
