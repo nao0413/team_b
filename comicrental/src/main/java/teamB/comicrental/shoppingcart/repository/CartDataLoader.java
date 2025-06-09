@@ -1,3 +1,4 @@
+/*
 package teamB.comicrental.shoppingcart.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,3 +37,4 @@ public class CartDataLoader {
         cartMapper.insert(cart2);
     }
 }
+*/

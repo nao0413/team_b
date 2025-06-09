@@ -18,6 +18,11 @@ public class CartController {
     private final int customer_id = 1; // ユーザーID
     private final int maxLimit = 30; // 月にレンタルできる最大冊数
 
+    @GetMapping("")
+    public String redirectToCartTable() {
+        return "redirect:/cart/table";
+    }
+
     // カート一覧画面を表示する
 
     @GetMapping("/table")
@@ -36,7 +41,7 @@ public class CartController {
     @PostMapping("/delete")
     public String deleteItem(@RequestParam("cart_id") int cart_id) {
         cartService.deleteCart(cart_id); // cart_id に対応するデータを削除
-        return "redirect:/cart"; // 一覧画面にリダイレクト
+        return "redirect:/cart/table"; // 一覧画面にリダイレクト
     }
 
     // カート内の全アイテムを削除（論理削除）
@@ -44,7 +49,7 @@ public class CartController {
     @PostMapping("/deleteAll")
     public String deleteAll() {
         cartService.deleteAllCart(customer_id); // 指定ユーザーのカートを全削除
-        return "redirect:/cart"; // 一覧画面にリダイレクト
+        return "redirect:/cart/table"; // 一覧画面にリダイレクト
     }
 
     // レンタル確認画面を表示する
@@ -53,6 +58,7 @@ public class CartController {
     public String confirmCart(Model model) {
         List<Cart> cartList = cartService.getCartList(customer_id); // カート内容を取得
         model.addAttribute("cartList", cartList); // テンプレートに渡す
+        model.addAttribute("totalCount", cartService.getTotalCount(cartList));
         return "cart/cart_confirm"; // cart_confirm.html を表示
     }
 
