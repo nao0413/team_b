@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import teamB.comicrental.top.repository.ComicMapper;
+import teamB.comicrental.top.repository.TopComicMapper;
 import java.util.List;
 import teamB.comicrental.top.model.Comic;
 
@@ -12,7 +12,7 @@ import teamB.comicrental.top.model.Comic;
 public class TopController {
 
     @Autowired
-    private ComicMapper comicMapper;
+    private TopComicMapper comicMapper;
 
     @GetMapping("/top")
     public String showTop(Model model) {
