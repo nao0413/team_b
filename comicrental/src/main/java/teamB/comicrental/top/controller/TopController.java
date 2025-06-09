@@ -1,3 +1,5 @@
+// ======= Java Controller =======
+// TopController.java
 package teamB.comicrental.top.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -5,8 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import teamB.comicrental.top.repository.TopComicMapper;
-import java.util.List;
 import teamB.comicrental.top.model.Comic;
+
+import java.util.List;
 
 @Controller
 public class TopController {
@@ -15,9 +18,9 @@ public class TopController {
     private TopComicMapper comicMapper;
 
     @GetMapping("/top")
-    public String showTop(Model model) {
+    public String showTopPage(Model model) {
         List<Comic> topComics = comicMapper.findTopComics();
         model.addAttribute("topComics", topComics);
-        return "top/top"; // → resources/templates/top/top.html を表示
+        return "top/top"; // maps to templates/top/top.html
     }
 }
