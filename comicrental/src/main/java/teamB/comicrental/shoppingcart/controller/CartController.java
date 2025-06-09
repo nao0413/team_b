@@ -20,7 +20,7 @@ public class CartController {
 
     // カート一覧画面を表示する
 
-    @GetMapping("/table")
+    @GetMapping({ "", "/table" })
     public String showCart(Model model) {
         // カート内のアイテム一覧を取得
         List<Cart> cartList = cartService.getCartList(customer_id);
@@ -52,7 +52,9 @@ public class CartController {
     @GetMapping("/confirm")
     public String confirmCart(Model model) {
         List<Cart> cartList = cartService.getCartList(customer_id); // カート内容を取得
+        int totalCount = cartService.getTotalCount(cartList);
         model.addAttribute("cartList", cartList); // テンプレートに渡す
+        model.addAttribute("totalCount", totalCount);
         return "cart/cart_confirm"; // cart_confirm.html を表示
     }
 

@@ -31,4 +31,16 @@ public interface CartMapper {
     // 指定された顧客のカートをすべて削除
     @Update("UPDATE cart SET is_deleted = true WHERE customer_id = #{customer_id}")
     void deleteAll(@Param("customer_id") int customer_id);
+
+    @Select("""
+              SELECT COUNT(*) FROM cart
+              WHERE customer_id = #{customer_id}
+              AND comic_id = #{comic_id}
+              AND volume = #{volume}
+              AND is_deleted = false
+            """)
+    int countByCustomerAndComic(@Param("customer_id") int customerId,
+            @Param("comic_id") int comicId,
+            @Param("volume") int volume);
+
 }
