@@ -18,6 +18,6 @@ public class topcontroller {
     public String showTop(Model model) {
         List<Comic> topComics = comicMapper.findTopComics();
         model.addAttribute("topComics", topComics);
-        return "top/top"; // → resources/templates/top/top.html を表示
+        return "top/top"; // → resources/templates/top/top.html を表示する
     }
 }

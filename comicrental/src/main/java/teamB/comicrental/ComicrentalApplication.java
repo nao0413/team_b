@@ -9,5 +9,5 @@ public class ComicrentalApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ComicrentalApplication.class, args);
 	}
-
+//
 }
