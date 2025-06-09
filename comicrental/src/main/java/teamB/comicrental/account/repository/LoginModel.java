@@ -1,4 +1,4 @@
-package teamB.comicrental.account.repository;
+package teamB.comicrental.account.repository;//パッケージ
 
 public class LoginModel {
     private String username;

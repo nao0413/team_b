@@ -1,4 +1,4 @@
-package teamB.comicrental.account.repository; // パッケージ名は適宜変更してください
+package teamB.comicrental.account.repository;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

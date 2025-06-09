@@ -80,7 +80,7 @@ public class AccountController {
         }
     }
 
-    // アカウント作成完了ページの表示
+    // アカウント作成完了ページの表示。
     @GetMapping("confirmation")
     public String showConfirmationPage() {
         return "account/confirmation_new_account"; // templates/account/confirmation_new_account.html を返す

@@ -37,7 +37,7 @@
     <div>
         <h1>アカウント登録完了</h1>
         <p th:if="${registrationSuccess}" th:text="${registrationSuccess}"></p>
-        <p th:unless="${registrationSuccess}">アカウントの作成が完了しました！</p>
+        <p th:unless="${registrationSuccess}">アカウントの作成が完了しました。</p>
         <br>
         <a th:href="@{/login/loginpage}">ログインページへ</a>
     </div>

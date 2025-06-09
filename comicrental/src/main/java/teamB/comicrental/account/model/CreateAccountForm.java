@@ -5,7 +5,7 @@ public class CreateAccountForm {
     private String name;
     private String email;
     private String password;
-    private String passwordConfirm; // パスワード再入力用
+    private String passwordConfirm; // パスワード再入力
 
     // ゲッターとセッター（必須）
     public String getName() {

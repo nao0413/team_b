@@ -1,4 +1,4 @@
-package teamB.comicrental.login.controller;
+package teamB.comicrental.login.controller;//パッケージ
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
