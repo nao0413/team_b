@@ -1,10 +1,9 @@
-package teamB.comicrental.login.repository;
+package teamB.comicrental.account.repository;//パッケージ
 
 public class LoginModel {
     private String username;
     private String password;
     private String email;
-    private boolean isSubscribed;
 
     // ゲッター・セッター
     public String getUsername() {
@@ -30,13 +29,4 @@ public class LoginModel {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public boolean isSubscribed() {
-        return isSubscribed;
-    }
-
-    public void setSubscribed(boolean subscribed) {
-        isSubscribed = subscribed;
-    }
-
 }
