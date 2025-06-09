@@ -3,16 +3,18 @@ package teamB.comicrental.comictable.repository;
 import java.sql.Date;
 
 public class ComicModel {
-    public int comic_id;
-    public String title;
-    public String author;
-    public String explanatory;
-    public int rentaltimes;
-    public int category_id;
-    public Date arrival_date;
-    public String comic_image;
-    public String category_name;
-    
+    private int comic_id;
+    private String title;
+    private String author;
+    private String explanatory;
+    private int rentaltimes;
+    private int category_id;
+    private Date arrival_date;
+    private String comic_image;
+    private String category_name;
+    private int customer_id;
+    private Boolean isRented; 
+
     public int getComic_id() {
         return comic_id;
     }
@@ -67,5 +69,16 @@ public class ComicModel {
     public void setCategory_name(String category_name) {
         this.category_name = category_name;
     }
-    
+    public int getCustomer_id() {
+        return customer_id;
+    }
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
+    }
+    public Boolean getIsRented() {
+        return isRented;
+    }
+    public void setIsRented(Boolean isRented) {
+        this.isRented = isRented;
+    }
 }
