@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="ja">
 
 <head>
@@ -12,7 +12,7 @@
     <div>
         <h1>漫画レンタル</h1>
         <h2>ログイン</h2>
-        <!--<form th:action="@{/login}" th:object="${loginPageModel}" method="post">-->
+        <form th:action="@{/login}" th:object="${loginPageModel}" method="post">
         <form action="logincheck" method="post">
             <div>
                 <input type="text" th:field="*{username}" placeholder="名前" id="username" name="username">
@@ -20,7 +20,7 @@
             <div>
                 <input type="password" th:field="*{password}" placeholder="パスワード" id="password" name="password">
             </div>
-            <!-- <button onclick="location.href='./home.html'">ログイン</button> -->
+            <button onclick="location.href='./home.html'">ログイン</button>
             <button type="submit">ログイン</button>
 
         </form>
@@ -33,6 +33,38 @@
 
     </div>
 
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>テストログインページ</title>
+</head>
+
+<body>
+    <div>
+        <h1>漫画レンタル</h1>
+        <h2>ログイン</h2>
+        <form th:action="@{/login}" th:object="${loginPageModel}" method="post">
+            <div>
+                <input type="text" th:field="*{username}" placeholder="名前">
+            </div>
+            <div>
+                <input type="password" th:field="*{password}" placeholder="パスワード">
+            </div>
+            <button type="submit">ログイン</button>
+        </form>
+        <div>
+            <a th:href="@{~/account/create}">アカウントの新規作成はこちら</a>
+            <a href="before_reset_password.html">パスワードを忘れた方はこちら</a>
+            <a href="#">お問い合わせフォームはこちら</a>
+        </div>
+        <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+    </div>
 </body>
 
 </html>
