@@ -1,23 +1,27 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>漫画レンタル トップページ</title>
+    <meta charset="UTF-8">
+    <title>トップページ</title>
 </head>
 <body>
-  <h1>漫画レンタルへようこそ！</h1>
-  <nav>
-    <a href="login.html">ログインはこちら</a> |
-    <a href="register.html">アカウント新規作成はこちら</a> |
-    <a href="ranking.html">漫画ランキングページはこちら</a>
-  </nav>
+<h1>漫画レンタルへようこそ！</h1>
 
-  <h2>今月の人気ランキング</h2>
+<nav>
+    <a th:href="@{/login/loginpage}">ログインはこちら</a> |
+    <a th:href="@{/register}">アカウント新規作成はこちら</a> |
+    <a th:href="@{/ranking}">漫画ランキングページはこちら</a>
+</nav>
 
-  <!-- RANKING_PLACEHOLDER -->
+<h2>人気漫画ランキング（レンタル回数順）</h2>
+<ol>
+    <li th:each="comic, stat : ${topComics}">
+        <img th:src="@{/images/{img}(img=${comic.comicImage})}" width="80"><br>
+        <strong th:text="${stat.count} + '位:'"></strong>
+        <span th:text="${comic.title}"></span>（<span th:text="${comic.author}"></span>） - 
+        <span th:text="${comic.rentaltimes}"></span>回
+    </li>
+</ol>
 
-  <footer>
-    <p>© 漫画レンタルシステム</p>
-  </footer>
 </body>
 </html>
