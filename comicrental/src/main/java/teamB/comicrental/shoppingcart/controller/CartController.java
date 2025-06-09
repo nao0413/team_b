@@ -9,7 +9,7 @@ import teamB.comicrental.shoppingcart.model.Cart;
 import java.util.List;
 
 @Controller
-@RequestMapping("/cart") // /cart で始まるURLをこのコントローラーで処理
+@RequestMapping("/cart") 
 public class CartController {
 
     @Autowired

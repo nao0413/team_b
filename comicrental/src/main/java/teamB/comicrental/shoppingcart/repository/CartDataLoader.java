@@ -18,7 +18,7 @@ public class CartDataLoader {
 public void testAddComic() {
     int daysToAdd = 7;
 
-    if (cartMapper.countByCustomerAndComic(1, 1, 1) == 0) {
+    if (cartMapper.countByCustomerAndComic(1, 1, 1) == 0) { //ヒロアカ
         Cart cart1 = new Cart();
         cart1.setCustomer_id(1);
         cart1.setComic_id(1);
@@ -28,7 +28,7 @@ public void testAddComic() {
         cartMapper.insert(cart1);
     }
 
-    if (cartMapper.countByCustomerAndComic(1, 3, 1) == 0) {
+    if (cartMapper.countByCustomerAndComic(1, 3, 1) == 0) { //ワンピ
         Cart cart2 = new Cart();
         cart2.setCustomer_id(1);
         cart2.setComic_id(3);
