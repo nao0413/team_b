@@ -8,11 +8,26 @@
     <title>サブスクリプション退会画面</title>
 </head>
 <body>
-    <h1>サブスクリプション　退会</h2>
+    <h1 th:text="${page.title}">サブスクリプション　退会</h1>
+        <div th:if="${errorMessage}" >
+        <p th:text="${errorMessage}"></p>
+    </div>
     <h2 class="caveat">サブスクリプションを退会します。</h2>
     <h2 class="caveat">よろしいですか？</h2>
-    <button>はい</button>
-    <button>いいえ</button>
+    <div class="user-info-section">
+        <h3>現在のユーザー情報</h3>
+        <p th:if="${page.id != null}">会員番号：<span th:text=${page.id}></span></p>
+        <p th:if="${page.name != null}">会員番号：<span th:text=${page.name}></span></p>
+        <p>サブスクリプション状況：<span th:text="${page.subscribed ?'加入済み' : '未加入'}"></span></p>
+    </div>
+    <form action="/subscription/doWithdrawal" method="post">
+    <input type="hidden" name="customerId" th:value="${page.id}">
+        <button type="submit" >はい</button>
+    </form>
+    <form action="/subscription/list" method="get">
+    <input type="hidden" name="customerId" th:value="${page.id}">
+        <button type="submit" >いいえ</button>
+    </form>
     <h5>マイページへ戻る</h5>
 </body>
 </html>

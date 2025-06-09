@@ -9,6 +9,17 @@
 </head>
 <body>
     <h1 th:text="${page.title}">サブスクリプション状況</h1>
+    <div th:if="${successMessage}">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <div th:if="${errorMessage}">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <div th:if="${infoMessage}">
+        <p th:text="${infoMessage}"></p>
+    </div>
     <div class="mypage">
     <h4 th:if="${page.id !=null}"> 会員番号:<span th:text="${page.id}"></span></h4>
     <h4 th:if="${page.name !=null}">名前:<span th:text="${page.name}"></span></h4>
@@ -17,9 +28,15 @@
     </div>
     <hr>
     <h2 class="join">サブスクリプション　加入</h2>
-    <a href="subscriptionJoin.html">加入ページへ</a>
+    <form action="/subscription/join" method="get">
+    <button type="submit" >加入ページへ</button>
+    <input type="hidden" name="customerId" th:value="${page.id}"><!--hidden-->
+    </form>
     <hr>
-    <h2 class="Withdrawal">サブスクリプション　退会</h2>
-    <a href="subscriptionWithdrawal.html">退会ページへ</a> 
+     <h2 class="Withdrawal">サブスクリプション　退会</h2>
+    <form action="/subscription/withdrawal" method="get">
+    <button type="submit">退会ページへ</button>
+    <input type="hidden" name="customerId" th:value="${page.id}">
+    </form>
 </body>
 </html>

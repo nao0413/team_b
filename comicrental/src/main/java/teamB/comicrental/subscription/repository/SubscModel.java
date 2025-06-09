@@ -13,6 +13,7 @@ public class SubscModel {
     public String credit_name;
     public String credit_date;
     public String security_code;
+    public int subscription_plan_id;
     public OffsetDateTime subscription_start_date;
     
     public int getCustomer_id() {
@@ -57,11 +58,18 @@ public class SubscModel {
     public void setSecurity_code(String security_code) {
         this.security_code = security_code;
     }
+    
     public OffsetDateTime getSubscription_start_date() {
         return subscription_start_date;
     }
     public void setSubscription_start_date(OffsetDateTime subscription_start_date) {
         this.subscription_start_date = subscription_start_date;
+    }
+    public int getsubscription_plan_id() {
+        return subscription_plan_id;
+    }
+    public void setsubscription_plan_id(int subscription_plan_id) {
+        this.subscription_plan_id = subscription_plan_id;
     }
     
 }

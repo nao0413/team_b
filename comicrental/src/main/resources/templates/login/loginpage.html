@@ -5,27 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ログイン</title>
+
 </head>
 
 <body>
     <div>
         <h1>漫画レンタル</h1>
         <h2>ログイン</h2>
-        <form>
+        <!--<form th:action="@{/login}" th:object="${loginPageModel}" method="post">-->
+        <form action="logincheck" method="post">
             <div>
-                <input type="text" placeholder="名前">
+                <input type="text" th:field="*{username}" placeholder="名前" id="username" name="username">
             </div>
             <div>
-                <input type="password" placeholder="パスワード">
+                <input type="password" th:field="*{password}" placeholder="パスワード" id="password" name="password">
             </div>
+            <!-- <button onclick="location.href='./home.html'">ログイン</button> -->
             <button type="submit">ログイン</button>
+
         </form>
         <div>
             <a href="creat_new_account.html">アカウントの新規作成はこちら</a>
             <a href="before_reset_password.html">パスワードを忘れた方はこちら</a>
             <a href="#">お問い合わせフォームはこちら</a>
         </div>
+        <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+
     </div>
+
 </body>
 
 </html>
