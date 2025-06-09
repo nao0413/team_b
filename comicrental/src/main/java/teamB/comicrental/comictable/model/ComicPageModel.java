@@ -10,5 +10,13 @@ import teamB.comicrental.comictable.repository.ComicModel;
 
 public class ComicPageModel {
     public String title;
+    public int Id;
     public List<ComicModel> list;
+    public int getId() {
+        return Id;
+    }
+    public void setId(int id) {
+        Id = id;
+    }
+    
 }
