@@ -20,7 +20,7 @@ public class CartController {
 
     // カート一覧画面を表示する
 
-    @GetMapping
+    @GetMapping("/table")
     public String showCart(Model model) {
         // カート内のアイテム一覧を取得
         List<Cart> cartList = cartService.getCartList(customer_id);

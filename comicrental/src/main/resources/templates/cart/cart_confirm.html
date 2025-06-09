@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>レンタル内容の確認</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .header-section {
+            border-bottom: 2px solid #666;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header-section h1 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .title-section {
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .title-section h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #eee;
+        }
+
+        .cart-image {
+            width: 100px;
+            height: auto;
+        }
+
+        .summary {
+            padding: 20px;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .button-area {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .button-area button {
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .back-link {
+            padding: 0 20px 20px;
+            text-align: left;
+        }
+
+        .back-link a {
+            font-size: 14px;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header-section">
+        <h1>漫画レンタル</h1>
+    </div>
+
+    <div class="title-section">
+        <h2>レンタル内容の確認</h2>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>商品</th>
+            <th>タイトル</th>
+            <th>巻</th>
+            <th>閲覧可能期限</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${cartList}">
+            <td><img th:src="@{${item.imageUrl}}" alt="漫画画像" class="cart-image"></td>
+            <td th:text="${item.title}"></td>
+            <td th:text="${item.volume} + '巻'"></td>
+            <td th:text="${#dates.format(item.rental_expire, 'yyyy年MM月dd日')}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="back-link">
+    <form method="get" th:action="@{/cart}">
+        <button type="submit" style="padding: 11px 28px; font-size: 14px;">買い物かごに戻る</button>
+    </form>
+    <p><a th:href="@{/subscription/register}">サブスク未登録の方はこちら</a></p>
+</div>
+
+
+    <div class="summary">
+        <div></div>
+        <div>合計冊数：<span th:text="${totalCount}"></span>冊</div>
+    </div>
+
+    <div class="button-area">
+        <form method="post" th:action="@{/rental/confirm}">
+            <button type="submit">レンタルを確定</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
