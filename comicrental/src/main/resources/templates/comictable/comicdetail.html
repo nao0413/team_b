@@ -7,13 +7,28 @@
     <title>漫画一覧</title>
 </head>
 <body>
-    <h2>タイトル</h2><h2>著者</h2>
-    <h3>ジャンル</h3>
-    <h3>説明</h3>
-    <h3>表紙</h3>
-    <h4>レンタル中</h4>
-    <h4>買い物かごへ追加</h4>
-    <h4>買い物かごページへ</h4>
-    <h4>漫画一覧ページ</h4>
+    <h1>漫画詳細ページ</h1>
+    <div>
+        <img th:src="${comic.comic_image}" alt="表紙画像" class="comic-detail-image">
+    </div>
+    <h2 th:text="${comic.title}">タイトル</h2>
+    <p><strong>著者：</strong><span th:text="${comic.author}">著者名</span></p>
+    <p><strong>ジャンル：</strong><span th:text="${comic.category_name}">ジャンル名</span></p>
+    <p><strong>説明：</strong><span th:text="${comic.explanatory}">この漫画はとっても面白いです！</span></p>
+    <span th:if="${comic.isRented}">レンタル中</span>
+    <span th:unless="${comic.isRented}">未レンタル</span>
+    <form action="/comics/addToCart" method="post">
+                <input type="hidden" name="comicId" th:value="${comic.comic_id}">
+                <input type="hidden" name="customerId" th:value="${customerId}">
+                <button type="submit" class="rent-button">カートに入れる</button>
+    </form>
+    <form action="/cart/table" method="get">
+        <button type="submit">買い物かごページへ</button>
+        <input type="hidden" name="customerId" th:value="${customerId}">
+    </form>
+    <form action="/comics/table" method="get">
+        <button type="submit">漫画一覧ページへ</button>
+        <input type="hidden" name="customerId" th:value="${customerId}">
+    </form>
 </body>
 </html>

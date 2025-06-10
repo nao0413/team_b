@@ -60,13 +60,13 @@ public class SubscController {
                 page.setName("不明");
                 page.setSubscribed(false);
             }
-        } else {
-            //前のページからcustomr_idを受け取れなかった場合
-            page.title = "ログインしていません";
-            page.setId(null);
-            page.setName("ゲスト");
-            page.setSubscribed(false);
-            return "redirect:/login/login";
+        // else {
+        //     //前のページからcustomr_idを受け取れなかった場合
+        //     page.title = "ログインしていません";
+        //     page.setId(null);
+        //     page.setName("ゲスト");
+        //     page.setSubscribed(false);
+        //     return "redirect:/login/loginpage";
         }
         model.addAttribute("page", page);
         return "subscription/subscription";
@@ -80,7 +80,7 @@ public class SubscController {
         //前のページからcustomer_idが受け取れなかった場合
         if (customerId == null) {
             redirectAttributes.addFlashAttribute("errorMessage", "ログインしてください。");
-            return "redirect:/login/login";
+            return "redirect:/login/loginpage";
         }
         Optional<SubscModel> existingSubscData = subscMapper.findById(customerId);
         //customer_idがDBに登録されている場合
@@ -178,10 +178,10 @@ public class SubscController {
     public String showWithdrawalPage(Model model,@RequestParam(value="customerId",required = false) Integer customerId,RedirectAttributes redirectAttributes){
         SubscPageModel page=new SubscPageModel();
         //前のページからcustomer_idが受け取れなかった場合
-        if (customerId == null) {
-            redirectAttributes.addFlashAttribute("errorMessage", "ログインしてください。");
-            return "redirect:/login/login";// 本当はログインページ
-        }
+        // if (customerId == null) {
+        //     redirectAttributes.addFlashAttribute("errorMessage", "ログインしてください。");
+        //     return "redirect:/login/loginpage";
+        // }
         //前のページからcustomer_idが受け取れた場合
         Optional<SubscModel> existingSubscData = subscMapper.findById(customerId);
          //customer_idがDBに登録されている場合
@@ -214,7 +214,7 @@ public class SubscController {
        //前のページからcustomer_idが受け取れなかった場合
         if (customerId == null) {
             redirectAttributes.addFlashAttribute("errorMessage", "ログインしてください。");
-            return "redirect:/login/login";
+            return "redirect:/login/loginpage";
         }
         //退会処理がうまくできたとき
         try{
