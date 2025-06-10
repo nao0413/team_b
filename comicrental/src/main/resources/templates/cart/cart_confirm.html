@@ -77,6 +77,7 @@
             padding: 10px 25px;
             font-size: 16px;
             cursor: pointer;
+            margin: 10px;
         }
 
         .back-link {
@@ -87,19 +88,23 @@
         .back-link a {
             font-size: 14px;
             color: blue;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- ヘッダー -->
     <div class="header-section">
         <h1>漫画レンタル</h1>
     </div>
 
+    <!-- タイトル -->
     <div class="title-section">
         <h2>レンタル内容の確認</h2>
     </div>
 
+    <!-- 商品一覧 -->
     <table>
         <thead>
         <tr>
@@ -119,24 +124,30 @@
         </tbody>
     </table>
 
+    <!-- 戻るリンクとサブスク案内 -->
     <div class="back-link">
-    <form method="get" th:action="@{/cart}">
-        <button type="submit" style="padding: 11px 28px; font-size: 14px;">買い物かごに戻る</button>
-    </form>
-    <p><a th:href="@{/subscription/register}">サブスク未登録の方はこちら</a></p>
-</div>
+        <form method="get" th:action="@{/cart}" style="display: inline;">
+            <button type="submit" style="padding: 10px 20px; font-size: 14px;">買い物かごに戻る</button>
+        </form>
+        <br>
+       <a th:href="@{/subscription/join(customerId=${customerId})}">サブスク未登録の方はこちら</a>
 
+    </div>
 
+    <!-- 合計冊数 -->
     <div class="summary">
         <div></div>
         <div>合計冊数：<span th:text="${totalCount}"></span>冊</div>
     </div>
 
+    <!-- レンタル確定 -->
     <div class="button-area">
-        <form method="post" th:action="@{/rental/confirm}">
-            <button type="submit">レンタルを確定</button>
-        </form>
+       <form method="post" th:action="@{/cart/complete}">
+    <button type="submit">レンタルを確定</button>
+</form>
+
     </div>
 </div>
 </body>
 </html>
+

@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import teamB.comicrental.shoppingcart.CartService;
 import teamB.comicrental.shoppingcart.model.Cart;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -59,14 +61,31 @@ public class CartController {
         List<Cart> cartList = cartService.getCartList(customer_id); // カート内容を取得
         model.addAttribute("cartList", cartList); // テンプレートに渡す
         model.addAttribute("totalCount", cartService.getTotalCount(cartList));
+        model.addAttribute("customerId", customer_id);
         return "cart/cart_confirm"; // cart_confirm.html を表示
     }
 
     // レンタル完了処理を実行し、完了画面を表示する
 
     @PostMapping("/complete")
-    public String completeRental() {
-        cartService.deleteAllCart(customer_id); // レンタル完了＝カート全削除
-        return "cart/cart_complete"; // 完了画面(cart_complete.html)を表示
+    public String completeRental(Model model) {
+        // まず、現在カートにある数を取得（＝今回借りた数）
+        List<Cart> cartList = cartService.getCartList(customer_id);
+        int rentedCount = cartList.size();
+
+        // 残りレンタル可能数を計算
+        int remaining = maxLimit - rentedCount;
+
+        // 閲覧可能期限
+        Date expireDate = Date.valueOf(LocalDate.now().plusDays(7));
+
+        // カートを削除（最後に実行）
+        cartService.deleteAllCart(customer_id);
+
+        // 画面に渡す
+        model.addAttribute("rentalExpire", expireDate);
+        model.addAttribute("remainingLimit", remaining);
+
+        return "cart/cart_complete";
     }
 }
