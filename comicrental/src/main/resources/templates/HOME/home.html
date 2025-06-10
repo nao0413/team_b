@@ -1,145 +1,51 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>HOME - 漫画レンタル</title>
-    <style>
-        body {
-            font-family: "Helvetica", sans-serif;
-            margin: 0;
-            background-color: #f9f9f9;
-        }
-        header, nav, footer {
-            background-color: #222;
-            color: #fff;
-            padding: 1em;
-            text-align: center;
-        }
-        nav a {
-            color: #00ccff;
-            margin: 0 1em;
-            text-decoration: none;
-        }
-        main {
-            max-width: 1000px;
-            margin: 2em auto;
-            padding: 1em;
-            background-color: #fff;
-            border-radius: 8px;
-        }
-        h2 {
-            border-bottom: 2px solid #333;
-            padding-bottom: 0.5em;
-        }
-        .comic-section {
-            margin-bottom: 2em;
-        }
-        .comic-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1em;
-        }
-        .comic-card {
-            width: 150px;
-            text-align: center;
-        }
-        .comic-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-        .genre-filter {
-            margin-bottom: 1em;
-        }
-        .genre-filter select {
-            padding: 0.5em;
-            font-size: 1em;
-        }
-        .button {
-            background-color: #28a745;
-            color: white;
-            padding: 0.5em 1em;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-        .button:hover {
-            background-color: #218838;
-        }
-    </style>
+    <title>ホーム - 漫画レンタル</title>
 </head>
 <body>
-
-<header>
-    <h1>漫画レンタル HOME</h1>
-</header>
+<h1>ようこそ、漫画レンタルへ！</h1>
 
 <nav>
-    <a href="mypage.html">マイページ</a>
-    <a href="search.html">検索</a>
-    <a href="comic-list.html">漫画一覧</a>
+    <a th:href="@{/mypage}">マイページ</a> |
+    <a th:href="@{/search}">検索</a> |
+    <a th:href="@{/list}">漫画一覧</a>
 </nav>
 
-<main>
-    <section class="comic-section">
-        <h2>人気タイトル</h2>
-        <div class="comic-grid">
-            <div class="comic-card">
-                <a href="comic-detail.html">
-                    <img src="images/comic1.jpg" alt="漫画1">
-                    <p>タイトル1</p>
-                </a>
-            </div>
-            <div class="comic-card">
-                <a href="comic-detail.html">
-                    <img src="images/comic2.jpg" alt="漫画2">
-                    <p>タイトル2</p>
-                </a>
-            </div>
-            <!-- 他の人気漫画カードも同様に追加 -->
-        </div>
-    </section>
+<h2>おすすめ漫画</h2>
+<button onclick="location.href='/recommend'">おすすめを見る</button>
 
-    <section class="comic-section">
-        <h2>最近入荷された漫画</h2>
-        <div class="comic-grid">
-            <div class="comic-card">
-                <a href="comic-detail.html">
-                    <img src="images/comic3.jpg" alt="漫画3">
-                    <p>タイトル3</p>
-                </a>
-            </div>
-            <div class="comic-card">
-                <a href="comic-detail.html">
-                    <img src="images/comic4.jpg" alt="漫画4">
-                    <p>タイトル4</p>
-                </a>
-            </div>
-        </div>
-    </section>
+<h2>ジャンルから探す</h2>
+<form action="/search" method="get">
+    <select name="genre">
+        <option value="">ジャンルを選択</option>
+        <option value="戦闘">戦闘系</option>
+        <option value="恋愛">恋愛系</option>
+        <option value="SF">SF系</option>
+    </select>
+    <button type="submit">絞り込む</button>
+</form>
 
-    <section class="comic-section">
-        <h2>ジャンルで絞り込み</h2>
-        <div class="genre-filter">
-            <select onchange="location.href=this.value;">
-                <option value="#">ジャンルを選択</option>
-                <option value="genre-action.html">戦闘系</option>
-                <option value="genre-romance.html">恋愛系</option>
-                <option value="genre-sf.html">SF系</option>
-                <!-- 他ジャンルも追加可能 -->
-            </select>
-        </div>
-    </section>
+<h2>人気タイトル</h2>
+<ul>
+    <li th:each="comic : ${popularComics}">
+        <a th:href="@{/comic/detail(title=${comic.title})}">
+            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" width="80" alt="表紙画像">
+            <span th:text="${comic.title}"></span>（<span th:text="${comic.rentaltimes}"></span>回）
+        </a>
+    </li>
+</ul>
 
-    <section class="comic-section">
-        <a href="recommend.html" class="button">おすすめ漫画を見る</a>
-    </section>
-</main>
-
-<footer>
-    &copy; 2025 漫画レンタルサービス
-</footer>
+<h2>最近入荷</h2>
+<ul>
+    <li th:each="comic : ${recentComics}">
+        <a th:href="@{/comic/detail(title=${comic.title})}">
+            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" width="80" alt="表紙画像">
+            <span th:text="${comic.title}"></span>（入荷日: <span th:text="${comic.arrivalDate}"></span>）
+        </a>
+    </li>
+</ul>
 
 </body>
 </html>
