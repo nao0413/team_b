@@ -11,7 +11,7 @@ public interface TopComicMapper {
 
     @Select("""
         SELECT title, author, comic_image AS comicImage, rentaltimes,
-               category AS genre, arrival_date AS arrivalDate
+               category_id AS genre, arrival_date AS arrivalDate
         FROM comic
         ORDER BY rentaltimes DESC
         LIMIT 5
@@ -20,7 +20,7 @@ public interface TopComicMapper {
 
     @Select("""
         SELECT title, author, comic_image AS comicImage, rentaltimes,
-               category AS genre, arrival_date AS arrivalDate
+               category_id AS genre, arrival_date AS arrivalDate
         FROM comic
         ORDER BY arrival_date DESC
         LIMIT 5
@@ -29,7 +29,7 @@ public interface TopComicMapper {
 
     @Select("""
         SELECT title, author, comic_image AS comicImage, rentaltimes,
-               category AS genre, arrival_date AS arrivalDate
+               category_id AS genre, arrival_date AS arrivalDate
         FROM comic
         WHERE category = #{genre}
         ORDER BY rentaltimes DESC
@@ -38,7 +38,7 @@ public interface TopComicMapper {
 
     @Select("""
         SELECT title, author, comic_image AS comicImage, rentaltimes,
-               category AS genre, arrival_date AS arrivalDate
+               category_id AS genre, arrival_date AS arrivalDate
         FROM comic
         WHERE title = #{title}
         LIMIT 1
@@ -47,7 +47,7 @@ public interface TopComicMapper {
 
     @Select("""
         SELECT title, author, comic_image AS comicImage, rentaltimes,
-               category AS genre, arrival_date AS arrivalDate
+               category_id AS genre, arrival_date AS arrivalDate
         FROM comic
         WHERE title ILIKE #{title}
     """)
