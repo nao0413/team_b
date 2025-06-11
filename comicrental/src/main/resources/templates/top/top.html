@@ -2,27 +2,35 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>トップページ - 漫画レンタル</title>
+    <title>ホーム - 漫画レンタル</title>
 </head>
 <body>
-<h1>漫画レンタルへようこそ！</h1>
+<h1 th:text="${message}">ホーム</h1>
 
 <nav>
-    <a th:href="@{/login/loginpage}">ログインはこちら</a> |
-    <a th:href="@{/register}">アカウント新規作成はこちら</a> |
-    <a th:href="@{/ranking}">漫画ランキングページはこちら</a>
+    <a th:href="@{/top}">トップページ</a> |
+    <a th:href="@{/search}">漫画検索</a> |
+    <a th:href="@{/favorites}">お気に入り</a> |
+    <a th:href="@{/logout}">ログアウト</a>
 </nav>
 
-<h2>人気漫画ランキング（レンタル回数順）</h2>
-
-<ol>
-    <li th:each="comic, stat : ${topComics}">
-        <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}"  width="80"><br>
-        <strong th:text="${stat.count} + '位:'"></strong>
-        <span th:text="${comic.title}"></span>（<span th:text="${comic.author}"></span>） -
-        <span th:text="${comic.rentaltimes}"></span>回
-    </li>
-</ol>
+<section>
+    <h2>おすすめ漫画</h2>
+    <ul>
+        <li>
+            <img src="/comicimage/slamdunk.jpg" alt="スラムダンク" width="80">
+            スラムダンク - 井上井恵（仮）
+        </li>
+        <li>
+            <img src="/comicimage/NARUTO.jpg" alt="NARUTO" width="80">
+            NARUTO - 岸本斉史
+        </li>
+        <li>
+            <img src="/comicimage/dragonball.jpg" alt="ドラゴンボール" width="80">
+            ドラゴンボール - 鳥山明
+        </li>
+    </ul>
+</section>
 
 </body>
 </html>

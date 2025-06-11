@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>検索結果</title>
+</head>
+<body>
+<h1>検索結果</h1>
+
+<p th:if="${#lists.isEmpty(results)}">該当する漫画が見つかりませんでした。</p>
+
+<ul th:if="${!#lists.isEmpty(results)}">
+    <li th:each="comic : ${results}">
+        <a th:href="@{/comic/detail(title=${comic.title})}">
+            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" width="80" alt="表紙画像">
+            <strong th:text="${comic.title}"></strong> - <span th:text="${comic.author}"></span>
+            （ジャンル: <span th:text="${comic.genre}"></span>）
+        </a>
+    </li>
+</ul>
+
+<a th:href="@{/search}">← 検索に戻る</a>
+
+</body>
+</html>
+
