@@ -6,10 +6,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>サブスクリプション退会画面</title>
+    <style>
+        body {
+            /* 全体のコンテンツを中央寄せに */
+            text-align: center;
+            /* ページ全体の上下左右の余白を調整 */
+            margin: 20px;
+            /* 行の高さを調整して読みやすくする */
+            line-height: 1.6;
+        }
+
+        h1 {
+            /* メインタイトルを大きくし、下に十分な余白を取る */
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            /* 確認メッセージを調整し、上下に余白を取る */
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 10px; /* 連続するh2の間隔を詰める */
+        }
+        
+        h2.caveat {
+            /* 注意喚起のh2に対して、少し強調したい場合*/
+            font-size: 1.9em; /* 少し大きめに */
+            font-weight: bold; /* もしフォント変更が許されるなら太字にするとより強調 */
+            color:red;
+            margin-bottom: 15px; /* 次の要素との間に少しスペースを */
+        }
+
+        h3 {
+            /* ユーザー情報の見出しを調整し、上下に余白を取る */
+            font-size: 1.5em;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+        h5 {
+            /* 「マイページへ戻る」の文字サイズと余白を調整 */
+            font-size: 1em;
+            margin-top: 40px; /* ボタンとの間に十分なスペースを空ける */
+            margin-bottom: 20px;
+        }
+
+        p {
+            /* メッセージやユーザー情報の文字サイズを調整 */
+            font-size: 1.1em;
+            /* メッセージの下に余白を取る */
+            margin-bottom: 15px;
+            /* メッセージの内側に余白を設定 */
+            padding: 10px;
+            /* メッセージボックスが内容に合わせて幅を調整し、中央寄せになるように */
+            display: inline-block;
+            /* メッセージボックスの最大幅を設定 */
+            max-width: 600px;
+            /* 幅を100%にして、小さい画面でも適切に表示されるように */
+            width: 100%;
+            /* パディングとボーダーを要素の合計幅/高さに含める */
+            box-sizing: border-box;
+        }
+
+        .user-info-section {
+            /* ユーザー情報セクションの上下の余白と、左右を自動にして中央寄せにする */
+            margin: 30px auto;
+            /* ユーザー情報セクションの内側の余白 */
+            padding: 25px;
+            /* ユーザー情報セクションの最大幅を設定し、コンテンツが広がりすぎないようにする */
+            max-width: 500px;
+            /* ユーザー情報セクション内のテキストを左寄せに */
+            text-align: left;
+        }
+
+        .user-info-section h3, .user-info-section p {
+            /* ユーザー情報セクション内の見出しと段落は中央寄せにする */
+            text-align: center;
+        }
+
+        button {
+            /* ボタンの内側の余白を調整して大きく見せる */
+            padding: 12px 25px;
+            /* ボタンの文字サイズを調整 */
+            font-size: 1.1em;
+            /* ボタンの上に余白を取る */
+            margin-top: 20px; /* 各ボタン間のスペース */
+            /* ボタンがインラインブロック要素として扱われるように */
+            display: inline-block;
+        }
+
+        /* 「はい」ボタンのスタイル */
+        form[action="/subscription/doWithdrawal"] button {
+            background-color: #dc3545; /* 赤系（danger） */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 15px; /* 「いいえ」ボタンとの間にスペース */
+        }
+        form[action="/subscription/doWithdrawal"] button:hover {
+            background-color: #c82333;
+        }
+
+        /* 「いいえ」ボタンのスタイル */
+        form[action="/subscription/list"] button {
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 15px; /* 「はい」ボタンとの間にスペース */
+        }
+
+        form {
+            /* フォーム間の余白を調整（今回はボタンが並ぶので、フォーム単位の余白は少なめに） */
+            margin-bottom: 10px;
+            display: inline-block; /* ボタンを横並びにするためにフォームもインラインブロックに */
+        }
+    </style>
 </head>
+
 <body>
     <h1 th:text="${page.title}">サブスクリプション　退会</h1>
-        <div th:if="${errorMessage}" >
+    <div th:if="${errorMessage}">
         <p th:text="${errorMessage}"></p>
     </div>
     <h2 class="caveat">サブスクリプションを退会します。</h2>
@@ -21,13 +139,14 @@
         <p>サブスクリプション状況：<span th:text="${page.subscribed ?'加入済み' : '未加入'}"></span></p>
     </div>
     <form action="/subscription/doWithdrawal" method="post">
-    <input type="hidden" name="customerId" th:value="${page.id}">
-        <button type="submit" >はい</button>
+        <input type="hidden" name="customerId" th:value="${page.id}">
+        <button type="submit">はい</button>
     </form>
     <form action="/subscription/list" method="get">
-    <input type="hidden" name="customerId" th:value="${page.id}">
-        <button type="submit" >いいえ</button>
+        <input type="hidden" name="customerId" th:value="${page.id}">
+        <button type="submit">いいえ</button>
     </form>
     <h5>マイページへ戻る</h5>
 </body>
+
 </html>

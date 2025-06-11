@@ -64,7 +64,7 @@ public class ComicController {
     @PostMapping("addToCart")
     public String addToCart(@RequestParam("comicId") Integer comicId,@RequestParam(value = "volume",required = false) Integer volume,HttpSession session,RedirectAttributes redirectAttributes){
          String loggedInUsername = (String) session.getAttribute("loggedInUser");
-         //Integer customerId = (Integer) session.getAttribute("loggedInUserId"); 
+         Integer customerId = (Integer) session.getAttribute("loggedInUserId"); 
          if(loggedInUsername==null){
             redirectAttributes.addFlashAttribute("errorMessage","ログインが必要です。");
             return "redirect:/login/loginpage";
@@ -75,7 +75,7 @@ public class ComicController {
         }
         //買い物かごへ追加したい漫画の情報をセットする
         Cart cartItem=new Cart();
-        //cartItem.setCustomer_id(customerId);
+        cartItem.setCustomer_id(customerId);
         cartItem.setComic_id(comicId);
         cartItem.setVolume(volume);
         Date rentalExpireDate = Date.from(LocalDate.now().plusDays(7).atStartOfDay(ZoneId.systemDefault()).toInstant());

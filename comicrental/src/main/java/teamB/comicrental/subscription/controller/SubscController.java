@@ -25,6 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 //import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.RequestBody;
 
+import jakarta.servlet.http.HttpSession;
+
 
 /**
  * SubscriptionController.java
@@ -40,12 +42,17 @@ public class SubscController {
 
     //サブスクリプション確認画面にて、会員情報を表示する
     @GetMapping("list")
-    public String list(Model model, @RequestParam(value ="customerId", required=false) Integer customerId,RedirectAttributes redirectAttributes) {
+    public String list(Model model,HttpSession session,RedirectAttributes redirectAttributes) {
         SubscPageModel page = new SubscPageModel();
         log.info("テストログ出力");
         page.title = "サブスクリプション状況";
         //ログイン状態のとき（前のページからcustomer_idを受け取っている場合）
-        if (customerId != null) {
+       String loggedInUsername = (String) session.getAttribute("loggedInUser");
+        Integer customerId = (Integer) session.getAttribute("loggedInUserId"); 
+         if(loggedInUsername==null){
+            redirectAttributes.addFlashAttribute("errorMessage","ログインが必要です。");
+            return "redirect:/login/loginpage";
+         }
             //会員IDがDBに登録されている場合
             Optional<SubscModel> subscDateOptional = subscMapper.findById(customerId);
             if (subscDateOptional.isPresent()) {
@@ -60,28 +67,20 @@ public class SubscController {
                 page.setName("不明");
                 page.setSubscribed(false);
             }
-        // else {
-        //     //前のページからcustomr_idを受け取れなかった場合
-        //     page.title = "ログインしていません";
-        //     page.setId(null);
-        //     page.setName("ゲスト");
-        //     page.setSubscribed(false);
-        //     return "redirect:/login/loginpage";
-        }
         model.addAttribute("page", page);
         return "subscription/subscription";
     }
 
     //サブスクリプションに加入する画面に表示する情報
     @GetMapping("join")
-    public String showJoinPage(Model model, @RequestParam(value ="customerId", required=false)Integer customerId,RedirectAttributes redirectAttributes) {
+    public String showJoinPage(Model model,HttpSession session,RedirectAttributes redirectAttributes) {
         SubscPageModel page = new SubscPageModel();
-
-        //前のページからcustomer_idが受け取れなかった場合
-        if (customerId == null) {
-            redirectAttributes.addFlashAttribute("errorMessage", "ログインしてください。");
+        String loggedInUsername = (String) session.getAttribute("loggedInUser");
+        Integer customerId = (Integer) session.getAttribute("loggedInUserId"); 
+         if(loggedInUsername==null){
+            redirectAttributes.addFlashAttribute("errorMessage","ログインが必要です。");
             return "redirect:/login/loginpage";
-        }
+         }
         Optional<SubscModel> existingSubscData = subscMapper.findById(customerId);
         //customer_idがDBに登録されている場合
         if (existingSubscData.isPresent()) {
@@ -114,17 +113,17 @@ public class SubscController {
     //入力されたクレジットカード情報を登録し、サブスクリプション状況を更新する
     @PostMapping("doJoin")
     public String doJoin(
-            @RequestParam("customerId")Integer customerId,
             @RequestParam("cardNumber") String cardNumber,
             @RequestParam("cardHolderName") String cardHolderName,
             @RequestParam("expiryDate") String expiryDate,
             @RequestParam("securityCode") String securityCode,
-            RedirectAttributes redirectAttributes, Model model) {
-        //前のページからcustomer_idが受け取れなかった場合
-        if (customerId == null) {
-            redirectAttributes.addFlashAttribute("errorMessage", "ログインしていません。");
-            return "subscription/subscription";// 本当はログイン画面
-        }
+            RedirectAttributes redirectAttributes ,HttpSession session, Model model) {
+        String loggedInUsername = (String) session.getAttribute("loggedInUser");
+        Integer customerId = (Integer) session.getAttribute("loggedInUserId"); 
+         if(loggedInUsername==null){
+            redirectAttributes.addFlashAttribute("errorMessage","ログインが必要です。");
+            return "redirect:/login/loginpage";
+         }
         //前のページからcustomer_idが受け取れた場合
         //一つでも入力されていない場所がある場合の処理
         if (cardNumber.isEmpty() || cardHolderName.isEmpty() || expiryDate.isEmpty() || securityCode.isEmpty()) {
@@ -175,13 +174,14 @@ public class SubscController {
 
     //サブスクリプションから退会するための処理
     @GetMapping("withdrawal")
-    public String showWithdrawalPage(Model model,@RequestParam(value="customerId",required = false) Integer customerId,RedirectAttributes redirectAttributes){
+    public String showWithdrawalPage(Model model,HttpSession session,RedirectAttributes redirectAttributes){
         SubscPageModel page=new SubscPageModel();
-        //前のページからcustomer_idが受け取れなかった場合
-        // if (customerId == null) {
-        //     redirectAttributes.addFlashAttribute("errorMessage", "ログインしてください。");
-        //     return "redirect:/login/loginpage";
-        // }
+        String loggedInUsername = (String) session.getAttribute("loggedInUser");
+        Integer customerId = (Integer) session.getAttribute("loggedInUserId"); 
+        if(loggedInUsername==null){
+            redirectAttributes.addFlashAttribute("errorMessage","ログインが必要です。");
+            return "redirect:/login/loginpage";
+         }
         //前のページからcustomer_idが受け取れた場合
         Optional<SubscModel> existingSubscData = subscMapper.findById(customerId);
          //customer_idがDBに登録されている場合
@@ -209,11 +209,13 @@ public class SubscController {
     }
 
     @PostMapping("doWithdrawal")
-    public String doWithdrawal(Model model,@RequestParam(value="customerId",required = false) Integer customerId,RedirectAttributes redirectAttributes){
+    public String doWithdrawal(Model model,HttpSession session,RedirectAttributes redirectAttributes){
         SubscPageModel page=new SubscPageModel();
        //前のページからcustomer_idが受け取れなかった場合
-        if (customerId == null) {
-            redirectAttributes.addFlashAttribute("errorMessage", "ログインしてください。");
+        String loggedInUsername = (String) session.getAttribute("loggedInUser");
+        Integer customerId = (Integer) session.getAttribute("loggedInUserId"); 
+        if(loggedInUsername==null){
+            redirectAttributes.addFlashAttribute("errorMessage","ログインが必要です。");
             return "redirect:/login/loginpage";
         }
         //退会処理がうまくできたとき
@@ -232,8 +234,9 @@ public class SubscController {
             return "redirect:/subscription/withdrawal?customerId=" + customerId;
         }
     }
-    
-    
 }
+  
+    
+
     
 

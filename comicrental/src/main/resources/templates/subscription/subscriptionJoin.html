@@ -6,7 +6,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>サブスクリプション加入画面</title>
-</head>
+    承知いたしました！文字の色やフォントは変更せず、位置と大きさの調整のみで、ご提示いただいたサブスクリプション加入画面も、前回の画面と同様に、見やすく整ったレイアウトに修正します。
+
+    以下に修正後のHTMLコードを記載します。
+
+    HTML
+
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>サブスクリプション加入画面</title>
+        <style>
+            body {
+                /* 全体のコンテンツを中央寄せに */
+                text-align: center;
+                /* ページ全体の上下左右の余白を調整 */
+                margin: 20px;
+                /* 行の高さを調整して読みやすくする */
+                line-height: 1.6;
+            }
+
+            h1 {
+                /* メインタイトルを大きくし、下に十分な余白を取る */
+                font-size: 2.5em;
+                margin-bottom: 30px;
+            }
+
+            h2 {
+                /* 各セクションの見出しを調整し、上下に余白を取る */
+                font-size: 1.8em;
+                margin-top: 40px;
+                margin-bottom: 20px;
+            }
+
+            h3 {
+                /* 加入済みメッセージの文字サイズを調整 */
+                font-size: 1.5em;
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+
+            h4 {
+                /* フォーム項目名の文字サイズを調整し、下に余白を取る */
+                font-size: 1.2em;
+                margin-top: 20px;
+                /* 入力欄との間に少しスペースを空ける */
+                margin-bottom: 8px;
+                /* 入力欄に近づける */
+            }
+
+            p {
+                /* メッセージの文字サイズを調整 */
+                font-size: 1.1em;
+                /* メッセージの下に余白を取る */
+                margin-bottom: 15px;
+                /* メッセージの内側に余白を設定 */
+                padding: 10px;
+                /* メッセージボックスが内容に合わせて幅を調整し、中央寄せになるように */
+                display: inline-block;
+                /* メッセージボックスの最大幅を設定 */
+                max-width: 600px;
+                /* 幅を100%にして、小さい画面でも適切に表示されるように */
+                width: 100%;
+                /* パディングとボーダーを要素の合計幅/高さに含める */
+                box-sizing: border-box;
+            }
+
+            form {
+                /* フォーム全体の最大幅を設定し、中央に配置 */
+                max-width: 500px;
+                margin: 30px auto;
+                /* フォーム内のテキストを左寄せに */
+                text-align: left;
+                /* フォームの内側に余白を設定 */
+                padding: 25px;
+                /* フォームの見た目を少し整える（必要であれば） */
+                /* border: 1px solid #eee; */
+                /* border-radius: 8px; */
+                /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); */
+            }
+
+            form {
+                /* フォーム全体の最大幅を設定し、中央に配置 */
+                max-width: 500px;
+                margin: 30px auto;
+                /* フォーム内のテキストを左寄せに */
+                text-align: left;
+                /* フォームの内側に余白を設定 */
+                padding: 25px;
+            }
+
+            form h2,
+            form h4 {
+                text-align: center;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                /* 入力フィールドの幅をフォームいっぱいに広げる */
+                width: calc(100% - 20%);
+                /* 左右のpadding分を引く */
+                padding: 10px;
+                margin-bottom: 20px;
+                /* 入力フィールドの下に余白 */
+                font-size: 1em;
+                /* 角を少し丸くする */
+                border-radius: 5px;
+                /* パディングとボーダーを要素の合計幅/高さに含める */
+                box-sizing: border-box;
+            }
+
+            button[type="submit"] {
+                /* ボタンの内側の余白 */
+                border: none;
+                border-radius: 5px;
+                font-size: 1.1em;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                margin-top: 20px;
+                /* ボタンを中央に配置 */
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            hr {
+                /* 水平線の上下の余白と、左右を自動にして中央寄せにする */
+                margin: 40px auto;
+                /* 水平線の長さを調整 */
+                width: 80%;
+                /* 水平線のスタイルを控えめに */
+                border: none;
+            }
+
+            /* 画面下部のボタン（サブスクリプション状況確認画面へ）のスタイル */
+            form[action="/subscription/list"] button {
+                padding: 10px 20px;
+                font-size: 1em;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+
 <body>
     <h1 th:text="${page.title}">サブスクリプション　加入</h1>
     <h2>シングルプラン　月額８００円　上限３０冊</h2>
@@ -17,28 +163,31 @@
         <p th:text="${successMessage}"></p>
     </div>
     <form action="/subscription/doJoin" method="post">
-    <input type="hidden" name="customerId" th:value="${page.id}">
-    <h2>クレジットカード情報</h2>
-    <h4>クレジットカード番号</h4>
-    <input type="text" name="cardNumber" placeholder="例: 1234-5678-9012-3456" th:value="${page.cardNumber}" required>
-    <h4>使用名義</h4>
-    <input type="text" name="cardHolderName" placeholder="例: YAMADA TARO" th:value="${page.cardHolderName}" required>
-    <h4>有効期限</h4>
-    <input type="text" name="expiryDate" placeholder="例: MM/YY" th:value="${page.expiryDate}" required>
-    <h4>セキュリティコード</h4>
-    <input type="password" name="securityCode" placeholder="例: 123" th:value="${page.securityCode}" required>
+        <input type="hidden" name="customerId" th:value="${page.id}">
+        <h2>クレジットカード情報</h2>
+        <h4>クレジットカード番号</h4>
+        <input type="text" name="cardNumber" placeholder="例: 1234-5678-9012-3456" th:value="${page.cardNumber}"
+            required>
+        <h4>使用名義</h4>
+        <input type="text" name="cardHolderName" placeholder="例: YAMADA TARO" th:value="${page.cardHolderName}"
+            required>
+        <h4>有効期限</h4>
+        <input type="text" name="expiryDate" placeholder="例: MM/YY" th:value="${page.expiryDate}" required>
+        <h4>セキュリティコード</h4>
+        <input type="password" name="securityCode" placeholder="例: 123" th:value="${page.securityCode}" required>
 
-    <button type="submit">加入</button>
+        <button type="submit">加入</button>
     </form>
 
-<div th:if="${page.subscribed}">
-    <h3>加入済です</h3>
-</div>
+    <div th:if="${page.subscribed}">
+        <h3>加入済です</h3>
+    </div>
 
     <hr>
     <form action="/subscription/list" method="get">
-    <button type="submit">サブスクリプション状況確認画面へ</button>
-    <input type="hidden" name="customerId" th:value="${page.id}">
+        <button type="submit">サブスクリプション状況確認画面へ</button>
+        <input type="hidden" name="customerId" th:value="${page.id}">
     </form>
 </body>
+
 </html>
