@@ -97,7 +97,6 @@ public class PasswordResetController {
         if (user != null) {
             // ユーザーが見つかった場合、セッションにユーザー名（またはID）を一時保存
             // これにより、次のページでどのユーザーのパスワードを変更するか識別できる
-            session.setAttribute("testAttribute", "hello");
             session.setAttribute("resettingUsername", user.getUsername());
             // session.setMaxInactiveInterval(5 * 60); // パスワードリセットセッションの有効期限を5分に設定
 
@@ -113,15 +112,17 @@ public class PasswordResetController {
     // URL: http://localhost:8080/password/reset
     @GetMapping("/reset")
     public String showResetPasswordPage(Model model, HttpSession session) {
-        String testAttribute = (String) session.getAttribute("testAttribute"); // ★★★ 追加 ★★★
-        System.out.println("Test Attribute: " + testAttribute);
         // セッションにリセット対象のユーザー名があるか確認
         String resettingUsername = (String) session.getAttribute("resettingUsername");
         if (resettingUsername == null) {
             // セッションに情報がない場合、リクエストページに戻す（不正アクセス対策）
             return "redirect:/password/request";
         }
-        model.addAttribute("resetPasswordForm", new ResetPasswordForm()); // 新しいパスワード入力フォーム
+
+        ResetPasswordForm form = new ResetPasswordForm();
+        form.setName(resettingUsername);
+
+        model.addAttribute("resetPasswordForm", form); // 新しいパスワード入力フォーム
         return "password/reset_password"; // templates/password/reset_password.html を返す
     }
 
