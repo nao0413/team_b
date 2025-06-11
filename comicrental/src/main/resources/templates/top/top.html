@@ -3,11 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>ホーム - 漫画レンタル</title>
+    <title>トップページ - 漫画レンタル</title>
 </head>
 
 <body>
-
     <h1>漫画レンタルへようこそ！</h1>
 
     <nav>
@@ -16,49 +15,20 @@
         <a th:href="@{/ranking}">漫画ランキングページはこちら</a>
     </nav>
 
-    <h2>人気漫画ランキング（レンタル回数順）</h2>
+    <h2>今月の人気ランキング</h2>
 
     <ol>
         <li th:each="comic, stat : ${topComics}">
-            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" width="80"><br>
-            <strong th:text="${stat.count} + '位:'"></strong>
-            <span th:text="${comic.title}"></span>（<span th:text="${comic.author}"></span>） -
-            <span th:text="${comic.rentaltimes}"></span>回
+            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" alt="表紙画像" width="80">
+            <p>
+                <strong th:text="${stat.count} + '位:'"></strong>
+                <span th:text="${comic.title}"></span> -
+                <span th:text="${comic.author}"></span><br>
+                貸出回数：<span th:text="${comic.rentaltimes}"></span> 回
+            </p>
         </li>
     </ol>
 
 </body>
 
 </html>
-
-<h1 th:text="${message}">ホーム</h1>
-
-<nav>
-    <a th:href="@{/top}">トップページ</a> |
-    <a th:href="@{/search}">漫画検索</a> |
-    <a th:href="@{/favorites}">お気に入り</a> |
-    <a th:href="@{/logout}">ログアウト</a>
-</nav>
-
-<section>
-    <h2>おすすめ漫画</h2>
-    <ul>
-        <li>
-            <img src="/comicimage/slamdunk.jpg" alt="スラムダンク" width="80">
-            スラムダンク - 井上井恵（仮）
-        </li>
-        <li>
-            <img src="/comicimage/NARUTO.jpg" alt="NARUTO" width="80">
-            NARUTO - 岸本斉史
-        </li>
-        <li>
-            <img src="/comicimage/dragonball.jpg" alt="ドラゴンボール" width="80">
-            ドラゴンボール - 鳥山明
-        </li>
-    </ul>
-</section>
-
-</body>
-</html>
-//
-
