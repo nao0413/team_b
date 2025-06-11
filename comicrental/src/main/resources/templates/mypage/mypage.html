@@ -45,14 +45,17 @@
     <div>
         <h1>会員情報</h1>
         <div>
-            <p>会員番号: <span th:text="${user.customerId}"></span></p>
-            <p>名前: <span th:text="${user.username}"></span></p>
-            <p>メールアドレス: <span th:text="${user.email}"></span></p>
+            <p>会員番号: <span th:text="${memberId}"></span></p>
+            <p>名前: <span th:text="${loggedInUsername}"></span></p>
+            <p>メールアドレス: <span th:text="${email}"></span></p>
         </div>
 
         <h1>メニューボタン</h1>
         <div>
-            <div><button type="button" onclick="location.href='@{/home}'">トップページ</button></div>
+            <div>
+                <form th:action="@{/home}" method="get"> <button type="submit">ホーム画面</button>
+                </form>
+            </div>
             <div>
                 <form th:action="@{/cart/table}" method="get"> <button type="submit">買い物かご</button>
                 </form>
@@ -68,7 +71,10 @@
                 <form th:action="@{/password/request}" method="get"> <button type="submit">パスワード変更</button>
                 </form>
             </div>
-            <div><button type="button" onclick="location.href='@{/login/logout}'">ログアウト</button></div>
+            <div>
+                <form th:action="@{/login/logout}" method="get"> <button type="submit">ログアウト</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
