@@ -52,10 +52,11 @@ public class LoginController {
     // resources/templates/login/create_new_account.html を指す
     // }
 
-    @GetMapping("/before_reset_password.html")
-    public String beforeResetPasswordPage() {
-        return "login/before_reset_password"; // resources/templates/login/before_reset_password.html を指す
-    }
+    // @GetMapping("/before_reset_password.html")
+    // public String beforeResetPasswordPage() {
+    // return "login/before_reset_password"; //
+    // resources/templates/login/before_reset_password.html を指す
+    // }
 
     // ログアウト処理
     // URL: http://localhost:8080/login/logout (例として追加)
