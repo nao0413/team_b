@@ -5,47 +5,34 @@
     <title>ホーム - 漫画レンタル</title>
 </head>
 <body>
-<h1>ようこそ、漫画レンタルへ！</h1>
 
-<nav>
-    <a th:href="@{/mypage}">マイページ</a> |
-    <a th:href="@{/search}">検索</a> |
-    <a th:href="@{/comics/table}">漫画一覧</a>
-</nav>
+    <h1>ホーム画面</h1>
 
-<h2>おすすめ漫画</h2>
-<button onclick="location.href='/recommend'">おすすめを見る</button>
+    <nav>
+        <a th:href="@{/top}">トップ</a> |
+        <a th:href="@{/search}">検索</a> |
+        <a th:href="@{/favorites}">お気に入り</a> |
+        <a th:href="@{/logout}">ログアウト</a>
+    </nav>
 
-<h2>ジャンルから探す</h2>
-<form action="/search" method="get">
-    <select name="genre">
-        <option value="">ジャンルを選択</option>
-        <option value="戦闘">戦闘系</option>
-        <option value="恋愛">恋愛系</option>
-        <option value="SF">SF系</option>
-    </select>
-    <button type="submit">絞り込む</button>
-</form>
-
-<h2>人気タイトル</h2>
-<ul>
-    <li th:each="comic : ${popularComics}">
-        <a th:href="@{/comic/detail(title=${comic.title})}">
-            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" width="80" alt="表紙画像">
-            <span th:text="${comic.title}"></span>（<span th:text="${comic.rentaltimes}"></span>回）
-        </a>
-    </li>
-</ul>
-
-<h2>最近入荷</h2>
-<ul>
-    <li th:each="comic : ${recentComics}">
-        <a th:href="@{/comic/detail(title=${comic.title})}">
-            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" width="80" alt="表紙画像">
-            <span th:text="${comic.title}"></span>（入荷日: <span th:text="${comic.arrivalDate}"></span>）
-        </a>
-    </li>
-</ul>
+    <section>
+        <h2>おすすめ漫画</h2>
+        <ul>
+            <li>
+                <img src="/comicimage/slamdunk.jpg" alt="スラムダンク" width="80">
+                スラムダンク - 井上井恵
+            </li>
+            <li>
+                <img src="/comicimage/NARUTO.jpg" alt="NARUTO" width="80">
+                NARUTO - 岸本斉史
+            </li>
+            <li>
+                <img src="/comicimage/dragonball.jpg" alt="ドラゴンボール" width="80">
+                ドラゴンボール - 鳥山明
+            </li>
+        </ul>
+    </section>
 
 </body>
 </html>
+
