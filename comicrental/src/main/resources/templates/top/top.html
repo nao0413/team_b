@@ -17,10 +17,10 @@
     <h2>人気漫画ランキング</h2>
     <ol>
         <li th:each="comic, stat : ${topComics}">
-            <img th:src="${comic.comicImage}" alt="表紙画像" width="80"><br>
             <strong th:text="${stat.count} + '位:'"></strong>
             <span th:text="${comic.title}"></span>（<span th:text="${comic.author}"></span>） -
-            <span th:text="${comic.rentaltimes}"></span>回
+            <span th:text="${comic.rentaltimes}"></span>回<br>
+            <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
         </li>
     </ol>
 
