@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>ホーム - 漫画レンタル</title>
 </head>
+
 <body>
+
+    <h1>漫画レンタルへようこそ！</h1>
+
+    <nav>
+        <a th:href="@{/login/loginpage}">ログインはこちら</a> |
+        <a th:href="@{/account/create}">アカウント新規作成はこちら</a> |
+        <a th:href="@{/ranking}">漫画ランキングページはこちら</a>
+    </nav>
+
+    <h2>人気漫画ランキング（レンタル回数順）</h2>
+
+    <ol>
+        <li th:each="comic, stat : ${topComics}">
+            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" width="80"><br>
+            <strong th:text="${stat.count} + '位:'"></strong>
+            <span th:text="${comic.title}"></span>（<span th:text="${comic.author}"></span>） -
+            <span th:text="${comic.rentaltimes}"></span>回
+        </li>
+    </ol>
+
+</body>
+
+</html>
+
 <h1 th:text="${message}">ホーム</h1>
 
 <nav>
@@ -35,3 +61,4 @@
 </body>
 </html>
 //
+

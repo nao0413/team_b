@@ -5,7 +5,7 @@ public class LoginModel {
     private String password;
     private String email;
     private boolean isSubscribed;
-    private int customerId;
+    private int userId;
 
     // ゲッター・セッター
     public String getUsername() {
@@ -40,12 +40,12 @@ public class LoginModel {
         isSubscribed = subscribed;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
 }

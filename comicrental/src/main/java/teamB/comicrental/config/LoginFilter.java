@@ -40,7 +40,7 @@ public class LoginFilter implements Filter {
         urls.add("^/password/success$");
 
         // 最初のトップ画面
-        urls.add("^/top/top$");
+        urls.add("^/top$");
 
         // マイページ（今だけ）
         urls.add("^/mypage$");
