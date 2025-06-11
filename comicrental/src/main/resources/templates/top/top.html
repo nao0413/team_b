@@ -5,24 +5,20 @@
     <title>トップページ - 漫画レンタル</title>
 </head>
 <body>
-
     <h1>漫画レンタルへようこそ！</h1>
 
     <nav>
         <a th:href="@{/login/loginpage}">ログイン</a> |
-        <a th:href="@{/account/create}">アカウント作成</a> |
-        <a th:href="@{/ranking}">ランキング</a>
+        <a th:href="@{/account/create}">新規アカウント登録</a> |
     </nav>
 
     <h2>人気漫画ランキング</h2>
     <ol>
         <li th:each="comic, stat : ${topComics}">
             <strong th:text="${stat.count} + '位:'"></strong>
-            <span th:text="${comic.title}"></span>（<span th:text="${comic.author}"></span>） -
-            <span th:text="${comic.rentaltimes}"></span>回<br>
-            <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
+            <span th:text="${comic.title}"></span>（<span th:text="${comic.author}"></span>）<br>
+            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" alt="表紙" width="100">
         </li>
     </ol>
-
 </body>
 </html>
