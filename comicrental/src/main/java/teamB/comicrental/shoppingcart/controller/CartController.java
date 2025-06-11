@@ -22,7 +22,7 @@ public class CartController {
 
     @GetMapping("")
     public String redirectToCartTable() {
-        return "redirect:/cart/table";
+        return "redirect:/cart/table"; // 買い物かごにも戻る
     }
 
     // カート一覧画面を表示する
@@ -46,7 +46,7 @@ public class CartController {
         return "redirect:/cart/table"; // 一覧画面にリダイレクト
     }
 
-    // カート内の全アイテムを削除（論理削除）
+    // カート内の全アイテムを削除
 
     @PostMapping("/deleteAll")
     public String deleteAll() {
@@ -87,5 +87,10 @@ public class CartController {
         model.addAttribute("remainingLimit", remaining);
 
         return "cart/cart_complete";
+    }
+
+    @GetMapping("/home")
+    public String showHomePage() {
+        return "home";
     }
 }
