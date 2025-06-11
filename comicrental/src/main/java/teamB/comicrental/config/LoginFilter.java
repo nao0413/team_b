@@ -27,6 +27,7 @@ public class LoginFilter implements Filter {
         urls.add("^/login/loginpage$");
         urls.add("^/login$");
         urls.add("^/login/logincheck$");
+        urls.add("^/login/logout_success");
 
         // アカウント作成関連
         urls.add("^/account/create$");
@@ -81,7 +82,7 @@ public class LoginFilter implements Filter {
         // url.matches("^/AboutUs") || url.matches("^/newcreate/newcomplete")) {
 
         // フィルターをかけない拡張子の指定
-        if (url.matches(".+\\.(css|png|jpg)"))
+        if (url.matches(".+\\.(css|png|jpg|js|ico|gif|woff|ttf)$"))
 
         {
             chain.doFilter(request, response);

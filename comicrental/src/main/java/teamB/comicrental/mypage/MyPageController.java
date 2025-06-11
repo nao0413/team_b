@@ -40,8 +40,8 @@ public class MyPageController {
         // HTML（Thymeleaf）で表示するためにモデルに会員情報を追加
         model.addAttribute("loggedInUsername", user.getUsername());
         // LoginModelにcustomer_idがなければ、適宜変更してください
-        // model.addAttribute("memberId", user.getCustomer_id()); // 例: 会員番号
-        // model.addAttribute("email", user.getEmail()); // 例: メールアドレス
+        model.addAttribute("memberId", user.getUserId()); // 例: 会員番号
+        model.addAttribute("email", user.getEmail()); // 例: メールアドレス
 
         return "mypage/mypage"; // resources/templates/mypage/mypage.html を返す
     }
