@@ -39,6 +39,7 @@ public class LoginController {
 
         if (user != null) {
             session.setAttribute("loggedInUser", user.getUsername());
+            session.setAttribute("loggedInUser", user.getUserId());
             return "HOME/home";
         } else {
             model.addAttribute("error", "ユーザー名またはパスワードが間違っています。");

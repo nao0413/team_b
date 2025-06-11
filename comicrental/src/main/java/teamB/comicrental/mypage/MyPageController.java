@@ -18,10 +18,10 @@ public class MyPageController {
 
     @GetMapping // URL: http://localhost:8080/mypage
     public String showMyPage(HttpSession session, Model model) {
-        // セッションからログイン中のユーザー名を取得
-        String loggedInUsername = (String) session.getAttribute("loggedInUser");
+        // セッションからログイン中のユーザーidを取得
+        Integer loggedInUserId = (Integer) session.getAttribute("loggedInUser");
 
-        if (loggedInUsername == null) {
+        if (loggedInUserId == null) {
             // セッションにユーザー情報がない場合（ログインしていない、またはセッション切れ）
             // ログインページにリダイレクトする
             return "redirect:/login/loginpage";
@@ -29,7 +29,7 @@ public class MyPageController {
 
         // ログイン中のユーザー名を使って、データベースから詳細な会員情報を取得
         // AccountMapperにfindByUsernameメソッドを実装済みのはずです
-        LoginModel user = accountMapper.findByUsername(loggedInUsername);
+        LoginModel user = accountMapper.findByUserId(loggedInUserId);
 
         if (user == null) {
             // セッションにはユーザー名があるが、DBからユーザーが見つからない（データ不整合など）
