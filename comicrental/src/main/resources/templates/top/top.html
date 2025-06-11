@@ -19,7 +19,7 @@
 
     <ol>
         <li th:each="comic, stat : ${topComics}">
-            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" alt="表紙画像" width="80">
+            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}"  width="80">
             <p>
                 <strong th:text="${stat.count} + '位:'"></strong>
                 <span th:text="${comic.title}"></span> -
