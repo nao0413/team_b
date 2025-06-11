@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import teamB.comicrental.top.model.Comic;
-import teamB.comicrental.home.repository.ComicHomeMapper;
+import teamB.comicrental.top.repository.TopComicMapper;
 
 import java.util.List;
 
@@ -14,12 +14,12 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-private ComicHomeMapper comicHomeMapper;  // 変数名を統一
+private TopComicMapper comicMapper;  // 変数名を統一
 
 @GetMapping("/home")
 public String showHomePage(Model model) {
-    List<Comic> popularComics = comicHomeMapper.findTopComics();
-    List<Comic> recentComics = comicHomeMapper.findRecentComics();
+    List<Comic> popularComics = comicMapper.findTopComics();
+    List<Comic> recentComics = comicMapper.findRecentComics();
     model.addAttribute("popularComics", popularComics);
     model.addAttribute("recentComics", recentComics);
     return "home/home";

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>現在のレンタル状況</title>
+</head>
+<body>
+<h1>現在のレンタル状況</h1>
+
+<p th:if="${#lists.isEmpty(currentRentals)}">現在レンタル中の漫画はありません。</p>
+
+<ul th:if="${!#lists.isEmpty(currentRentals)}">
+    <li th:each="rental : ${currentRentals}">
+        <img th:src="@{/comicimage/{img}(img=${rental.comicImage})}" width="80" alt="表紙画像">
+        <strong th:text="${rental.title}"></strong><br>
+        貸出日: <span th:text="${#dates.format(rental.rentalDate, 'yyyy/MM/dd')}"></span>
+    </li>
+</ul>
+
+<a th:href="@{/home}">← ホームに戻る</a>
+
+</body>
+</html>
