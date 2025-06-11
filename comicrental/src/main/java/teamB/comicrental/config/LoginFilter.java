@@ -27,7 +27,7 @@ public class LoginFilter implements Filter {
         urls.add("^/login/loginpage$");
         urls.add("^/login$");
         urls.add("^/login/logincheck$");
-        urls.add("^/login/logout_success");
+        urls.add("^/login/logout_success$");
 
         // アカウント作成関連
         urls.add("^/account/create$");
@@ -42,9 +42,6 @@ public class LoginFilter implements Filter {
 
         // 最初のトップ画面
         urls.add("^/top$");
-
-        // マイページ（今だけ）
-        urls.add("^/mypage$");
 
     }
 

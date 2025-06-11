@@ -65,14 +65,14 @@ public class LoginController {
     public String logout(HttpSession session) {
         // セッションを破棄する
         session.invalidate();
-        // ログアウト後はログインページにリダイレクト
-        return "redirect:/logout/logout_success";
+
+        return "redirect:/login/logout_success";
     }
 
     // URL: http://localhost:8080/login/logout_success
     @GetMapping("/logout_success")
     public String showLogoutSuccessPage() {
-        return "logout/logout_success";
+        return "login/logout_success";
 
     }
 }
