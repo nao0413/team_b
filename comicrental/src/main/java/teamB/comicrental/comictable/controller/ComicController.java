@@ -4,23 +4,28 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.ui.Model;
 
 import teamB.comicrental.comictable.model.ComicPageModel;
 import teamB.comicrental.comictable.repository.ComicMapper;
 import teamB.comicrental.comictable.repository.ComicModel;
-import teamB.comicrental.shoppingcart.CartService;
 import teamB.comicrental.shoppingcart.model.Cart;
 import teamB.comicrental.shoppingcart.repository.CartMapper;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 
 
 
@@ -36,16 +41,16 @@ public class ComicController {
     private ComicMapper comicMapper;
     @Autowired
     private CartMapper cartMapper;
-    @Autowired
-    private CartService cartService;
 
     //漫画を一覧で表示する
     @GetMapping("table")
-    public String showComictable(Model model,@RequestParam(value ="customerId", required=false)Integer customerId,RedirectAttributes redirectAttributes){
-        if (customerId == null) {
-        redirectAttributes.addFlashAttribute("errorMessage", "ログインしてください。");
-        return "redirect:/login/login";
-        }
+    public String showComictable(Model model,HttpSession session,RedirectAttributes redirectAttributes){
+         String loggedInUsername = (String) session.getAttribute("loggedInUser");
+         Integer customerId = (Integer) session.getAttribute("loggedInUserId"); 
+         if(loggedInUsername==null){
+            redirectAttributes.addFlashAttribute("errorMessage","ログインが必要です。");
+            return "redirect:/login/loginpage";
+         }
         List<ComicModel> comicList=comicMapper.findAllComicsWithCategoryAndRentalStatus(customerId);
         model.addAttribute("comicList",comicList);
         model.addAttribute("customerId", customerId);
@@ -57,11 +62,13 @@ public class ComicController {
 
     //レンタルしたい漫画を追加する処理
     @PostMapping("addToCart")
-    public String addToCart(@RequestParam("comicId") Integer comicId,@RequestParam(value = "volume",required = false) Integer volume,@RequestParam("customerId") Integer customerId,RedirectAttributes redirectAttributes){
-        if (customerId == null) {
-            redirectAttributes.addFlashAttribute("errorMessage", "ログインしていません。");
-            return "redirect:/login/login";
-        }
+    public String addToCart(@RequestParam("comicId") Integer comicId,@RequestParam(value = "volume",required = false) Integer volume,HttpSession session,RedirectAttributes redirectAttributes){
+         String loggedInUsername = (String) session.getAttribute("loggedInUser");
+         Integer customerId = (Integer) session.getAttribute("loggedInUserId"); 
+         if(loggedInUsername==null){
+            redirectAttributes.addFlashAttribute("errorMessage","ログインが必要です。");
+            return "redirect:/login/loginpage";
+         }
         //漫画の巻数がNULLの場合、１を設定する（今回は巻数の情報を入れてないため全て１になる）
         if(volume==null){
             volume=1;
@@ -88,6 +95,41 @@ public class ComicController {
         }
         }
 
+        @GetMapping("/detail/{comicId}")
+        public String showComicDetail(Model model,@PathVariable("comicId") Integer comicId, HttpSession session,RedirectAttributes redirectAttributes) {
+         String loggedInUsername = (String) session.getAttribute("loggedInUser");
+         Integer customerId = (Integer) session.getAttribute("loggedInUserId"); 
+         if(loggedInUsername==null){
+            redirectAttributes.addFlashAttribute("errorMessage","ログインが必要です。");
+            return "redirect:/login/loginpage";
+         }
+         Optional<ComicModel> comicOptional=comicMapper.findByComicId(comicId);
+         if(comicOptional.isPresent()){
+            ComicModel comic=comicOptional.get();
+            model.addAttribute("comic", comic);
+            model.addAttribute("customerId", customerId);
+            return "comictable/comicdetail";
+         }else{
+            redirectAttributes.addFlashAttribute("errorMessage","指定された漫画が見つかりません。");
+            return "redirect:comics/table?customerId="+customerId;
+         }
+        }
+        
+        @GetMapping("recommend")
+        public String showReccomendedComics(Model model,HttpSession session,RedirectAttributes redirectAttributes){
+         String loggedInUsername = (String) session.getAttribute("loggedInUser");
+         if(loggedInUsername==null){
+            redirectAttributes.addFlashAttribute("errorMessage","ログインが必要です。");
+            return "redirect:/login/loginpage";
+         }
+         ComicPageModel page=new ComicPageModel();
+         page.setTitle("おすすめ漫画 2.5次元舞台化特集");   
+         List<ComicModel> recommendedComics=comicMapper.findRecommendedComics();
+         model.addAttribute("recommendedComics", recommendedComics);
+         model.addAttribute("page",page);
+            return "comictable/comicrecommend";
+        }
+        
     }
     
 

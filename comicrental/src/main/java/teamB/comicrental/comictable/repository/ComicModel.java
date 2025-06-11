@@ -3,7 +3,7 @@ package teamB.comicrental.comictable.repository;
 import java.sql.Date;
 
 public class ComicModel {
-    private int comic_id;
+    private Integer comic_id;
     private String title;
     private String author;
     private String explanatory;
@@ -13,12 +13,16 @@ public class ComicModel {
     private String comic_image;
     private String category_name;
     private int customer_id;
-    private Boolean isRented; 
+    private Boolean isRented;
+    private Boolean is_recommended;
+    private String recommend_type;
+    private String recommend_text;
+    private String recommend_image; 
 
-    public int getComic_id() {
+    public Integer getComic_id() {
         return comic_id;
     }
-    public void setComic_id(int comic_id) {
+    public void setComic_id(Integer comic_id) {
         this.comic_id = comic_id;
     }
     public String getTitle() {
@@ -80,5 +84,29 @@ public class ComicModel {
     }
     public void setIsRented(Boolean isRented) {
         this.isRented = isRented;
+    }
+     public Boolean getIs_recommended() {
+        return is_recommended;
+    }
+    public void setIs_recommended(Boolean is_recommended) {
+        this.is_recommended = is_recommended;
+    }
+    public String getRecommend_type() {
+        return recommend_type;
+    }
+    public void setRecommend_type(String recommend_type) {
+        this.recommend_type = recommend_type;
+    }
+    public String getRecommend_text() {
+        return recommend_text;
+    }
+    public void setRecommend_text(String recommend_text) {
+        this.recommend_text = recommend_text;
+    }
+    public String getRecommend_image() {
+        return recommend_image;
+    }
+    public void setRecommend_image(String recommend_image) {
+        this.recommend_image = recommend_image;
     }
 }

@@ -11,7 +11,8 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            table-layout: fixed; 
+            table-layout: fixed;
+            border: 1px solid #ddd; /* テーブル全体に枠線を追加 */
         }
 
         th,
@@ -20,14 +21,74 @@
             text-align: left;
             vertical-align: top;
             white-space: normal;
+            border: 1px solid #ddd; /* セルにも枠線を追加 */
         }
-</style>
+
+        th {
+            background-color: #f2f2f2; /* ヘッダーの背景色 */
+            font-weight: bold; /* ヘッダーのテキストを太字に */
+        }
+
+        /* 各列の幅を調整 */
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 15%;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+            width: 15%;
+        }
+
+        th:nth-child(3),
+        td:nth-child(3) {
+            width: 10%;
+        }
+
+        th:nth-child(4),
+        td:nth-child(4) {
+            width: 15%;
+        }
+
+        th:nth-child(5),
+        td:nth-child(5) {
+            width: 20%;
+        }
+
+        th:nth-child(6),
+        td:nth-child(6) {
+            width: 15%;
+        }
+
+        /* 画像のサイズ調整 */
+        .comic-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ボタンのスタイル */
+        button {
+            padding: 5px 10px;
+            background-color:white;
+            color:black;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color:white;
+             color:black;
+        }
+    </style>
 </head>
 
 <body>
     <h1>漫画一覧</h1>
     <form action="/cart/table" method="get">
         <button type="submit">買い物かごページへ</button>
+        <input type="hidden" name="customerId" th:value="${customerId}">
+    </form>
+    <form action="/comics/recommend" method="get">
+        <button type="submit">おすすめページへ</button>
         <input type="hidden" name="customerId" th:value="${customerId}">
     </form>
     <div th:if="${errorMessage}">
@@ -44,7 +105,7 @@
             <th style="width: 10%;">ジャンル</th>
             <th style="width: 15%;">レンタル状況</th>
             <th style="width: 20%;">カートに追加</th>
-            <th style="width: 20%;">漫画個別ページ</th>
+            <!-- <th style="width: 20%;">漫画個別ページ</th> -->
             <th style="width: 15%;">表紙</th>
             </tr>
         </thead>
@@ -53,7 +114,9 @@
                 <td colspan="7">漫画が見つかりませんでした。</td>
             </tr>
             <tr th:each="comic:${comicList}">
-                <td th:text="${comic.title}">タイトル</td>
+                <td>
+                     <a th:href="@{'/comics/detail/' + ${comic.comic_id} + '?customerId=' + ${customerId}}" th:text="${comic.title}">タイトル</a>
+                </td>
                 <td th:text="${comic.author}">著者</td>
                 <td th:text="${comic.category_name}">ジャンル</td>
                 <td>
@@ -67,7 +130,7 @@
                         <button type="submit" class="add-to-cart-button">買い物かごへ入れる</button>
                     </form>
                 </td>
-                <td><a th:href="'/comic/'+${comic.comic_id}">詳細ページへ</a></td>
+                <!--<td><a th:href="'/comics/detail/'+${comic.comic_id}">詳細ページへ</a></td>-->
                 <td>
                     <img th:src="${comic.comic_image}" alt="表紙画像" class="comic-image">
                 </td>

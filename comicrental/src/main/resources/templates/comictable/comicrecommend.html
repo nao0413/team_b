@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>漫画紹介ページ</title>
+    <style>
+        .recommended-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .comic-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            width: 200px;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        .comic-card img {
+            max-width: 100%;
+            height: auto;
+            max-height: 250px; /* 画像の最大高さを設定 */
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        .comic-card h3 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .comic-card p {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .comic-card .description { /* おすすめ文のスタイル */
+            font-size: 0.85em;
+            color: #555;
+            height: 60px; /* 説明文の高さ制限 */
+            overflow: hidden; /* 制限を超えた部分は非表示 */
+            text-overflow: ellipsis; /* 省略記号 */
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* 3行で省略 */
+            -webkit-box-orient: vertical;
+        }
+        .detail-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .detail-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<h1 th:text="${page.title}">今月のおすすめ漫画</h1>
+    <div th:if="${#lists.isEmpty(recommendedComics)}">
+            <p>おすすめ漫画が見つかりませんでした。</p>
+    </div>
+    <div th:each="comic:${recommendedComics}">
+        <h2 th:text="${comic.title}">タイトル</h2>
+        <h2 th:text="${comic.author}">著者</h2>
+        <h2 th:text="${comic.explanatory}">説明文</h2>
+        <div>
+            <img th:src="${comic.comic_image}" alt="表紙画像" class="comic-image">
+        </div>
+        <h2 th:text="${comic.recommend_type}">タイプ</h2>
+        <h2 th:text="${comic.recommend_text}">紹介文</h2>
+        <div>
+            <img th:src="${comic.recommend_image}" alt="おすすめ画像" class="recommend-image">
+        </div>
+<a th:href="'/comics/detail/'+${comic.comic_id}">漫画個別ページへ</a>
+<form action="/comics/addToCart" method="post">
+        <input type="hidden" name="comicId" th:value="${comic.comic_id}">
+        <input type="hidden" name="customerId" th:value="${customerId}">
+        <button type="submit" class="add-to-cart-button">買い物かごへ入れる</button>
+</form>
+</div>
+</body>
+</html>
