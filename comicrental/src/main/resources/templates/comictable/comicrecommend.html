@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,96 +10,159 @@
         body {
             text-align: center;
         }
-        .comic-main-info {
+
+        .content-section {
             display: flex;
-            gap: 20px;
-            align-items: flex-start; /* 上揃え */
-            flex-wrap: wrap; /* 小さい画面で折り返す */
-            justify-content: center; /* 中央寄せ */
-            width: 100%; /* 親要素の幅を使う */
+            flex-direction: column;
+            /* 小さい画面では縦並び */
+            align-items: flex-start;
+            margin: 20px auto;
+            max-width: 960px;
+            /* 最大幅を設定して中央に寄せる */
+            padding: 10px;
         }
-        .info-main-info{
+
+        .comic-main-info,
+        .info-main-info {
             display: flex;
+            /* Flexboxを適用 */
+            flex-direction: column;
+            /* デフォルトは縦並び */
+            align-items: center;
+            /* 中央寄せ */
             gap: 20px;
-            align-items: flex-start; /* 上揃え */
-            flex-wrap: wrap; /* 小さい画面で折り返す */
-            justify-content: center; /* 中央寄せ */
-            width: 100%; /* 親要素の幅を使う */
+            /* 要素間の隙間 */
+            margin-bottom: 30px;
+            /* 各セクションの下の余白*/
+            width: 100%;
+            /* 親要素の幅を使う */
         }
+
         /* タイトル */
         h1 {
-            font-size: 2em; /* 現在のフォントサイズの2倍 */
+            font-size: 2em;
+            /* 現在のフォントサイズの2倍 */
         }
-        h3{
+
+        h2 {
+            font-size: 1em;
+            /* フォントサイズを調整 */
+        }
+
+        h3 {
             white-space: normal;
+            font-size: 1.1em;
+            /* フォントサイズを調整 */
+            text-align: left;
+            /* テキストを左寄せ */
+            flex-grow: 1;
+            /* 残りのスペースを埋める */
         }
 
         .comic-image-box {
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: auto;
+            flex-shrink: 0;
+            order: -1;
         }
 
         .comic-image-box img {
             max-width: 100%;
-            max-height: 100%;
-            object-fit: contain; /* 画像がボックスに収まるように調整 */
+            height: auto;
+            object-fit: contain;
+            /* 画像がボックスに収まるように調整 */
             display: block;
-            margin: auto; /* 中央寄せ */
+            margin: auto;
+            /* 中央寄せ */
         }
 
         .recommend-image-box {
-            width: 500px;
-            height: 400px;
+            width: 300px;
+            height: 250x;
+            flex-shrink: 0;
+            order: -1;
         }
 
         .recommend-image-box img {
             max-width: 100%;
-            max-height: 100%;
+            height: auto;
             object-fit: contain;
             display: block;
             margin: auto;
         }
 
-        
+
         /* ボタンの文字サイズ */
         button {
-            font-size: 1em; /* デフォルトのボタンと同じサイズ */
-            margin-top: 10px; /* 上部の余白 */
-            cursor: pointer; /* マウスオーバー時にカーソルを指の形にする */
+            display: flex;
+            flex-direction: column;
+            /* 小さい画面では縦並び */
+            gap: 15px;
+            /* ボタン間の隙間 */
+            margin-top: 30px;
+            margin-bottom: 50px;
+            /* 下に余白 */
+            justify-content: center;
+            /* ボタンを中央寄せ */
+            align-items: center;
+            cursor: pointer;
+            /* マウスオーバー時にカーソルを指の形にする */
+        }
+
+        .button-group {
+            display: flex;
+            /* これが重要！Flexコンテナにする */
+            flex-wrap: wrap;
+            /* ボタンが収まらない場合に折り返す */
+            gap: 15px;
+            /* ボタン間の隙間（現在の設定を維持） */
+            margin-top: 30px;
+            /* 現在の設定を維持 */
+            margin-bottom: 50px;
+            /* 現在の設定を維持 */
+            justify-content: center;
+            /* Flexアイテム（ボタン）を主軸（横方向）で中央に寄せる */
+            align-items: center;
         }
     </style>
 </head>
+
 <body>
-<h1 th:text="${page.title}">今月のおすすめ漫画</h1>
+    <h1 th:text="${page.title}">今月のおすすめ漫画</h1>
     <div th:if="${#lists.isEmpty(recommendedComics)}" class="info-box">
-            <p>おすすめ漫画が見つかりませんでした。</p>
+        <p>おすすめ漫画が見つかりませんでした。</p>
     </div>
     <div th:each="comic:${recommendedComics}">
         <div class="comic-main-info">
-        <h2 th:text="${comic.title}">タイトル</h2>
-        <h2 th:text="${comic.author}">著者</h2>
-        <h3 th:text="${comic.explanatory}">説明文</h3>
-        <div class="info-box comic-image-box"> 
-            <img th:src="${comic.comic_image}" alt="表紙画像">
-        </div>
+            <h2 th:text="${comic.title}">タイトル</h2>
+            <h2 th:text="${comic.author}">著者</h2>
+            <h2 th:text="${comic.explanatory}">説明文</h2>
+            <div class="info-box comic-image-box">
+                <img th:src="${comic.comic_image}" alt="表紙画像">
+            </div>
         </div>
         <div class="info-main-info">
-        <h3 th:text="${comic.recommend_text}">紹介文</h3>
-        <div class="info-box recommend-image-box">
-            <span>紹介した公演のポスターです。</span>
-            <img th:src="${comic.recommend_image}" alt="おすすめ画像">
+            <h3 th:text="${comic.recommend_text}">紹介文</h3>
+            <div class="info-box recommend-image-box">
+                <span>こちらは公演のポスターです。</span>
+                <img th:src="${comic.recommend_image}" alt="おすすめ画像">
+            </div>
         </div>
+        <div class="button-group">
+        <form action="/comics/detail" method="post">
+            <input type="hidden" name="comicId" th:value="${comic.comic_id}">
+            <input type="hidden" name="customerId" th:value="${customerId}">
+            <button type="submit" class="comicdetail">漫画個別ページへ</button>
+        </form>
+        <form action="/comics/addToCart" method="post">
+            <input type="hidden" name="comicId" th:value="${comic.comic_id}">
+            <input type="hidden" name="customerId" th:value="${customerId}">
+            <button type="submit" class="add-to-cart-button">買い物かごへ入れる</button>
+        </form>
         </div>
-<form action="/comics/detail" method="post">
-        <input type="hidden" name="comicId" th:value="${comic.comic_id}">
-        <input type="hidden" name="customerId" th:value="${customerId}">
-        <button type="submit" class="comicdetail">漫画個別ページへ</button>
-</form>
-<form action="/comics/addToCart" method="post">
-        <input type="hidden" name="comicId" th:value="${comic.comic_id}">
-        <input type="hidden" name="customerId" th:value="${customerId}">
-        <button type="submit" class="add-to-cart-button">買い物かごへ入れる</button>
-</form>
-</div>
+        <hr>
+    </div>
+    </div>
 </body>
+
 </html>

@@ -1,22 +1,90 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>サブスクリプション退会通知画面</title>
+    <style>
+        body {
+            /* 全体のコンテンツを中央寄せに */
+            text-align: center;
+            /* ページ全体の上下左右の余白を調整 */
+            margin: 20px;
+            /* 行の高さを調整して読みやすくする */
+            line-height: 1.6;
+        }
+
+        h1 {
+            /* メインタイトルを大きくし、下に十分な余白を取る */
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        h2.notification {
+            /* 通知メッセージを調整し、上下に余白を取る */
+            font-size: 2em;
+            /* 退会完了を明確に伝えるため、少し大きめに */
+            margin-top: 30px;
+            margin-bottom: 15px;
+            /* 各メッセージ間の間隔 */
+        }
+
+        p {
+            /* メッセージの文字サイズを調整 */
+            font-size: 1.1em;
+            /* メッセージの下に余白を取る */
+            margin-bottom: 25px;
+            /* 他の要素との間隔を確保 */
+            /* メッセージの内側に余白を設定 */
+            padding: 10px;
+            /* メッセージボックスが内容に合わせて幅を調整し、中央寄せになるように */
+            display: inline-block;
+            /* メッセージボックスの最大幅を設定 */
+            max-width: 600px;
+            /* 幅を100%にして、小さい画面でも適切に表示されるように */
+            width: 100%;
+            /* パディングとボーダーを要素の合計幅/高さに含める */
+            box-sizing: border-box;
+        }
+
+        button {
+            /* ボタンの内側の余白を調整して大きく見せる */
+            padding: 12px 25px;
+            /* ボタンの文字サイズを調整 */
+            font-size: 1.1em;
+            /* ボタンの上に余白を取る */
+            margin-top: 30px;
+            /* 通知メッセージとの間にスペース */
+            /* ボタンを中央に配置 */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h5 {
+            /* 「マイページへ戻る」の文字サイズと余白を調整 */
+            font-size: 1em;
+            margin-top: 40px;
+            /* ボタンとの間に十分なスペースを空ける */
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
+
 <body>
     <h1 th:text="${page.title}">サブスクリプション　退会</h1>
-    <div th:if="${successMessage}" >
+    <div th:if="${successMessage}">
         <p th:text="${successMessage}"></p>
     </div>
     <h2 class="notification">サブスクリプションを退会しました。</h2>
     <h2 class="notification">ご利用ありがとうございました。</h2>
     <form action="/subscription/list" method="get">
-    <button type="submit">サブスクリプション状況確認画面へ</button>
-    <input type="hidden" name="customerId" th:value="${page.id}">
+        <button type="submit">サブスクリプション状況確認画面へ</button>
+        <input type="hidden" name="customerId" th:value="${page.id}">
     </form>
     <h5>マイページへ戻る</h5>
 </body>
+
 </html>

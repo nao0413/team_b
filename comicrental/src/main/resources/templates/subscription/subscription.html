@@ -7,6 +7,101 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>サブスクリプション状況確認画面</title>
 </head>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>サブスクリプション状況確認画面</title>
+    <style>
+        body {
+            /* 全体のコンテンツを中央寄せに */
+            text-align: center;
+            /* ページ全体の上下左右の余白を調整 */
+            margin: 20px;
+            /* 行の高さを調整して読みやすくする */
+            line-height: 1.6;
+        }
+
+        h1 {
+            /* メインタイトルを大きくし、下に十分な余白を取る */
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            /* 各セクションの見出しを調整し、上下に余白を取る */
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            /* 会員情報などの文字サイズを調整し、下に余白を取る */
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            /* メッセージの文字サイズを調整 */
+            font-size: 1.1em;
+            /* メッセージの下に余白を取る */
+            margin-bottom: 15px;
+            /* メッセージの内側に余白を設定 */
+            padding: 10px;
+            /* メッセージボックスが内容に合わせて幅を調整し、中央寄せになるように */
+            display: inline-block;
+            /* メッセージボックスの最大幅を設定 */
+            max-width: 600px;
+            /* 幅を100%にして、小さい画面でも適切に表示されるように */
+            width: 100%;
+            /* パディングとボーダーを要素の合計幅/高さに含める */
+            box-sizing: border-box;
+        }
+
+        .mypage {
+            /* mypageブロックの上下の余白と、左右を自動にして中央寄せにする */
+            margin: 30px auto;
+            /* mypageブロックの内側の余白 */
+            padding: 25px;
+            /* mypageブロックの最大幅を設定し、コンテンツが広がりすぎないようにする */
+            max-width: 500px;
+            /* mypageブロック内のテキストを左寄せに */
+            text-align: left;
+        }
+
+        .mypage h4,
+        .mypage h5 {
+            /* mypageブロック内の見出しは中央寄せにする */
+            text-align: center;
+        }
+
+        hr {
+            /* 水平線の上下の余白と、左右を自動にして中央寄せにする */
+            margin: 40px auto;
+            /* 水平線の長さを調整 */
+            width: 80%;
+        }
+
+        button {
+            /* ボタンの内側の余白を調整して大きく見せる */
+            padding: 12px 25px;
+            /* ボタンの文字サイズを調整 */
+            font-size: 1.1em;
+            /* ボタンの上に余白を取る */
+            margin-top: 15px;
+            /* ボタンがインラインブロック要素として扱われるように */
+            display: inline-block;
+        }
+
+        form {
+            /* 各フォームの下に余白を取る */
+            margin-bottom: 20px;
+        }
+    </style>
+
 <body>
     <h1 th:text="${page.title}">サブスクリプション状況</h1>
     <div th:if="${successMessage}">
@@ -21,22 +116,23 @@
         <p th:text="${infoMessage}"></p>
     </div>
     <div class="mypage">
-    <h4 th:if="${page.id !=null}"> 会員番号:<span th:text="${page.id}"></span></h4>
-    <h4 th:if="${page.name !=null}">名前:<span th:text="${page.name}"></span></h4>
-    <h4>サブスクリプション状況:<span th:text="${page.subscribed ? '加入済み':'未加入'}"></span></h4>
-    <h5>マイページへ</h5>
+        <h4 th:if="${page.id !=null}"> 会員番号:<span th:text="${page.id}"></span></h4>
+        <h4 th:if="${page.name !=null}">名前:<span th:text="${page.name}"></span></h4>
+        <h4>サブスクリプション状況:<span th:text="${page.subscribed ? '加入済み':'未加入'}"></span></h4>
+        <h5>マイページへ</h5>
     </div>
     <hr>
     <h2 class="join">サブスクリプション　加入</h2>
     <form action="/subscription/join" method="get">
-    <button type="submit" >加入ページへ</button>
-    <input type="hidden" name="customerId" th:value="${page.id}"><!--hidden-->
+        <button type="submit">加入ページへ</button>
+        <input type="hidden" name="customerId" th:value="${page.id}"><!--hidden-->
     </form>
     <hr>
-     <h2 class="Withdrawal">サブスクリプション　退会</h2>
+    <h2 class="Withdrawal">サブスクリプション　退会</h2>
     <form action="/subscription/withdrawal" method="get">
-    <button type="submit">退会ページへ</button>
-    <input type="hidden" name="customerId" th:value="${page.id}">
+        <button type="submit">退会ページへ</button>
+        <input type="hidden" name="customerId" th:value="${page.id}">
     </form>
 </body>
+
 </html>

@@ -26,6 +26,6 @@ public interface ComicMapper {
     @Select("select c.comic_id,c.title,c.author,c.explanatory,c.category_id,ca.category_name,c.comic_image from comic c LEFT JOIN category ca ON c.category_id=ca.category_id WHERE c.comic_id =#{comicId} LIMIT 1")
     Optional<ComicModel> findByComicId(@Param("comicId")int comicId);
 
-    @Select("select comic_id,title,author,comic_image,is_recommended,recommend_type,recommend_text,recommend_image from comic where is_recommended=true ORDER BY comic_id ")
+    @Select("select comic_id,title,author,explanatory,comic_image,is_recommended,recommend_type,recommend_text,recommend_image from comic where is_recommended=true ORDER BY comic_id ")
     List<ComicModel>findRecommendedComics();
 }
