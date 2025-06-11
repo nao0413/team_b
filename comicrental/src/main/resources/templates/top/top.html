@@ -9,12 +9,10 @@
 
     <nav>
         <a th:href="@{/login/loginpage}">ログイン</a> |
-        <a th:href="@{/account/create}">アカウント作成</a> |
-        <a th:href="@{/search}">検索</a> |
-        <a th:href="@{/mypage}">マイページ</a>
+        <a th:href="@{/account/create}">新規アカウント登録</a> |
     </nav>
 
-    <h2>人気漫画ランキング（レンタル回数順）</h2>
+    <h2>人気漫画ランキング</h2>
     <ol>
         <li th:each="comic, stat : ${topComics}">
             <strong th:text="${stat.count} + '位:'"></strong>
