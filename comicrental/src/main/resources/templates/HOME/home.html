@@ -31,7 +31,7 @@
 <ul>
     <li th:each="comic : ${popularComics}">
         <a th:href="@{/comic/detail(title=${comic.title})}">
-            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" alt="表紙" width="100">
+            <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
             <span th:text="${comic.title}"></span>（<span th:text="${comic.rentaltimes}"></span>回）
         </a>
     </li>
@@ -41,7 +41,7 @@
 <ul>
     <li th:each="comic : ${recentComics}">
         <a th:href="@{/comic/detail(title=${comic.title})}">
-            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" alt="表紙" width="100">
+            <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
             <span th:text="${comic.title}"></span>（入荷日: <span th:text="${comic.arrivalDate}"></span>）
         </a>
     </li>
