@@ -21,7 +21,7 @@
 <h2>人気タイトル</h2>
 <ul>
     <li th:each="comic : ${popularComics}">
-        <a th:href="@{'/comic/detail/' + ${comic.comic_id}}">
+        <a th:href="@{/comic/detail(title=${comic.title})}">
             <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
             <span th:text="${comic.title}"></span>（<span th:text="${comic.rentaltimes}"></span>回）
         </a>
@@ -31,9 +31,10 @@
 <h2>最近入荷</h2>
 <ul>
     <li th:each="comic : ${recentComics}">
-        <a th:href="@{'/comic/detail/' + ${comic.comic_id}}">
+        <a th:href="@{/comic/detail(title=${comic.title})}">
             <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
-            <span th:text="${comic.title}"></span>（入荷日: <span th:text="${comic.arrivalDate}"></span>）
+            <span th:text="${comic.title}"></span>
+            （入荷日: <span th:text="${comic.arrivalDate}"></span>）
         </a>
     </li>
 </ul>
