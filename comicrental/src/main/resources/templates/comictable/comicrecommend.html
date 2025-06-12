@@ -149,7 +149,7 @@
             </div>
         </div>
         <div class="button-group">
-        <form action="/comics/detail" method="post">
+        <form th:action="@{'/comics/detail/'+${comic.comic_id}}" method="get">
             <input type="hidden" name="comicId" th:value="${comic.comic_id}">
             <input type="hidden" name="customerId" th:value="${customerId}">
             <button type="submit" class="comicdetail">漫画個別ページへ</button>
