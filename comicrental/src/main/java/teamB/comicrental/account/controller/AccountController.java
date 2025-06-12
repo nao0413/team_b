@@ -70,7 +70,7 @@ public class AccountController {
 
             // 登録成功したら、登録完了ページへリダイレクト
             // リダイレクト先にメッセージを渡す場合はRedirectAttributesを使用
-            redirectAttributes.addFlashAttribute("registrationSuccess", "アカウントの作成が完了しました！ログインしてください。");
+            redirectAttributes.addFlashAttribute("registrationSuccess", "アカウントの作成が完了しました！");
             return "redirect:/account/confirmation"; // "/account/confirmation" へリダイレクト
         } catch (Exception e) {
             // データベースエラーなどが発生した場合
