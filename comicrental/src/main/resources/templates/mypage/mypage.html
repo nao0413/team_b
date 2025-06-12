@@ -60,13 +60,14 @@
                 <form th:action="@{/cart/table}" method="get"> <button type="submit">買い物かご</button>
                 </form>
             </div>
-            <div><button type="button">レンタル状況</button></div>
-            <div><button type="button">お気に入り一覧</button></div>
+            <div>
+                <form th:action="@{/rental/status}" method="get"> <button type="submit">レンタル状況</button>
+                </form>
+            </div>
             <div>
                 <form th:action="@{/subscription/list}" method="get"> <button type="submit">サブスクリプション</button>
                 </form>
             </div>
-            <div><button type="button">お問い合わせフォーム</button></div>
             <div>
                 <form th:action="@{/password/request}" method="get"> <button type="submit">パスワード変更</button>
                 </form>
