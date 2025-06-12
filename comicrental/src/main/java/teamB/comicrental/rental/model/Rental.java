@@ -4,14 +4,17 @@ import java.util.Date;
 
 public class Rental {
     private int rentalId;
+    private int comicId;
     private String title;
     private String comicImage;
     private Date rentalDate;
     private Date returnDate;
 
-    // Getters & Setters
     public int getRentalId() { return rentalId; }
     public void setRentalId(int rentalId) { this.rentalId = rentalId; }
+
+    public int getComicId() { return comicId; }
+    public void setComicId(int comicId) { this.comicId = comicId; }
 
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
