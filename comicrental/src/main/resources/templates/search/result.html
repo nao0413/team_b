@@ -7,20 +7,27 @@
 <body>
 <h1>検索結果</h1>
 
-<p th:if="${#lists.isEmpty(results)}">該当する漫画が見つかりませんでした。</p>
+<!-- 結果なし -->
+<p th:if="${#lists.isEmpty(results)}">お探しのものは見つかりませんでした。</p>
 
+<!-- 結果あり -->
 <ul th:if="${!#lists.isEmpty(results)}">
     <li th:each="comic : ${results}">
-        <a th:href="@{/comic/detail(title=${comic.title})}">
-            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" width="80" alt="表紙画像">
-            <strong th:text="${comic.title}"></strong> - <span th:text="${comic.author}"></span>
-            
+        <a th:href="@{'/comics/detail/' + ${comic.comic_id}}">
+            <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
+            <span th:text="${comic.title}"></span>（<span th:text="${comic.author}"></span>）
         </a>
+        <!-- カート追加ボタン -->
+        <form th:action="@{/cart/add}" method="post">
+            <input type="hidden" name="comicId" th:value="${comic.comic_id}">
+            <button type="submit">買い物かごへ</button>
+        </form>
     </li>
 </ul>
 
-<a th:href="@{/search}">← 検索に戻る</a>
+<!-- 検索に戻るボタン -->
+<br>
+<button onclick="location.href='/search'">検索に戻る</button>
 
 </body>
 </html>
-//
