@@ -15,11 +15,11 @@ public class HomeController {
     @Autowired
     private TopComicMapper comicMapper;
 
-    @GetMapping("/top")
-    public String showTopPage(Model model) {
-        List<Comic> topComics = comicMapper.findTopComics();
-        model.addAttribute("topComics", topComics);
-        return "top/top"; // maps to templates/top/top.html
-    }
+    @GetMapping("/home")
+public String showHomePage(Model model) {
+    List<Comic> topComics = comicMapper.findTopComics();
+    model.addAttribute("topComics", topComics);
+    return "home/home";
+}
 }
 
