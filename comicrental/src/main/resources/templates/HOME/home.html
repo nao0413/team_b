@@ -11,18 +11,18 @@
 <nav>
     <a th:href="@{/mypage}">マイページ</a> |
     <a th:href="@{/search}">検索</a> |
-    <a th:href="@{/list}">漫画一覧</a>
+    <a th:href="@{/comics/table}">漫画一覧</a>
 </nav>
 
 <h2>おすすめ漫画</h2>
-<button onclick="location.href='/recommend'">おすすめを見る</button>
+<button onclick="location.href='/comics/recommend'">おすすめを見る</button>
 
 
 
 <h2>人気タイトル</h2>
 <ul>
     <li th:each="comic : ${popularComics}">
-        <a th:href="@{/comic/detail(title=${comic.title})}">
+        <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
             <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
             <span th:text="${comic.title}"></span>（<span th:text="${comic.rentaltimes}"></span>回）
         </a>
@@ -32,7 +32,7 @@
 <h2>最近入荷</h2>
 <ul>
     <li th:each="comic : ${recentComics}">
-        <a th:href="@{/comic/detail(title=${comic.title})}">
+        <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
             <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
             <span th:text="${comic.title}"></span>（入荷日: <span th:text="${comic.arrivalDate}"></span>）
         </a>
