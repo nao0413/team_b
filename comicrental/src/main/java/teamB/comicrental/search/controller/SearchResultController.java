@@ -17,7 +17,7 @@ public class SearchResultController {
     @Autowired
     private TopComicMapper comicMapper;
 
-    @GetMapping("/search/result")
+    @GetMapping("/search/result2")
     public String showSearchResult(@RequestParam("title") String title, Model model) {
         List<Comic> results = comicMapper.findComicsByTitleLike("%" + title + "%");
         model.addAttribute("results", results);
