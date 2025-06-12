@@ -17,8 +17,8 @@
 <button onclick="location.href='/recommend'">おすすめを見る</button>
 
 <h2>人気タイトル</h2>
-<p th:text="${#lists.size(popularComics)} + ' 件の人気漫画'"></p>
-<ul>
+<p th:if="${popularComics != null}" th:text="${#lists.size(popularComics)} + ' 件の人気漫画'"></p>
+<ul th:if="${popularComics != null}">
     <li th:each="comic : ${popularComics}">
         <a th:href="@{/comic/detail(title=${comic.title})}">
             <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" alt="表紙画像" width="80">
@@ -26,6 +26,7 @@
         </a>
     </li>
 </ul>
+
 
 <h2>最近入荷</h2>
 <p th:text="${#lists.size(recentComics)} + ' 件の新着漫画'"></p>
