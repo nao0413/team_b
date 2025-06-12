@@ -2,21 +2,23 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ホーム</title>
+    <title>トップページ - 漫画レンタル</title>
 </head>
 <body>
-    <h1>ホームページ - 人気漫画</h1>
+    <h1>漫画レンタルへようこそ！</h1>
 
-    <div th:if="${#lists.isEmpty(topComics)}">
-        <p>人気漫画は現在ありません。</p>
-    </div>
-    <ul th:if="${not #lists.isEmpty(topComics)}">
-        <li th:each="comic : ${topComics}">
-            <a th:href="@{'/comic/detail/' + ${comic.comic_id}}">
-                <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
-                <span th:text="${comic.title}"></span>（<span th:text="${comic.rentaltimes}"></span>回レンタル）
-            </a>
+    <nav>
+        <a th:href="@{/login/loginpage}">ログイン</a> |
+        <a th:href="@{/account/create}">新規アカウント登録</a> |
+    </nav>
+
+    <h2>人気漫画ランキング</h2>
+    <ol>
+        <li th:each="comic, stat : ${topComics}">
+            <strong th:text="${stat.count} + '位:'"></strong>
+            <span th:text="${comic.title}"></span>（<span th:text="${comic.author}"></span>）<br>
+            <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
         </li>
-    </ul>
+    </ol>
 </body>
 </html>
