@@ -2,29 +2,21 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ホーム - 漫画レンタル</title>
+    <title>ホーム</title>
 </head>
 <body>
+    <h1>ホームページ - 人気漫画</h1>
 
-<h1>ようこそ、漫画レンタルへ！</h1>
-
-<nav>
-    <a th:href="@{/mypage}">マイページ</a> |
-    <a th:href="@{/search}">検索</a> |
-    <a th:href="@{/list}">漫画一覧</a>
-</nav>
-
-<h2>人気タイトル（レンタル回数順）</h2>
-<ul>
-    <li th:each="comic : ${popularComics}">
-        <a th:href="@{'/comics/detail/' + ${comic.comic_id}}">
-            <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
-            <div>
-                <strong th:text="${comic.title}">タイトル</strong>（<span th:text="${comic.rentaltimes}">0</span>回）
-            </div>
-        </a>
-    </li>
-</ul>
-
+    <div th:if="${#lists.isEmpty(topComics)}">
+        <p>人気漫画は現在ありません。</p>
+    </div>
+    <ul th:if="${not #lists.isEmpty(topComics)}">
+        <li th:each="comic : ${topComics}">
+            <a th:href="@{'/comic/detail/' + ${comic.comic_id}}">
+                <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
+                <span th:text="${comic.title}"></span>（<span th:text="${comic.rentaltimes}"></span>回レンタル）
+            </a>
+        </li>
+    </ul>
 </body>
 </html>

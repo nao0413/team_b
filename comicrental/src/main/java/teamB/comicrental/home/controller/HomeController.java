@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import teamB.comicrental.top.model.Comic;
 import teamB.comicrental.top.repository.TopComicMapper;
-
-import java.util.List;
 
 @Controller
 public class HomeController {
@@ -17,8 +14,7 @@ public class HomeController {
 
     @GetMapping("/home")
     public String showHome(Model model) {
-        List<Comic> popularComics = comicMapper.findTopComics();
-        model.addAttribute("popularComics", popularComics);
-        return "home/home"; // templates/home/home.html
+        model.addAttribute("topComics", comicMapper.findTopComics()); // topと同じ名前で渡す
+        return "home/home"; // HTMLの場所は home/home.html にします
     }
 }
