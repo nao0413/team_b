@@ -1,24 +1,97 @@
+package teamB.comicrental.top.repository;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import teamB.comicrental.top.model.Comic;
+
+import java.util.List;
+
+@Mapper
+public interface TopComicMapper {
+
+    @Select("""
+        SELECT title, author, comic_image AS comicImage, rentaltimes,
+               category_id AS genre, arrival_date AS arrivalDate
+        FROM comic
+        ORDER BY rentaltimes DESC
+        LIMIT 5
+    """)
+    List<Comic> findTopComics();
+
+    @Select("""
+        SELECT title, author, comic_image AS comicImage, rentaltimes,
+               category_id AS genre, arrival_date AS arrivalDate
+        FROM comic
+        ORDER BY arrival_date DESC
+        LIMIT 5
+    """)
+    List<Comic> findRecentComics();
+
+    @Select("""
+        SELECT title, author, comic_image AS comicImage, rentaltimes,
+               category_id AS genre, arrival_date AS arrivalDate
+        FROM comic
+        WHERE category = #{genre}
+        ORDER BY rentaltimes DESC
+    """)
+    List<Comic> findComicsByGenre(String genre);
+
+    @Select("""
+        SELECT title, author, comic_image AS comicImage, rentaltimes,
+               category_id AS genre, arrival_date AS arrivalDate
+        FROM comic
+        WHERE title = #{title}
+        LIMIT 1
+    """)
+    Comic findComicByTitle(String title);
+
+    @Select("""
+        SELECT title, author, comic_image AS comicImage, rentaltimes,
+               category_id AS genre, arrival_date AS arrivalDate
+        FROM comic
+        WHERE title ILIKE #{title}
+    """)
+    List<Comic> findComicsByTitleLike(String title);
+}
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>トップページ - 漫画レンタル</title>
+    <title>ホーム - 漫画レンタル</title>
 </head>
 <body>
-    <h1>漫画レンタルへようこそ！</h1>
+<h1>ようこそ、漫画レンタルへ！</h1>
 
-    <nav>
-        <a th:href="@{/login/loginpage}">ログイン</a> |
-        <a th:href="@{/account/create}">新規アカウント登録</a> |
-    </nav>
+<nav>
+    <a th:href="@{/mypage}">マイページ</a> |
+    <a th:href="@{/search}">検索</a> |
+    <a th:href="@{/list}">漫画一覧</a>
+</nav>
 
-    <h2>人気漫画ランキング</h2>
-    <ol>
-        <li th:each="comic, stat : ${topComics}">
-            <strong th:text="${stat.count} + '位:'"></strong>
-            <span th:text="${comic.title}"></span>（<span th:text="${comic.author}"></span>）<br>
+<h2>おすすめ漫画</h2>
+<button onclick="location.href='/recommend'">おすすめを見る</button>
+
+
+
+<h2>人気タイトル</h2>
+<ul>
+    <li th:each="comic : ${popularComics}">
+        <a th:href="@{/comic/detail(title=${comic.title})}">
             <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
-        </li>
-    </ol>
+            <span th:text="${comic.title}"></span>（<span th:text="${comic.rentaltimes}"></span>回）
+        </a>
+    </li>
+</ul>
+
+<h2>最近入荷</h2>
+<ul>
+    <li th:each="comic : ${recentComics}">
+        <a th:href="@{/comic/detail(title=${comic.title})}">
+            <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
+            <span th:text="${comic.title}"></span>（入荷日: <span th:text="${comic.arrivalDate}"></span>）
+        </a>
+    </li>
+</ul>
+
 </body>
 </html>
