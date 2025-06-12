@@ -106,6 +106,10 @@
         <button type="submit" class="comictable">漫画一覧ページへ</button>
         <input type="hidden" name="customerId" th:value="${customerId}">
     </form>
+    <form action="/home" method="get">
+        <button type="submit" class="home">ホームページへ</button>
+        <input type="hidden" name="customerId" th:value="${customerId}">
+    </form>
 </body>
 
 </html>
