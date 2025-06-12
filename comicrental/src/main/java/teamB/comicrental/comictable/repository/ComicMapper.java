@@ -28,4 +28,6 @@ public interface ComicMapper {
 
     @Select("select comic_id,title,author,explanatory,comic_image,is_recommended,recommend_type,recommend_text,recommend_image from comic where is_recommended=true ORDER BY comic_id ")
     List<ComicModel>findRecommendedComics();
+
+    
 }
