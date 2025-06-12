@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,61 +10,93 @@
         body {
             text-align: center;
         }
+
         /* タイトル */
         h1 {
-            font-size: 2em; /* 現在のフォントサイズの2倍 */
+            font-size: 2em;
+            /* 現在のフォントサイズの2倍 */
         }
 
         /* 漫画タイトル */
         h2 {
-            font-size: 1.8em; /* 現在のフォントサイズの1.8倍 */
-            margin-top: 15px; /* 上部の余白 */
-            margin-bottom: 10px; /* 下部の余白 */
+            font-size: 1.8em;
+            /* 現在のフォントサイズの1.8倍 */
+            margin-top: 15px;
+            /* 上部の余白 */
+            margin-bottom: 10px;
+            /* 下部の余白 */
         }
 
         /* 著者、ジャンル、説明などのテキスト */
         p {
-            font-size: 1.1em; /* 現在のフォントサイズの1.1倍 */
-            line-height: 1.6; /* 行の高さ（読みやすさのため） */
-            margin-bottom: 8px; /* 下部の余白 */
+            font-size: 1.1em;
+            /* 現在のフォントサイズの1.1倍 */
+            line-height: 1.6;
+            /* 行の高さ（読みやすさのため） */
+            margin-bottom: 8px;
+            /* 下部の余白 */
         }
 
         /* 著者、ジャンルなどのラベル（<strong>タグ） */
         p strong {
-            font-size: 1.1em; /* 親の<p>タグと同じサイズ */
-            margin-right: 5px; /* ラベルと内容の間に少しスペース */
+            font-size: 1.1em;
+            /* 親の<p>タグと同じサイズ */
+            margin-right: 5px;
+            /* ラベルと内容の間に少しスペース */
         }
 
         /* レンタル状況のテキスト */
         span {
-            font-size: 1.1em; /* 現在のフォントサイズの1.1倍 */
-            margin-bottom: 15px; /* 下部の余白 */
+            font-size: 1.1em;
+            /* 現在のフォントサイズの1.1倍 */
+            margin-bottom: 15px;
+            /* 下部の余白 */
         }
 
         /* ボタンの文字サイズ */
         button {
-            font-size: 1em; /* デフォルトのボタンと同じサイズ */
+            font-size: 1em;
+            /* デフォルトのボタンと同じサイズ */
 
-            margin-top: 10px; /* 上部の余白 */
-            cursor: pointer; /* マウスオーバー時にカーソルを指の形にする */
+            margin-top: 10px;
+            /* 上部の余白 */
+            cursor: pointer;
+            /* マウスオーバー時にカーソルを指の形にする */
+        }
+
+        .comic-detail-image {
+            max-width: 300px;
+            height: auto;
+            display: block;
+            /* インライン要素ではなくブロック要素として扱う */
+            margin: 0 auto;
         }
     </style>
 </head>
+
 <body>
     <h1>漫画詳細ページ</h1>
-    <div>
+    <div th:if="${errorMessage}">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <div th:if="${successMessage}">
+        <p th:text="${successMessage}"></p>
+    </div>
+    <div class="comic-detail-image">
         <img th:src="${comic.comic_image}" alt="表紙画像" class="comic-detail-image">
     </div>
     <h2 th:text="${comic.title}">タイトル</h2>
     <p><strong>著者：</strong><span th:text="${comic.author}">著者名</span></p>
     <p><strong>ジャンル：</strong><span th:text="${comic.category_name}">ジャンル名</span></p>
     <p><strong>説明：</strong><span th:text="${comic.explanatory}">この漫画はとっても面白いです！</span></p>
-    <span th:if="${comic.isRented}">レンタル中</span>
+    <span th:if="${comic.isRented}">
+        <a th:href="@{/rental/status}" th:text="レンタル中"></a>
+    </span>
     <span th:unless="${comic.isRented}">未レンタル</span>
-    <form action="/comics/addToCart" method="post">
-                <input type="hidden" name="comicId" th:value="${comic.comic_id}">
-                <input type="hidden" name="customerId" th:value="${customerId}">
-                <button type="submit" class="add-to-cart-button">カートに入れる</button>
+    <form action="/comics/addToCartDetail" method="post">
+        <input type="hidden" name="comicId" th:value="${comic.comic_id}">
+        <input type="hidden" name="customerId" th:value="${customerId}">
+        <button type="submit" class="add-to-cart-button">カートに入れる</button>
     </form>
     <form action="/cart/table" method="get">
         <button type="submit" class="cartpage">買い物かごページへ</button>
@@ -74,4 +107,5 @@
         <input type="hidden" name="customerId" th:value="${customerId}">
     </form>
 </body>
+
 </html>

@@ -97,6 +97,20 @@
     <div th:if="${successMessage}">
         <p th:text="${successMessage}"></p>
     </div>
+    <div class="sort-controls">
+        <label for="sortOrder">表示順：</label>
+        <select id="sortOrder" onchange="changeSortOrder()">
+            <option value="comicId" th:selected="${currentSort=='comicId'||currentSort==null}">デフォルト</option>
+            <option value="arrivalDate" th:selected="${currentSort=='arrivalDate'}">入荷日順</option>
+            <option value="rentalCount" th:selected="${currentSort=='rentalCount'}">レンタル回数順</option>
+        </select>
+    </div>
+    <script>
+        function changeSortOrder(){
+            var sortOrder=document.getElementById("sortOrder").value;
+            window.location.href="/comics/table?sort="+sortOrder;
+        }
+    </script>
     <table>
         <thead>
             <tr>
@@ -115,12 +129,14 @@
             </tr>
             <tr th:each="comic:${comicList}">
                 <td>
-                     <a th:href="@{'/comics/detail/' + ${comic.comic_id} + '?customerId=' + ${customerId}}" th:text="${comic.title}">タイトル</a>
+                     <a th:href="@{'/comics/detail/' + ${comic.comic_id} }" th:text="${comic.title}">タイトル</a>
                 </td>
                 <td th:text="${comic.author}">著者</td>
                 <td th:text="${comic.category_name}">ジャンル</td>
                 <td>
-                    <span th:if="${comic.isRented}">レンタル中</span>
+                    <span th:if="${comic.isRented}">
+                        <a th:href="@{/rental/status}" th:text="レンタル中"></a>
+                    </span>
                     <span th:unless="${comic.isRented}">未レンタル</span>
                 </td>
                 <td>

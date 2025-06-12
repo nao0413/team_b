@@ -10,7 +10,7 @@ import java.util.List;
 public interface TopComicMapper {
 
     @Select("""
-        SELECT title, author, comic_image AS comicImage, rentaltimes,
+        SELECT comic_id,title, author, comic_image AS comicImage, rentaltimes,
                category_id AS genre, arrival_date AS arrivalDate
         FROM comic
         ORDER BY rentaltimes DESC
@@ -19,7 +19,7 @@ public interface TopComicMapper {
     List<Comic> findTopComics();
 
     @Select("""
-        SELECT title, author, comic_image AS comicImage, rentaltimes,
+        SELECT comic_id,title, author, comic_image AS comicImage, rentaltimes,
                category_id AS genre, arrival_date AS arrivalDate
         FROM comic
         ORDER BY arrival_date DESC

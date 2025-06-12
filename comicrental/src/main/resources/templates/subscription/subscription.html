@@ -73,7 +73,7 @@
         }
 
         .mypage h4,
-        .mypage h5 {
+        .mypage p {
             /* mypageブロック内の見出しは中央寄せにする */
             text-align: center;
         }
@@ -119,7 +119,7 @@
         <h4 th:if="${page.id !=null}"> 会員番号:<span th:text="${page.id}"></span></h4>
         <h4 th:if="${page.name !=null}">名前:<span th:text="${page.name}"></span></h4>
         <h4>サブスクリプション状況:<span th:text="${page.subscribed ? '加入済み':'未加入'}"></span></h4>
-        <h5>マイページへ</h5>
+        <p>| <a th:href="@{/mypage}">マイページ</a> |</p> 
     </div>
     <hr>
     <h2 class="join">サブスクリプション　加入</h2>
