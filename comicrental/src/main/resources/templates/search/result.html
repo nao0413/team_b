@@ -14,7 +14,7 @@
         <a th:href="@{/comic/detail(title=${comic.title})}">
             <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" width="80" alt="表紙画像">
             <strong th:text="${comic.title}"></strong> - <span th:text="${comic.author}"></span>
-            （ジャンル: <span th:text="${comic.genre}"></span>）
+            
         </a>
     </li>
 </ul>
