@@ -19,7 +19,7 @@ public class MyPageController {
     @GetMapping // URL: http://localhost:8080/mypage
     public String showMyPage(HttpSession session, Model model) {
         // セッションからログイン中のユーザーidを取得
-        Integer loggedInUserId = (Integer) session.getAttribute("loggedInUser");
+        Integer loggedInUserId = (Integer) session.getAttribute("loggedInUserId");
 
         if (loggedInUserId == null) {
             // セッションにユーザー情報がない場合（ログインしていない、またはセッション切れ）
