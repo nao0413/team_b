@@ -5,34 +5,12 @@
     <title>漫画検索</title>
 </head>
 <body>
-<h1>漫画検索</h1>
+<h1>漫画タイトル検索</h1>
 
-<form action="/search" method="get">
-    <label>タイトルで検索：<input type="text" name="title" /></label>
+<form th:action="@{/search/result}" method="get">
+    <input type="text" name="title" placeholder="タイトルを入力">
     <button type="submit">検索</button>
 </form>
-
-<form action="/search" method="get">
-    <label>ジャンルで絞り込み：
-        <select name="genre">
-            <option value="">すべて</option>
-            <option value="戦闘">戦闘</option>
-            <option value="恋愛">恋愛</option>
-            <option value="SF">SF</option>
-        </select>
-    </label>
-    <button type="submit">絞り込む</button>
-</form>
-
-<h2>検索結果</h2>
-<ul>
-    <li th:each="comic : ${results}">
-        <a th:href="@{/comic/detail(title=${comic.title})}">
-            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" width="80">
-            <span th:text="${comic.title}"></span>（<span th:text="${comic.genre}"></span>）
-        </a>
-    </li>
-</ul>
 
 </body>
 </html>
