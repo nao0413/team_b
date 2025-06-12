@@ -5,6 +5,7 @@
     <title>ホーム - 漫画レンタル</title>
 </head>
 <body>
+
 <h1>ようこそ、漫画レンタルへ！</h1>
 
 <nav>
@@ -13,33 +14,17 @@
     <a th:href="@{/list}">漫画一覧</a>
 </nav>
 
-<h2>おすすめ漫画</h2>
-<button onclick="location.href='/recommend'">おすすめを見る</button>
-
-<h2>人気タイトル</h2>
-<p th:if="${popularComics != null}" th:text="${#lists.size(popularComics)} + ' 件の人気漫画'"></p>
-<ul th:if="${popularComics != null}">
-    <li th:each="comic : ${popularComics}">
-        <a th:href="@{/comic/detail(title=${comic.title})}">
-            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" alt="表紙画像" width="80">
-            <span th:text="${comic.title}"></span>（<span th:text="${comic.rentaltimes}"></span>回）
-        </a>
-    </li>
-</ul>
-
-
-<h2>最近入荷</h2>
-<p th:text="${#lists.size(recentComics)} + ' 件の新着漫画'"></p>
+<h2>人気タイトル（レンタル回数順）</h2>
 <ul>
-    <li th:each="comic : ${recentComics}">
-        <a th:href="@{/comic/detail(title=${comic.title})}">
-            <img th:src="@{/comicimage/{img}(img=${comic.comicImage})}" alt="表紙画像" width="80">
-            <span th:text="${comic.title}"></span>
-            （入荷日: <span th:text="${comic.arrivalDate}"></span>）
+    <li th:each="comic : ${popularComics}">
+        <a th:href="@{'/comics/detail/' + ${comic.comic_id}}">
+            <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
+            <div>
+                <strong th:text="${comic.title}">タイトル</strong>（<span th:text="${comic.rentaltimes}">0</span>回）
+            </div>
         </a>
     </li>
 </ul>
 
 </body>
 </html>
-
