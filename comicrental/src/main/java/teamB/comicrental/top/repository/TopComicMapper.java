@@ -10,7 +10,7 @@ import java.util.List;
 public interface TopComicMapper {
 
     @Select("""
-        SELECT comic_id, title, author, comic_image AS comicImage, rentaltimes,
+        SELECT title, author, comic_image AS comicImage, rentaltimes,
                category_id AS genre, arrival_date AS arrivalDate
         FROM comic
         ORDER BY rentaltimes DESC
@@ -19,7 +19,7 @@ public interface TopComicMapper {
     List<Comic> findTopComics();
 
     @Select("""
-        SELECT comic_id, title, author, comic_image AS comicImage, rentaltimes,
+        SELECT title, author, comic_image AS comicImage, rentaltimes,
                category_id AS genre, arrival_date AS arrivalDate
         FROM comic
         ORDER BY arrival_date DESC
@@ -28,16 +28,16 @@ public interface TopComicMapper {
     List<Comic> findRecentComics();
 
     @Select("""
-        SELECT comic_id, title, author, comic_image AS comicImage, rentaltimes,
+        SELECT title, author, comic_image AS comicImage, rentaltimes,
                category_id AS genre, arrival_date AS arrivalDate
         FROM comic
-        WHERE category_id = #{genre}
+        WHERE category = #{genre}
         ORDER BY rentaltimes DESC
     """)
     List<Comic> findComicsByGenre(String genre);
 
     @Select("""
-        SELECT comic_id, title, author, comic_image AS comicImage, rentaltimes,
+        SELECT title, author, comic_image AS comicImage, rentaltimes,
                category_id AS genre, arrival_date AS arrivalDate
         FROM comic
         WHERE title = #{title}
@@ -46,10 +46,11 @@ public interface TopComicMapper {
     Comic findComicByTitle(String title);
 
     @Select("""
-        SELECT comic_id, title, author, comic_image AS comicImage, rentaltimes,
+        SELECT title, author, comic_image AS comicImage, rentaltimes,
                category_id AS genre, arrival_date AS arrivalDate
         FROM comic
         WHERE title ILIKE #{title}
     """)
     List<Comic> findComicsByTitleLike(String title);
 }
+
