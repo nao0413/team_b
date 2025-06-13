@@ -156,7 +156,7 @@ public class CartController {
         // カートにある冊数
         int cartCount = cartList.size();
 
-        // 合計冊数が30超えたらエラー
+        // 合計冊数が30超えたらエラー出す
         if ((alreadyRented + cartCount) > maxLimit) {
             redirectAttributes.addFlashAttribute("errorMessage", "今月のレンタル可能数を超えています。カートを見直してください。");
             return "redirect:/cart/confirm";
