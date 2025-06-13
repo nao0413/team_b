@@ -55,13 +55,14 @@ public interface TopComicMapper {
     """)
     List<Comic> findComicsByTitleLike(String title);
 
+    
+
     @Select("""
-    SELECT comic_id, title, author, comic_image AS comicImage, rentaltimes,
+    SELECT comic_id, title, author, comic_image AS comicImage, rentaltimes, 
            category_id AS genre, arrival_date AS arrivalDate
     FROM comic
     WHERE comic_id = #{comicId}
 """)
 Comic findComicById(@Param("comicId") int comicId);
-
 }
 
