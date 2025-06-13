@@ -19,6 +19,7 @@
         <strong th:text="${rental.title}"></strong><br>
         貸出日: <span th:text="${#dates.format(rental.rentalDate, 'yyyy/MM/dd')}"></span><br>
         返却期限: <span th:text="${#dates.format(rental.returnDate, 'yyyy/MM/dd')}"></span>
+        <a th:href="@{/rental/read/{id}(id=${rental.comicId})}">読む</a>
     </li>
 </ul>
 
