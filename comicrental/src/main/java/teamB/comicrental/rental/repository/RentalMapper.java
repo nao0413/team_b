@@ -24,6 +24,7 @@ public interface RentalMapper {
                     r.rental_expire AS returnDate
                 FROM rental r
                 JOIN comic c ON r.comic_id=c.comic_id
+
                 WHERE r.rental_status='レンタル中' AND r.customer_id=#{customerId}
                 ORDER BY r.rental_expire ASC
             """)
