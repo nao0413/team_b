@@ -1,5 +1,5 @@
 .header-section {
-    border-bottom: 2px solid black;
+    /*border-bottom: 3px solid white;*/
     background-color: #E64545;
     font-family: "Meiryo UI";
     color: black;
@@ -7,13 +7,39 @@
     text-align: center;
 }
 .header-section h1 {
-    font-size: 1.3em; 
-    margin: 0;        
+    font-size: 1.4em; 
+    margin: 0; 
+    color: #fff;
+    text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px
+      0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px
+      0px #000, 0px -1px 0px #000, 2px 2px 0px #000;
+}
+.footer-section{
+    background-color: #E64545;
+    font-family: "Meiryo UI";
+    color: black;
+    padding: 13px;
+}
+.footer-section h4{
+    font-size: 1em;
+    color: #fff;
+    text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px
+      0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px
+      0px #000, 0px -1px 0px #000, 2px 2px 0px;
 }
 body{
     background-color: white;
     font-family: "Meiryo UI";
     font-size: 16px;
+}
+.title{
+    text-align: center;
+    font-size: 2em; 
+    margin: 0; 
+    color:#f8f8ff;
+    text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px
+      0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px
+      0px #000, 0px -1px 0px #000, 2px 2px 0px #000;
 }
 *,
 *:before,
