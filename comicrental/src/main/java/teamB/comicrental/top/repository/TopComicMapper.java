@@ -46,7 +46,7 @@ public interface TopComicMapper {
     Comic findComicByTitle(String title);
 
     @Select("""
-        SELECT title, author, comic_image AS comicImage, rentaltimes,
+        SELECT comic_id,title, author, comic_image AS comicImage, rentaltimes,
                category_id AS genre, arrival_date AS arrivalDate
         FROM comic
         WHERE title ILIKE #{title}
