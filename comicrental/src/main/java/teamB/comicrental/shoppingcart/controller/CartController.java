@@ -11,7 +11,6 @@ import teamB.comicrental.rental.RentalService;
 import teamB.comicrental.rental.repository.RentalMapper;
 import teamB.comicrental.shoppingcart.CartService;
 import teamB.comicrental.shoppingcart.model.Cart;
-import teamB.comicrental.subscription.model.SubscPageModel;
 import teamB.comicrental.subscription.repository.SubscMapper;
 import teamB.comicrental.subscription.repository.SubscModel;
 
@@ -44,39 +43,39 @@ public class CartController {
     }
 
     @GetMapping("/table")
-public String showCart(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
-    Integer customer_id = (Integer) session.getAttribute("loggedInUserId");
-    if (customer_id == null) {
-        return "redirect:/login/loginpage";
+    public String showCart(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        Integer customer_id = (Integer) session.getAttribute("loggedInUserId");
+        if (customer_id == null) {
+            return "redirect:/login/loginpage";
+        }
+
+        List<Cart> cartList = cartService.getCartList(customer_id);
+        int cartCount = cartList.size();
+
+        // サブスク加入状況を取得
+        Optional<SubscModel> subscOptional = subscMapper.findById(customer_id);
+        boolean isSubscribed = subscOptional.isPresent() && subscOptional.get().isIs_subscribed();
+        model.addAttribute("isSubscribed", isSubscribed);
+
+        // 今月の期間
+        LocalDate now = LocalDate.now();
+        Date sqlStartDate = Date.valueOf(now.withDayOfMonth(1));
+        Date sqlEndDate = Date.valueOf(now.withDayOfMonth(now.lengthOfMonth()));
+
+        int alreadyRented = rentalMapper.countMonthlyRentals(customer_id, sqlStartDate, sqlEndDate);
+        int remaining = maxLimit - (alreadyRented + cartCount);
+
+        // ✅ サブスク加入者だけに超過エラー出す
+        if (isSubscribed && remaining < 0) {
+            model.addAttribute("errorMessage", "レンタル可能数を超えています。カートを見直してください。");
+        }
+
+        model.addAttribute("cartList", cartList);
+        model.addAttribute("totalCount", cartCount);
+        model.addAttribute("remainingLimit", Math.max(0, remaining));
+
+        return "cart/cart";
     }
-
-    List<Cart> cartList = cartService.getCartList(customer_id);
-    int cartCount = cartList.size();
-
-    // サブスク加入状況を取得
-    Optional<SubscModel> subscOptional = subscMapper.findById(customer_id);
-    boolean isSubscribed = subscOptional.isPresent() && subscOptional.get().isIs_subscribed();
-    model.addAttribute("isSubscribed", isSubscribed);
-
-    // 今月の期間
-    LocalDate now = LocalDate.now();
-    Date sqlStartDate = Date.valueOf(now.withDayOfMonth(1));
-    Date sqlEndDate = Date.valueOf(now.withDayOfMonth(now.lengthOfMonth()));
-
-    int alreadyRented = rentalMapper.countMonthlyRentals(customer_id, sqlStartDate, sqlEndDate);
-    int remaining = maxLimit - (alreadyRented + cartCount);
-
-    // ✅ サブスク加入者だけに超過エラー出す
-    if (isSubscribed && remaining < 0) {
-        model.addAttribute("errorMessage", "レンタル可能数を超えています。カートを見直してください。");
-    }
-
-    model.addAttribute("cartList", cartList);
-    model.addAttribute("totalCount", cartCount);
-    model.addAttribute("remainingLimit", Math.max(0, remaining));
-
-    return "cart/cart";
-}
 
     @PostMapping("/delete")
     public String deleteItem(@RequestParam("cart_id") int cart_id) {
@@ -95,51 +94,51 @@ public String showCart(Model model, HttpSession session, RedirectAttributes redi
     }
 
     @GetMapping("/confirm")
-public String confirmCart(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
-    Integer customer_id = (Integer) session.getAttribute("loggedInUserId");
-    if (customer_id == null) {
-        return "redirect:/login/loginpage";
+    public String confirmCart(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        Integer customer_id = (Integer) session.getAttribute("loggedInUserId");
+        if (customer_id == null) {
+            return "redirect:/login/loginpage";
+        }
+
+        List<Cart> cartList = cartService.getCartList(customer_id);
+        if (cartList.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "カートに商品がありません。");
+            return "redirect:/cart/table";
+        }
+
+        LocalDate now = LocalDate.now();
+        Date sqlStartDate = Date.valueOf(now.withDayOfMonth(1));
+        Date sqlEndDate = Date.valueOf(now.withDayOfMonth(now.lengthOfMonth()));
+        int alreadyRented = rentalMapper.countMonthlyRentals(customer_id, sqlStartDate, sqlEndDate);
+        int cartCount = cartList.size();
+
+        if ((alreadyRented + cartCount) > maxLimit) {
+            redirectAttributes.addFlashAttribute("errorMessage", "レンタル可能数を超えています。カートを見直してください。");
+            return "redirect:/cart/table";
+        }
+
+        Optional<SubscModel> subscOptional = subscMapper.findById(customer_id);
+        boolean isSubscribed = subscOptional.isPresent() && subscOptional.get().isIs_subscribed();
+        model.addAttribute("isSubscribed", isSubscribed);
+
+        model.addAttribute("cartList", cartList);
+        model.addAttribute("totalCount", cartService.getTotalCount(cartList));
+        model.addAttribute("customerId", customer_id);
+        return "cart/cart_confirm";
     }
 
-    List<Cart> cartList = cartService.getCartList(customer_id);
-    if (cartList.isEmpty()) {
-        redirectAttributes.addFlashAttribute("errorMessage", "カートに商品がありません。");
-        return "redirect:/cart/table";
-    }
-
-    LocalDate now = LocalDate.now();
-    Date sqlStartDate = Date.valueOf(now.withDayOfMonth(1));
-    Date sqlEndDate = Date.valueOf(now.withDayOfMonth(now.lengthOfMonth()));
-    int alreadyRented = rentalMapper.countMonthlyRentals(customer_id, sqlStartDate, sqlEndDate);
-    int cartCount = cartList.size();
-
-    if ((alreadyRented + cartCount) > maxLimit) {
-        redirectAttributes.addFlashAttribute("errorMessage", "レンタル可能数を超えています。カートを見直してください。");
-        return "redirect:/cart/table";
-    }
-
-    Optional<SubscModel> subscOptional = subscMapper.findById(customer_id);
-    boolean isSubscribed = subscOptional.isPresent() && subscOptional.get().isIs_subscribed();
-    model.addAttribute("isSubscribed", isSubscribed);
-
-    model.addAttribute("cartList", cartList);
-    model.addAttribute("totalCount", cartService.getTotalCount(cartList));
-    model.addAttribute("customerId", customer_id);
-    return "cart/cart_confirm";
-}
-    
     @PostMapping("/complete")
     public String completeRental(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
-    Integer customer_id = (Integer) session.getAttribute("loggedInUserId");
-    if (customer_id == null) {
-        return "redirect:/login/loginpage";
-    }
+        Integer customer_id = (Integer) session.getAttribute("loggedInUserId");
+        if (customer_id == null) {
+            return "redirect:/login/loginpage";
+        }
 
-    Optional<SubscModel> subscOptional = subscMapper.findById(customer_id);
-    if (subscOptional.isEmpty() || !subscOptional.get().isIs_subscribed()) {
-        redirectAttributes.addFlashAttribute("errorMessage", "※レンタルを確定するにはサブスクリプションへの加入が必要です。");
-        return "redirect:/cart/table";  
-    }
+        Optional<SubscModel> subscOptional = subscMapper.findById(customer_id);
+        if (subscOptional.isEmpty() || !subscOptional.get().isIs_subscribed()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "※レンタルを確定するにはサブスクリプションへの加入が必要です。");
+            return "redirect:/cart/table";
+        }
         List<Cart> cartList = cartService.getCartList(customer_id);
         if (cartList.isEmpty()) {
             redirectAttributes.addFlashAttribute("errorMessage", "カートが空のため、レンタルを確定できません。");
@@ -175,4 +174,4 @@ public String confirmCart(Model model, HttpSession session, RedirectAttributes r
 
         return "cart/cart_complete";
     }
-    }
+}
