@@ -12,7 +12,7 @@ public class Rental {
     private int comicId;
 
     private String title;
-    private String comic_image;
+    private String comicImage;
     private Date rental_date;
     private Date return_date;
 
@@ -37,8 +37,8 @@ public class Rental {
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
 
-    public String getComic_image() { return comic_image; }
-    public void setComic_image(String comic_image) { this.comic_image = comic_image; }
+   public String getComicImage() { return comicImage; }
+    public void setComicImage(String comicImage) { this.comicImage = comicImage; }
 
     public Date getRental_date() { return rental_date; }
     public void setRental_date(Date rental_date) { this.rental_date = rental_date; }
