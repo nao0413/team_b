@@ -23,7 +23,7 @@ public interface RentalMapper {
                     r.rental_expire AS returnDate
                 FROM rental r
                 JOIN comic c ON r.comic_id=c.comic_id
-                WHERE r.rental_status='貸出中'
+                WHERE r.rental_status='レンタル中'
             """)
     List<Rental> findCurrentRentals();
 
