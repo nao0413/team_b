@@ -7,16 +7,20 @@
 <body>
 <h1>現在のレンタル状況</h1>
 
+<!-- レンタル中が0件の時 -->
 <p th:if="${#lists.isEmpty(currentRentals)}">現在レンタル中の漫画はありません。</p>
 
+<!-- レンタル中がある場合 -->
 <ul th:if="${!#lists.isEmpty(currentRentals)}">
     <li th:each="rental : ${currentRentals}">
-        <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
+        <img th:src="@{${rental.comicImage}}" alt="表紙画像" width="80"><br>
         <strong th:text="${rental.title}"></strong><br>
-        貸出日: <span th:text="${#dates.format(rental.rentalDate, 'yyyy/MM/dd')}"></span>
+        貸出日: <span th:text="${#dates.format(rental.rentalDate, 'yyyy/MM/dd')}"></span><br>
+        返却期限: <span th:text="${#dates.format(rental.returnDate, 'yyyy/MM/dd')}"></span>
     </li>
 </ul>
 
+<!-- 戻るリンク -->
 <a th:href="@{/home}">← ホームに戻る</a>
 
 </body>
