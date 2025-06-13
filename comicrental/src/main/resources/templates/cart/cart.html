@@ -143,14 +143,29 @@
         今月のレンタル残数 あと <span th:text="${remainingLimit}"></span> 冊
     </p>
     <p class="total">合計冊数：<span th:text="${totalCount}"></span>冊</p>
-</div>
+<div style="margin-top: 30px;">
 
+    
+    <div style="margin-top: 30px;">
 
-    <div class="button-area">
-        <form method="get" th:action="@{/cart/confirm}">
-            <button type="submit">確認画面へ進む</button>
+    
+    <div style="text-align: left; margin-bottom: 10px;">
+        <form action="/comics/table" method="get" style="display: inline;">
+            <button type="submit" style="font-size: 14px; padding: 8px 14px;">
+                漫画一覧ページへ
+            </button>
         </form>
     </div>
+
+   
+    <div style="text-align: center;">
+        <form action="/cart/confirm" method="get" style="display: inline;">
+            <button type="submit" style="font-size: 16px; padding: 10px 20px;">
+                確認画面へ進む
+            </button>
+        </form>
+    </div>
+
 </div>
 </body>
 </html>
