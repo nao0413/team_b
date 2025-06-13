@@ -19,7 +19,7 @@ public interface ComicMapper {
     public List<ComicModel> findAllComicsWithCategory();
     
     //上記のに合わせて、rentalテーブルも合体させて情報を取得するSQL（デフォルト）
-    @Select("select c.comic_id,c.title,c.author,c.explanatory,c.category_id,ca.category_name,c.comic_image,CASE WHEN r.rental_status='renting' THEN TRUE ELSE FALSE END AS is_rented from comic c LEFT JOIN category ca ON c.category_id=ca.category_id LEFT JOIN rental r ON c.comic_id=r.comic_id AND r.customer_id=#{customer_id} AND r.rental_status='renting' ORDER BY c.comic_id")
+    @Select("select c.comic_id,c.title,c.author,c.explanatory,c.category_id,ca.category_name,c.comic_image,CASE WHEN r.rental_status='レンタル中' THEN TRUE ELSE FALSE END AS is_rented from comic c LEFT JOIN category ca ON c.category_id=ca.category_id LEFT JOIN rental r ON c.comic_id=r.comic_id AND r.customer_id=#{customer_id} ORDER BY c.comic_id")
     public List<ComicModel> findAllComicsWithCategoryAndRentalStatus(@Param("customer_id")int customerId);
 
     //詳細ページのため
@@ -31,10 +31,10 @@ public interface ComicMapper {
     List<ComicModel>findRecommendedComics();
     
     //入荷順
-    @Select("select c.comic_id,c.title,c.author,c.explanatory,c.category_id,ca.category_name,c.comic_image,c.arrival_date,CASE WHEN r.rental_status='renting' THEN TRUE ELSE FALSE END AS is_rented from comic c LEFT JOIN category ca ON c.category_id=ca.category_id LEFT JOIN rental r ON c.comic_id=r.comic_id AND r.customer_id=#{customer_id} AND r.rental_status='renting' ORDER BY c.arrival_date")
+    @Select("select c.comic_id,c.title,c.author,c.explanatory,c.category_id,ca.category_name,c.comic_image,c.arrival_date,CASE WHEN r.rental_status='レンタル中' THEN TRUE ELSE FALSE END AS is_rented from comic c LEFT JOIN category ca ON c.category_id=ca.category_id LEFT JOIN rental r ON c.comic_id=r.comic_id AND r.customer_id=#{customer_id} ORDER BY c.arrival_date")
     public List<ComicModel>findAllComicsSortedByArrivalDate (@Param("customer_id")int customerId);
 
     //レンタル回数順
-    @Select("select c.comic_id,c.title,c.author,c.explanatory,c.category_id,ca.category_name,c.comic_image,c.rentaltimes,CASE WHEN r.rental_status='renting' THEN TRUE ELSE FALSE END AS is_rented from comic c LEFT JOIN category ca ON c.category_id=ca.category_id LEFT JOIN rental r ON c.comic_id=r.comic_id AND r.customer_id=#{customer_id} AND r.rental_status='renting' ORDER BY c.rentaltimes DESC")
+    @Select("select c.comic_id,c.title,c.author,c.explanatory,c.category_id,ca.category_name,c.comic_image,c.rentaltimes,CASE WHEN r.rental_status='レンタル中' THEN TRUE ELSE FALSE END AS is_rented from comic c LEFT JOIN category ca ON c.category_id=ca.category_id LEFT JOIN rental r ON c.comic_id=r.comic_id AND r.customer_id=#{customer_id} ORDER BY c.rentaltimes DESC")
     public List<ComicModel>findAllComicsSortedByRentaltimes (@Param("customer_id")int customerId);
 }

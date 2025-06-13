@@ -5,12 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpSession;
 import teamB.comicrental.rental.RentalService;
 import teamB.comicrental.rental.model.Rental;
 import teamB.comicrental.rental.repository.RentalMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,8 +25,13 @@ public class RentalStatusController {
     private RentalService rentalService;
 
     @GetMapping("/rental/status")
-    public String showRentalStatus(Model model) {
-        List<Rental> currentRentals = rentalMapper.findCurrentRentals();
+    public String showRentalStatus(Model model,HttpSession session,RedirectAttributes redirectAttributes) {
+        Integer customerId=(Integer)session.getAttribute("loggedInUserId");
+        if (customerId == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "ログインが必要です。");
+            return "redirect:/login/loginpage";
+        }
+        List<Rental> currentRentals = rentalMapper.findCurrentRentals(customerId);
         model.addAttribute("currentRentals", currentRentals);
         return "rental/status";
     }

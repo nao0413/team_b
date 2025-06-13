@@ -134,10 +134,10 @@
                 <td th:text="${comic.author}">著者</td>
                 <td th:text="${comic.category_name}">ジャンル</td>
                 <td>
-                    <span th:if="${comic.isRented}">
+                    <span th:if="${comic.is_rented}">
                         <a th:href="@{/rental/status}" th:text="レンタル中"></a>
                     </span>
-                    <span th:unless="${comic.isRented}">未レンタル</span>
+                    <span th:unless="${comic.is_rented}">未レンタル</span>
                 </td>
                 <td>
                     <form action="/comics/addToCart" method="post">

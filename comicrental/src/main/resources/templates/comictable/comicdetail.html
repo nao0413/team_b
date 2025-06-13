@@ -89,10 +89,10 @@
     <p><strong>著者：</strong><span th:text="${comic.author}">著者名</span></p>
     <p><strong>ジャンル：</strong><span th:text="${comic.category_name}">ジャンル名</span></p>
     <p><strong>説明：</strong><span th:text="${comic.explanatory}">この漫画はとっても面白いです！</span></p>
-    <span th:if="${comic.isRented}">
+    <span th:if="${comic.is_rented}">
         <a th:href="@{/rental/status}" th:text="レンタル中"></a>
     </span>
-    <span th:unless="${comic.isRented}">未レンタル</span>
+    <span th:unless="${comic.is_rented}">未レンタル</span>
     <form action="/comics/addToCartDetail" method="post">
         <input type="hidden" name="comicId" th:value="${comic.comic_id}">
         <input type="hidden" name="customerId" th:value="${customerId}">
