@@ -18,7 +18,7 @@ public interface RentalMapper {
                 SELECT
                     r.rental_id,
                     r.customer_id,
-                    c.comic_id,
+                    c.comic_id AS comicId,
                     c.title,
                     c.comic_image AS comicImage,
                     r.rental_start_date AS rentalDate,
@@ -93,7 +93,13 @@ public interface RentalMapper {
             @Param("startDate") java.sql.Date startDate,
             @Param("endDate") java.sql.Date endDate);
 
-    
+    @Select("""
+    SELECT comic_id, title, author, comic_image AS comicImage, rentaltimes, category_id AS genre, arrival_date AS arrivalDate
+    FROM comic
+    WHERE comic_id = #{comicId}
+""")
+Comic findComicById(@Param("comicId") int comicId);
+
 
 }
     
