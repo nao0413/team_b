@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>読むページ</title>
+</head>
+<body>
+    <h1>漫画を読む</h1>
+
+    <div th:if="${#lists.isEmpty(pages)}">
+        <p>この漫画にはページが登録されていません。</p>
+    </div>
+
+    <div th:if="${!#lists.isEmpty(pages)}">
+        <div th:each="page : ${pages}">
+            <img th:src="@{/comicpages/{img}(img=${page})}" alt="ページ画像" style="display: block; width: 100%; max-width: 600px; margin-bottom: 20px;">
+        </div>
+    </div>
+
+    <a th:href="@{/rental/status}">← レンタル状況に戻る</a>
+</body>
+</html>
