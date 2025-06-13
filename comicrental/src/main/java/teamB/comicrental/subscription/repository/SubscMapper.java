@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+
 /**
  * SubscriptionMapper.java
  */
@@ -26,4 +27,5 @@ public interface SubscMapper {
     //サブスクリプションを退会した際にDBを更新する 
     @Update("UPDATE customer SET is_subscribed=FALSE,subscription_plan_id=NULL,credit_number=NULL,credit_name=NULL,credit_date=NULL,security_code=NULL WHERE customer_id=#{customer_id}")
             public void unsubscribe(@Param("customer_id") int customer_id);
+            
 }

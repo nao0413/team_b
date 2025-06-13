@@ -29,7 +29,7 @@ public interface ComicMapper {
     //漫画紹介ページのため
     @Select("select comic_id,title,author,explanatory,comic_image,is_recommended,recommend_type,recommend_text,recommend_image from comic where is_recommended=true ORDER BY comic_id ")
     List<ComicModel>findRecommendedComics();
-
+    
     //入荷順
     @Select("select c.comic_id,c.title,c.author,c.explanatory,c.category_id,ca.category_name,c.comic_image,c.arrival_date,CASE WHEN r.rental_status='renting' THEN TRUE ELSE FALSE END AS is_rented from comic c LEFT JOIN category ca ON c.category_id=ca.category_id LEFT JOIN rental r ON c.comic_id=r.comic_id AND r.customer_id=#{customer_id} AND r.rental_status='renting' ORDER BY c.arrival_date")
     public List<ComicModel>findAllComicsSortedByArrivalDate (@Param("customer_id")int customerId);

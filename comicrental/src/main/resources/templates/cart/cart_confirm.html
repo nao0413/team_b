@@ -94,6 +94,8 @@
 </head>
 <body>
 <div class="container">
+
+
     <!-- ヘッダー -->
     <div class="header-section">
         <h1>漫画レンタル</h1>
@@ -102,6 +104,7 @@
     <!-- タイトル -->
     <div class="title-section">
         <h2>レンタル内容の確認</h2>
+         <p th:if="${errorMessage}" th:text="${errorMessage}" style="color:red; margin-top: 10px;"></p>
     </div>
 
     <!-- 商品一覧 -->
@@ -116,7 +119,7 @@
         </thead>
         <tbody>
         <tr th:each="item : ${cartList}">
-            <td><img th:src="@{${item.imageUrl}}" alt="漫画画像" class="cart-image"></td>
+            <td><img th:src="@{${item.comic_image}}" alt="漫画画像" class="cart-image"></td>
             <td th:text="${item.title}"></td>
             <td th:text="${item.volume} + '巻'"></td>
             <td th:text="${#dates.format(item.rental_expire, 'yyyy年MM月dd日')}"></td>
@@ -124,13 +127,12 @@
         </tbody>
     </table>
 
-    <!-- 戻るリンクとサブスク案内 -->
+   
     <div class="back-link">
         <form method="get" th:action="@{/cart}" style="display: inline;">
             <button type="submit" style="padding: 10px 20px; font-size: 14px;">買い物かごに戻る</button>
         </form>
-        <br>
-       <a th:href="@{/subscription/join(customerId=${customerId})}">サブスク未登録の方はこちら</a>
+
 
     </div>
 
@@ -140,14 +142,43 @@
         <div>合計冊数：<span th:text="${totalCount}"></span>冊</div>
     </div>
 
-    <!-- レンタル確定 -->
-    <div class="button-area">
-       <form method="post" th:action="@{/cart/complete}">
-    <button type="submit">レンタルを確定</button>
-</form>
-
+<div th:if="${isSubscribed}" style="text-align: center; margin-top: 30px;">
+    <form th:action="@{/cart/complete}" method="post">
+        <button type="submit" style="
+            padding: 15px 40px;
+            font-size: 18px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        ">
+            レンタル確定
+        </button>
+    </form>
+</div>
+<div th:if="${not isSubscribed}" style="display: flex; justify-content: center; margin-top: 30px;">
+    <div style="
+        background-color: #ffe5e5;
+        border: 2px solid #ff4d4d;
+        border-radius: 10px;
+        padding: 20px 30px;
+        text-align: center;
+        max-width: 500px;
+    ">
+        <p style="color: #d8000c; font-size: 16px; margin-bottom: 15px;">
+            ⚠ サブスクリプション未登録のため、レンタルできません。
+        </p>
+        <a th:href="@{/subscription/join(customerId=${customerId})}" style="
+            display: inline-block;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        ">
+            → サブスク登録はこちら
+        </a>
     </div>
 </div>
-</body>
-</html>
-

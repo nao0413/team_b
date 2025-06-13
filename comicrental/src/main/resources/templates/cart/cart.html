@@ -93,6 +93,10 @@
 </head>
 <body>
 <div class="container">
+
+     <div th:if="${errorMessage}" style="color:red; font-weight:bold; text-align:center; padding: 10px;">
+        <p th:text="${errorMessage}"></p>
+    </div>
     <div class="header-section">
         <h1>漫画レンタル</h1>
     </div>
@@ -119,7 +123,7 @@
         </thead>
         <tbody>
         <tr th:each="item : ${cartList}">
-            <td><img th:src="@{${item.imageUrl}}" alt="漫画画像" class="cart-image"></td>
+            <td><img th:src="@{${item.comic_image}}" alt="漫画画像" class="cart-image"></td>
             <td th:text="${item.title}"></td>
             <td th:text="${item.volume} + '巻'"></td>
             <td th:text="${#dates.format(item.rental_expire, 'yyyy年MM月dd日')}"></td>
@@ -133,10 +137,14 @@
         </tbody>
     </table>
 
-    <div class="summary">
-        <p>今月のレンタル残数 あと <span th:text="${remainingLimit}"></span> 冊</p>
-        <p class="total">合計冊数：<span th:text="${totalCount}"></span>冊</p>
-    </div>
+    <!-- サブスク加入者だけにレンタル残数を表示 -->
+<div class="summary">
+    <p th:if="${isSubscribed}">
+        今月のレンタル残数 あと <span th:text="${remainingLimit}"></span> 冊
+    </p>
+    <p class="total">合計冊数：<span th:text="${totalCount}"></span>冊</p>
+</div>
+
 
     <div class="button-area">
         <form method="get" th:action="@{/cart/confirm}">

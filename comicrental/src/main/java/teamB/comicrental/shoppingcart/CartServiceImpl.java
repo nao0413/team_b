@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import teamB.comicrental.shoppingcart.model.Cart;
 import teamB.comicrental.shoppingcart.repository.CartMapper;
 import java.util.List;
+import java.sql.Date;
+
 
 // CartService の実装クラス：実際の処理内容をここで定義
 @Service
@@ -43,4 +45,10 @@ public class CartServiceImpl implements CartService {
     public void deleteAllCart(int customer_id) {
         cartMapper.deleteAll(customer_id);
     }
+
+    @Override
+public int countMonthlyRentals(int customerId, Date startDate, Date endDate) {
+    return cartMapper.countMonthlyRentals(customerId, startDate, endDate);
+}
+
 }

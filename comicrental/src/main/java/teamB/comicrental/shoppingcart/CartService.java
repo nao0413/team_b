@@ -2,6 +2,7 @@ package teamB.comicrental.shoppingcart;
 
 import java.util.List;
 import teamB.comicrental.shoppingcart.model.Cart;
+import java.sql.Date;
 
 public interface CartService {
     List<Cart> getCartList(int customer_id); //指定された顧客IDに紐づくカートの中身を取得する。
@@ -13,4 +14,7 @@ public interface CartService {
     void deleteAllCart(int customer_id); //指定された顧客のすべてのカート内商品を削除する。
 
     int getRemainingLimit(int customer_id, int maxLimit); //月のレンタル上限数と現在のカート内冊数から、残り借りられる冊数を計算する
+
+    int countMonthlyRentals(int customerId, Date startDate, Date endDate);
+
 }
