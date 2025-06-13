@@ -18,48 +18,36 @@ public interface RentalMapper {
 
     // レンタル中の漫画を取得
     @Select("""
-
                 SELECT
                     r.rental_id,
+                    c.comic_id,
                     c.title,
                     c.comic_image AS comicImage,
-                    r.rental_date,
-                    r.return_date
+                    r.rental_start_date AS rentalDate,
+                    r.rental_expire AS returnDate
                 FROM rental r
-                JOIN comic c ON r.comic_id = c.comic_id
-                WHERE r.return_date IS NULL
+                JOIN comic c ON r.comic_id=c.comic_id
+                WHERE r.rental_status='貸出中'
             """)
-
-        SELECT 
-            r.rental_id, 
-            c.comic_id, 
-            c.title, 
-            c.comic_image AS comicImage, 
-            r.rental_start_date AS rentalDate, 
-            r.rental_expire AS returnDate
-        FROM rental r
-        JOIN comic c ON r.comic_id = c.comic_id
-        WHERE r.rental_status = '貸出中'
-    """)
-
     List<Rental> findCurrentRentals();
 
     // 過去のレンタル履歴
     @Select("""
-
                 SELECT
                     r.rental_id,
+                    c.comic_id,
                     c.title,
                     c.comic_image AS comicImage,
-                    r.rental_date,
-                    r.return_date
-                FROM rental r
-                JOIN comic c ON r.comic_id = c.comic_id
-                WHERE r.return_date IS NOT NULL
-                ORDER BY r.return_date DESC
+                    r.rental_start_date AS rentalDate,
+                    r.rental_end_date AS returnDate
+                    FROM rental r
+                JOIN comic c ON r.comic_id=c.comic_id
+                WHERE r.rental_status='返却済み'
+                ORDER BY r.rental_end_date DESC
             """)
     List<Rental> findRentalHistory();
 
+    // タイトルで検索
     @Select("""
                 SELECT
                     r.rental_id,
@@ -74,6 +62,7 @@ public interface RentalMapper {
             """)
     List<Rental> findRentalByTitle(String title);
 
+    // レンタル登録
     @Insert("""
                 INSERT INTO rental (
                     customer_id,
@@ -93,6 +82,7 @@ public interface RentalMapper {
             """)
     void insertRental(Rental rental);
 
+    // 月間レンタル数カウント
     @Select("""
                 SELECT COUNT(*) FROM rental
                 WHERE customer_id = #{customer_id}
@@ -103,24 +93,4 @@ public interface RentalMapper {
             @Param("startDate") java.sql.Date startDate,
             @Param("endDate") java.sql.Date endDate);
 
-          
-
-
 }
-
-
-        SELECT 
-            r.rental_id, 
-            c.comic_id, 
-            c.title, 
-            c.comic_image AS comicImage, 
-            r.rental_start_date AS rentalDate, 
-            r.rental_end_date AS returnDate
-        FROM rental r
-        JOIN comic c ON r.comic_id = c.comic_id
-        WHERE r.rental_status = '返却済み'
-        ORDER BY r.rental_end_date DESC
-    """)
-    List<Rental> findRentalHistory();
-}
-
