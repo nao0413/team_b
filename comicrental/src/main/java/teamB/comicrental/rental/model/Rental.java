@@ -3,13 +3,19 @@ package teamB.comicrental.rental.model;
 import java.util.Date;
 
 public class Rental {
+
     private int rental_id;
     private int customer_id;
     private int comic_id;
+
+    private int rentalId;
+    private int comicId;
+
     private String title;
     private String comic_image;
     private Date rental_date;
     private Date return_date;
+
 
     // Getter & Setter
     public int getRental_id() { return rental_id; }
@@ -20,6 +26,13 @@ public class Rental {
 
     public int getComic_id() { return comic_id; }
     public void setComic_id(int comic_id) { this.comic_id = comic_id; }
+
+    public int getRentalId() { return rentalId; }
+    public void setRentalId(int rentalId) { this.rentalId = rentalId; }
+
+
+    public int getComicId() { return comicId; }
+    public void setComicId(int comicId) { this.comicId = comicId; }
 
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }

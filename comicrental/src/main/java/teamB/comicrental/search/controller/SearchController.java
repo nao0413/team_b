@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import teamB.comicrental.top.model.Comic;
 import teamB.comicrental.top.repository.TopComicMapper;
 
@@ -17,21 +16,18 @@ public class SearchController {
     @Autowired
     private TopComicMapper comicMapper;
 
+    // 検索フォーム表示用
     @GetMapping("/search")
-    public String showSearchResults(@RequestParam(value = "genre", required = false) String genre,
-                                     @RequestParam(value = "title", required = false) String title,
-                                     Model model) {
-        List<Comic> results;
+    public String showSearchForm() {
+        return "search/search"; // ← 検索フォーム用のHTMLを用意
+    }
 
-        if (genre != null && !genre.isEmpty()) {
-            results = comicMapper.findComicsByGenre(genre);
-        } else if (title != null && !title.isEmpty()) {
-            results = comicMapper.findComicsByTitleLike("%" + title + "%");
-        } else {
-            results = List.of();
-        }
-
+    // 検索実行後の結果表示
+    @GetMapping("/search/result")
+    public String searchByTitle(@RequestParam("title") String title, Model model) {
+        List<Comic> results = comicMapper.findComicsByTitleLike("%" + title + "%");
         model.addAttribute("results", results);
-        return "search/search";
+        return "search/result";
     }
 }
+
