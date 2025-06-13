@@ -3,10 +3,6 @@ package teamB.comicrental.rental.repository;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-
-import org.apache.ibatis.annotations.Update;
-
-import teamB.comicrental.rental.model.Rental;
 import org.apache.ibatis.annotations.Param;
 
 import teamB.comicrental.rental.model.Rental;
@@ -92,5 +88,4 @@ public interface RentalMapper {
             @Param("customer_id") int customerId,
             @Param("startDate") java.sql.Date startDate,
             @Param("endDate") java.sql.Date endDate);
-
 }
