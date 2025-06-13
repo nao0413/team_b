@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>漫画一覧</title>
+    <link rel="stylesheet" href="/CSS/comicrental.css">
     <style>
         table {
             width: 100%;
@@ -66,22 +67,19 @@
             height: auto;
         }
 
-        /* ボタンのスタイル */
-        button {
-            padding: 5px 10px;
-            background-color:white;
-            color:black;
-        }
-
+        /*ボタンのスタイル
         button:hover {
             background-color:white;
              color:black;
-        }
+        }*/
 
     </style>
 </head>
 
 <body>
+    <div class="header-section">
+        <h1>漫画レンタル</h1>
+    </div>
     <h1>漫画一覧</h1>
     <form action="/cart/table" method="get">
         <button type="submit" style="padding: 5px 10px; background-color:white; color:black; border: none; text-decoration: underline;">買い物かごページへ</button>
@@ -91,6 +89,7 @@
         <button type="submit" style="padding: 5px 10px; background-color:white; color:black; border: none; text-decoration: underline;">おすすめページへ</button>
         <input type="hidden" name="customerId" th:value="${customerId}">
     </form>
+    <a th:href="@{/home}">HOMEへ戻る</a>
     <div th:if="${errorMessage}">
         <p th:text="${errorMessage}"></p>
     </div>
@@ -143,7 +142,7 @@
                     <form action="/comics/addToCart" method="post">
                         <input type="hidden" name="comicId" th:value="${comic.comic_id}">
                         <input type="hidden" name="customerId" th:value="${customerId}">
-                        <button type="submit" class="add-to-cart-button">買い物かごへ入れる</button>
+                        <button type="submit" class="add-to-cart-button btn btn-border"><span>買い物かごへ入れる</span></button>
                     </form>
                 </td>
                 <!--<td><a th:href="'/comics/detail/'+${comic.comic_id}">詳細ページへ</a></td>-->

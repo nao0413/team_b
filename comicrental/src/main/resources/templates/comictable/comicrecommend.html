@@ -128,6 +128,9 @@
 </head>
 
 <body>
+    <div class="header-section">
+        <h1>漫画レンタル</h1>
+    </div>
     <h1 th:text="${page.title}">今月のおすすめ漫画</h1>
     <div th:if="${#lists.isEmpty(recommendedComics)}" class="info-box">
         <p>おすすめ漫画が見つかりませんでした。</p>
@@ -159,6 +162,7 @@
             <input type="hidden" name="customerId" th:value="${customerId}">
             <button type="submit" class="add-to-cart-button">買い物かごへ入れる</button>
         </form>
+        <a th:href="@{/home}">HOMEへ戻る</a>
         </div>
         <hr>
     </div>
