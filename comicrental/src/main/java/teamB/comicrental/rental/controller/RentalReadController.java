@@ -3,25 +3,26 @@ package teamB.comicrental.rental.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import teamB.comicrental.rental.repository.RentalMapper;
-import teamB.comicrental.rental.model.Rental;
-
-import java.util.List;
+import teamB.comicrental.top.model.Comic;
+import teamB.comicrental.top.repository.TopComicMapper;
 
 @Controller
-@RequestMapping("/rental")
 public class RentalReadController {
 
     @Autowired
-    private RentalMapper rentalMapper;
+    private TopComicMapper comicMapper;
 
-    @GetMapping("/read/{id}")
+    @GetMapping("/rental/read/{id}")
     public String readComic(@PathVariable("id") int comicId, Model model) {
-        // 該当コミックのページ画像リストを取得（ここでは仮にテーブルがあると仮定）
-        List<String> pages = rentalMapper.findComicPages(comicId);
-        model.addAttribute("pages", pages);
+        Comic comic = comicMapper.findComicById(comicId);  // comic_idで取得するメソッドが必要
+        if (comic == null) {
+            return "redirect:/rental/status";
+        }
+        model.addAttribute("comic", comic);
         return "rental/read";
     }
 }
+

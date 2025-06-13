@@ -2,6 +2,8 @@ package teamB.comicrental.top.repository;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Param;
+
 import teamB.comicrental.top.model.Comic;
 
 import java.util.List;
@@ -52,5 +54,14 @@ public interface TopComicMapper {
         WHERE title ILIKE #{title}
     """)
     List<Comic> findComicsByTitleLike(String title);
+
+    @Select("""
+    SELECT comic_id, title, author, comic_image AS comicImage, rentaltimes,
+           category_id AS genre, arrival_date AS arrivalDate
+    FROM comic
+    WHERE comic_id = #{comicId}
+""")
+Comic findComicById(@Param("comicId") int comicId);
+
 }
 

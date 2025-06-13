@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Param;
 
 import teamB.comicrental.rental.model.Rental;
+import teamB.comicrental.top.model.Comic;
 
 import java.util.List;
 
@@ -99,6 +100,12 @@ public interface RentalMapper {
     ORDER BY page_number
             """)
     List<String> findComicPages(@Param("comicId") int comicId);
+    @Select("""
+    SELECT comic_id, title, author, comic_image AS comicImage, rentaltimes, category_id AS genre, arrival_date AS arrivalDate
+    FROM comic
+    WHERE comic_id = #{comicId}
+            """)
+    Comic findComicById(int comicId);
 
 }
     
