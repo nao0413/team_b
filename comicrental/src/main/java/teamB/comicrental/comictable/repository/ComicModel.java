@@ -13,7 +13,7 @@ public class ComicModel {
     private String comic_image;
     private String category_name;
     private int customer_id;
-    private Boolean isRented;
+    private Boolean is_rented;
     private Boolean is_recommended;
     private String recommend_type;
     private String recommend_text;
@@ -79,11 +79,11 @@ public class ComicModel {
     public void setCustomer_id(int customer_id) {
         this.customer_id = customer_id;
     }
-    public Boolean getIsRented() {
-        return isRented;
+    public Boolean getIs_rented() {
+        return is_rented;
     }
-    public void setIsRented(Boolean isRented) {
-        this.isRented = isRented;
+    public void setIs_rented(Boolean is_rented) {
+        this.is_rented = is_rented;
     }
      public Boolean getIs_recommended() {
         return is_recommended;

@@ -11,7 +11,7 @@
 
 <ul th:if="${!#lists.isEmpty(currentRentals)}">
     <li th:each="rental : ${currentRentals}">
-        <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
+        <img th:src="${rental.comicImage}" alt="表紙画像" width="80">
         <strong th:text="${rental.title}"></strong><br>
         貸出日: <span th:text="${#dates.format(rental.rentalDate, 'yyyy/MM/dd')}"></span>
     </li>
