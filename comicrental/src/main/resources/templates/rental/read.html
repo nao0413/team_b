@@ -8,9 +8,12 @@
 <h1 th:text="'『' + ${comic.title} + '』を読む'">タイトル</h1>
 
 <div style="text-align: center;">
-    <img th:src="${comic.comicImage}" alt="漫画ページ" style="width: 50%; margin-bottom: 20px;">
+    <div th:each="i : ${#numbers.sequence(1, 10)}">
+        <img th:src="${comic.comicImage}" alt="漫画ページ" style="width: 50%; margin-bottom: 20px;">
+    </div>
 </div>
 
 <a th:href="@{/rental/status}">← レンタル状況へ戻る</a>
 </body>
 </html>
+
