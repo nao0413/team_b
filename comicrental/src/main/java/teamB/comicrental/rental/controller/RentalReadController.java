@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import teamB.comicrental.rental.repository.RentalMapper;
 import teamB.comicrental.top.model.Comic;
 import teamB.comicrental.top.repository.TopComicMapper;
 
@@ -13,11 +14,11 @@ import teamB.comicrental.top.repository.TopComicMapper;
 public class RentalReadController {
 
     @Autowired
-    private TopComicMapper comicMapper;
+    private RentalMapper rentalMapper;
 
     @GetMapping("/rental/read/{id}")
     public String readComic(@PathVariable("id") int comicId, Model model) {
-        Comic comic = comicMapper.findComicById(comicId);  // comic_idで取得するメソッドが必要
+         Comic comic = rentalMapper.findComicById(comicId);  // comic_idで取得するメソッドが必要
         if (comic == null) {
             return "redirect:/rental/status";
         }
