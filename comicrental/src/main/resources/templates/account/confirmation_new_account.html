@@ -157,7 +157,7 @@
 
         <div class="section-segment message-container">
             <p class="message" th:if="${registrationSuccess}" th:text="${registrationSuccess}">アカウントが作成されました。</p>
-            <p class="message" th:unless="${registrationSuccess}">アカウントが作成されました。</p>
+            <!-- <p class="message" th:unless="${registrationSuccess}">アカウントが作成されました。</p>> -->
 
             <a th:href="@{/login/loginpage}">アカウントのログインはこちら</a>
         </div>
