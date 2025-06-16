@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>漫画一覧</title>
+    <link rel="stylesheet" href="/CSS/comicrental.css">
+    <link rel="stylesheet" href="/CSS/comictable.css">
     <style>
         body {
             text-align: center;
@@ -46,22 +48,11 @@
         }
 
         /* レンタル状況のテキスト */
-        span {
+        span.comicinfo {
             font-size: 1.1em;
             /* 現在のフォントサイズの1.1倍 */
             margin-bottom: 15px;
             /* 下部の余白 */
-        }
-
-        /* ボタンの文字サイズ */
-        button {
-            font-size: 1em;
-            /* デフォルトのボタンと同じサイズ */
-
-            margin-top: 10px;
-            /* 上部の余白 */
-            cursor: pointer;
-            /* マウスオーバー時にカーソルを指の形にする */
         }
 
         .comic-detail-image {
@@ -78,41 +69,45 @@
     <div class="header-section">
         <h1>漫画レンタル</h1>
     </div>
-    <h1>漫画詳細ページ</h1>
+
+    <h1 class="title">漫画個別ページ</h1>
+
+    <div class="link-button-container">
+    <a th:href="@{/cart/table}" class="link-button">買い物かごページへ</a>
+    <a th:href="@{/comics/table}" class="link-button">漫画一覧ページへ</a>
+    <a th:href="@{/home}" class="link-button">HOME</a>
+    </div>
+
     <div th:if="${errorMessage}">
         <p th:text="${errorMessage}"></p>
     </div>
     <div th:if="${successMessage}">
         <p th:text="${successMessage}"></p>
     </div>
+
     <div class="comic-detail-image">
         <img th:src="${comic.comic_image}" alt="表紙画像" class="comic-detail-image">
     </div>
+
     <h2 th:text="${comic.title}">タイトル</h2>
-    <p><strong>著者：</strong><span th:text="${comic.author}">著者名</span></p>
-    <p><strong>ジャンル：</strong><span th:text="${comic.category_name}">ジャンル名</span></p>
-    <p><strong>説明：</strong><span th:text="${comic.explanatory}">この漫画はとっても面白いです！</span></p>
-    <span th:if="${comic.is_rented}">
+    <p><strong>著者：</strong><span th:text="${comic.author}" class="comicinfo">著者名</span></p>
+    <p><strong>ジャンル：</strong><span th:text="${comic.category_name}" class="comicinfo">ジャンル名</span></p>
+    <p><strong>説明：</strong><span th:text="${comic.explanatory}" class="comicinfo">この漫画はとっても面白いです！</span></p>
+    <span th:if="${comic.is_rented}" class="rented">
         <a th:href="@{/rental/status}" th:text="レンタル中"></a>
     </span>
-    <span th:unless="${comic.is_rented}">未レンタル</span>
+    <span th:unless="${comic.is_rented}" class="non-rented">未レンタル</span>
+
     <form action="/comics/addToCartDetail" method="post">
         <input type="hidden" name="comicId" th:value="${comic.comic_id}">
         <input type="hidden" name="customerId" th:value="${customerId}">
-        <button type="submit" class="add-to-cart-button">カートに入れる</button>
+        <button type="submit" class="btn btn-border"><span>カートに入れる</span></button>
     </form>
-    <form action="/cart/table" method="get">
-        <button type="submit" class="cartpage">買い物かごページへ</button>
-        <input type="hidden" name="customerId" th:value="${customerId}">
-    </form>
-    <form action="/comics/table" method="get">
-        <button type="submit" class="comictable">漫画一覧ページへ</button>
-        <input type="hidden" name="customerId" th:value="${customerId}">
-    </form>
-    <form action="/home" method="get">
-        <button type="submit" class="home">ホームページへ</button>
-        <input type="hidden" name="customerId" th:value="${customerId}">
-    </form>
+
+    <div class="footer-section">
+        <h4>ComicRental(solekia@teamB)</h4>
+    </div>
+
 </body>
 
 </html>

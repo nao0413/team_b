@@ -6,9 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>漫画紹介ページ</title>
+    <link rel="stylesheet" href="/CSS/comicrental.css">
+    <link rel="stylesheet" href="/CSS/comictable.css">
     <style>
         body {
-            text-align: center;
+            margin: 0;
+            font-size: 16px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        .container {
+            max-width: 960px;
+            /* 最大幅を設定して、広がりすぎないようにする */
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            /* コンテナの背景色を白に */
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .content-section {
@@ -25,36 +41,41 @@
         .comic-main-info,
         .info-main-info {
             display: flex;
-            /* Flexboxを適用 */
             flex-direction: column;
             /* デフォルトは縦並び */
             align-items: center;
-            /* 中央寄せ */
             gap: 20px;
-            /* 要素間の隙間 */
             margin-bottom: 30px;
-            /* 各セクションの下の余白*/
             width: 100%;
             /* 親要素の幅を使う */
         }
 
         /* タイトル */
         h1 {
-            font-size: 2em;
-            /* 現在のフォントサイズの2倍 */
+            font-size: 2.5em;
+            /* 漫画タイトルを大きく */
+            color: #E64545;
+            /* ヘッダーの赤と合わせる */
+            text-align: center;
+            margin-bottom: 15px;
         }
 
-        h2 {
-            font-size: 1em;
-            /* フォントサイズを調整 */
+        .comic-main-info h2 {
+            font-size: 1.1em;
+            line-height: 1.6;
+            /* 行間を広げて読みやすく */
+            margin-bottom: 10px;
+            text-align: center;
         }
 
-        h3 {
+        .comic-main-info h3 {
             white-space: normal;
             font-size: 1.1em;
-            /* フォントサイズを調整 */
-            text-align: left;
-            /* テキストを左寄せ */
+
+            line-height: 1.6;
+            /* 行間を広げて読みやすく */
+            margin-bottom: 10px;
+            text-align: center;
             flex-grow: 1;
             /* 残りのスペースを埋める */
         }
@@ -73,7 +94,6 @@
             /* 画像がボックスに収まるように調整 */
             display: block;
             margin: auto;
-            /* 中央寄せ */
         }
 
         .recommend-image-box {
@@ -98,31 +118,26 @@
             flex-direction: column;
             /* 小さい画面では縦並び */
             gap: 15px;
-            /* ボタン間の隙間 */
             margin-top: 30px;
             margin-bottom: 50px;
-            /* 下に余白 */
             justify-content: center;
             /* ボタンを中央寄せ */
             align-items: center;
             cursor: pointer;
-            /* マウスオーバー時にカーソルを指の形にする */
         }
 
         .button-group {
             display: flex;
-            /* これが重要！Flexコンテナにする */
             flex-wrap: wrap;
             /* ボタンが収まらない場合に折り返す */
             gap: 15px;
             /* ボタン間の隙間（現在の設定を維持） */
             margin-top: 30px;
-            /* 現在の設定を維持 */
             margin-bottom: 50px;
-            /* 現在の設定を維持 */
             justify-content: center;
             /* Flexアイテム（ボタン）を主軸（横方向）で中央に寄せる */
             align-items: center;
+            margin-bottom: 25px;
         }
     </style>
 </head>
@@ -131,11 +146,16 @@
     <div class="header-section">
         <h1>漫画レンタル</h1>
     </div>
-    <h1 th:text="${page.title}">今月のおすすめ漫画</h1>
+
+    <h1 th:text="${page.title}" class="title">今月のおすすめ漫画</h1>
     <div th:if="${#lists.isEmpty(recommendedComics)}" class="info-box">
         <p>おすすめ漫画が見つかりませんでした。</p>
     </div>
-    <div th:each="comic:${recommendedComics}">
+    <div class="link-button-container">
+        <a th:href="@{/home}" class="link-button">HOMEへ戻る</a>
+        <a th:href="@{/comics/table}" class="link-button">漫画一覧ページへ</a>
+    </div>
+    <div th:each="comic:${recommendedComics}" class="container">
         <div class="comic-main-info">
             <h2 th:text="${comic.title}">タイトル</h2>
             <h2 th:text="${comic.author}">著者</h2>
@@ -144,6 +164,7 @@
                 <img th:src="${comic.comic_image}" alt="表紙画像">
             </div>
         </div>
+
         <div class="info-main-info">
             <h3 th:text="${comic.recommend_text}">紹介文</h3>
             <div class="info-box recommend-image-box">
@@ -151,22 +172,22 @@
                 <img th:src="${comic.recommend_image}" alt="おすすめ画像">
             </div>
         </div>
+
         <div class="button-group">
-        <form th:action="@{'/comics/detail/'+${comic.comic_id}}" method="get">
-            <input type="hidden" name="comicId" th:value="${comic.comic_id}">
-            <input type="hidden" name="customerId" th:value="${customerId}">
-            <button type="submit" class="comicdetail">漫画個別ページへ</button>
-        </form>
-        <form action="/comics/addToCart" method="post">
-            <input type="hidden" name="comicId" th:value="${comic.comic_id}">
-            <input type="hidden" name="customerId" th:value="${customerId}">
-            <button type="submit" class="add-to-cart-button">買い物かごへ入れる</button>
-        </form>
-        <a th:href="@{/home}">HOMEへ戻る</a>
+            <form action="/comics/addToCart" method="post">
+                <input type="hidden" name="comicId" th:value="${comic.comic_id}">
+                <input type="hidden" name="customerId" th:value="${customerId}">
+                <button type="submit" class="btn btn-border"><span>買い物かごへ入れる</span></button>
+            </form>
+            <a th:href="@{'/comics/detail/' + ${comic.comic_id} }" class="link-button">この漫画の詳細ページはこちら！</a>
         </div>
-        <hr>
     </div>
     </div>
+
+    <div class="footer-section">
+        <h4>ComicRental(solekia@teamB)</h4>
+    </div>
+
 </body>
 
 </html>

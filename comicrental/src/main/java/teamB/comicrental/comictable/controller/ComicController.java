@@ -144,7 +144,7 @@ public class ComicController {
          redirectAttributes.addFlashAttribute("errorMessage", "ログインが必要です。");
          return "redirect:/login/loginpage";
       }
-      Optional<ComicModel> comicOptional = comicMapper.findByComicId(comicId);
+      Optional<ComicModel> comicOptional = comicMapper.findByComicId(comicId,customerId);
       if (comicOptional.isPresent()) {
          ComicModel comic = comicOptional.get();
          model.addAttribute("comic", comic);

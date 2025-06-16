@@ -1,0 +1,72 @@
+.link-button {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 10px;
+    background-color: #E64545;
+    color: white;
+    border-radius: 15px;
+    /*角を丸くする*/
+    text-decoration: none;
+    font-size: 0.95em;
+}
+.link-button-container {
+    display: flex;
+    padding: 8px 15px;
+    font-size: 0.95em;
+    flex-direction: row;
+    justify-content: center;
+    /*左寄せ*/
+    align-items: center;
+    /*垂直方向の中央揃え*/
+    gap: 10px;
+    /*リンク間の間隔*/
+    margin-top: 10px;
+    /*上部の余白*/
+}
+
+span.rented {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+span.rented a {
+    color: white;
+    text-decoration: none;
+}
+
+span.rented a:hover {
+    color: red;
+    text-decoration: none;
+}
+
+/* 未レンタル */
+span.non-rented {
+    background-color: #6c757d;
+    color: white;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.box-section {
+            background-color: white;
+            /* 背景色 */
+            border: 1px solid #ddd;
+            /* 薄い枠線 */
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            /* 内側の余白 */
+            margin: 20px auto;
+            /* 上下に余白、左右中央揃え */
+            max-width: 800px;
+            /* ボックスの最大幅（適宜調整） */
+            text-align: left;
+        }

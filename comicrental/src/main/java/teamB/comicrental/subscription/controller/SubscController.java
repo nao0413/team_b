@@ -211,7 +211,6 @@ public class SubscController {
     @PostMapping("doWithdrawal")
     public String doWithdrawal(Model model,HttpSession session,RedirectAttributes redirectAttributes){
         SubscPageModel page=new SubscPageModel();
-       //前のページからcustomer_idが受け取れなかった場合
         String loggedInUsername = (String) session.getAttribute("loggedInUser");
         Integer customerId = (Integer) session.getAttribute("loggedInUserId"); 
         if(loggedInUsername==null){

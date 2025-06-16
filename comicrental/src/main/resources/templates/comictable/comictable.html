@@ -7,66 +7,173 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>漫画一覧</title>
     <link rel="stylesheet" href="/CSS/comicrental.css">
+    <link rel="stylesheet" href="/CSS/comictable.css">
     <style>
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            table-layout: fixed;
-            border: 1px solid #ddd; /* テーブル全体に枠線を追加 */
+        .sort-controls label {
+            font-size: 1em;
+            /* 周囲のテキストサイズに合わせる */
+            color: #333;
+            font-weight: bold;
+            margin-right: 5px;
+            /* ラベルとセレクトボックスの間隔 */
         }
 
-        th,
-        td {
-            padding: 8px;
-            text-align: left;
-            vertical-align: top;
-            white-space: normal;
-            border: 1px solid #ddd; /* セルにも枠線を追加 */
-        }
+        .sort-controls select {
+            /* デフォルトのスタイルをリセット */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
 
-        th {
-            background-color: #f2f2f2; /* ヘッダーの背景色 */
-            font-weight: bold; /* ヘッダーのテキストを太字に */
+            background-color: #f8f8f8;
+            color:black;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 8px 10px;
+            font-family: "Meiryo UI", sans-serif;
+            /* サイトのフォントに合わせる */
+            outline: none;
         }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+                table-layout: fixed;
+                border: 1px solid #ddd;
+                /* テーブル全体に枠線を追加 */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                overflow: hidden;
+                /* 中の文字がはみ出さないようにする */
+            }
 
-        /* 各列の幅を調整 */
-        th:nth-child(1),
-        td:nth-child(1) {
-            width: 20%;
-        }
+            th,
+            td {
+                padding: 10px 15px;
+                text-align: left;
+                vertical-align: middle;
+                white-space: normal;
+                border-bottom: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+            }
 
-        th:nth-child(2),
-        td:nth-child(2) {
-            width: 15%;
-        }
+            th {
+                background-color: #E64545;
+                color: white;
+                font-weight: bold;
+                /* ヘッダーのテキストを太字に */
+                font-size: 1.1em;
+                text-align: center;
+                padding: 15px 10px;
+                border-bottom: 3px solid #333;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+                letter-spacing: 0.05em;
+            }
 
-        th:nth-child(3),
-        td:nth-child(3) {
-            width: 20%;
-        }
+            /* 偶数行に背景色をつけてストライプにする */
+            tbody tr:nth-child(even) {
+                background-color: #FACAC8;
+                /* 偶数行の背景色 */
+            }
 
-        th:nth-child(4),
-        td:nth-child(4) {
-            width: 10%;
-        }
+            td a.comictitle {
+                color: #007bff;
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 1.05em;
+            }
 
-        th:nth-child(5),
-        td:nth-child(5) {
-            width: 15%;
-        }
+            td a:hover {
+                color: #ff0000;
+                text-decoration: underline;
+                /* ホバーで下線 */
+            }
 
-        th:nth-child(6),
-        td:nth-child(6) {
-            width: 20%;
-        }
+            td {
+                font-weight: 300;
+            }
 
-        /* 画像のサイズ調整 */
-        .comic-image {
-            max-width: 100%;
-            height: auto;
-        }
+            /* レンタル中 */
+            td span.rented {
+                background-color: #28a745;
+                color: white;
+                font-weight: bold;
+                padding: 3px 8px;
+                border-radius: 4px;
+                display: inline-block;
+            }
+
+            td span.rented a {
+                color: white;
+                text-decoration: none;
+            }
+
+            td span.rented a:hover {
+                color: red;
+                text-decoration: none;
+            }
+
+            /* 未レンタル */
+            td span.non-rented {
+                background-color: #6c757d;
+                color: white;
+                font-weight: bold;
+                padding: 3px 8px;
+                border-radius: 4px;
+                display: inline-block;
+            }
+
+            /* 表紙画像 */
+            .comic-image {
+                max-width: 400px;
+                /* 画像の幅を調整 */
+                height: auto;
+                border: 1px solid #ddd;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+                /* 角丸 */
+            }
+
+            /* 影を少し強める */
+            /* 各列の幅を調整 */
+            th:nth-child(1),
+            td:nth-child(1) {
+                width: 20%;
+            }
+
+            th:nth-child(2),
+            td:nth-child(2) {
+                width: 15%;
+            }
+
+            th:nth-child(3),
+            td:nth-child(3) {
+                width: 20%;
+            }
+
+            th:nth-child(4),
+            td:nth-child(4) {
+                width: 10%;
+            }
+
+            th:nth-child(5),
+            td:nth-child(5) {
+                width: 15%;
+            }
+
+            th:nth-child(6),
+            td:nth-child(6) {
+                width: 20%;
+            }
+
+            /* 画像のサイズ調整 */
+            .comic-image {
+                max-width: 70px;
+                height: auto;
+                border: 1px solid #ddd;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+                /* 角丸 */
+            }
     </style>
 </head>
 
@@ -74,46 +181,47 @@
     <div class="header-section">
         <h1>漫画レンタル</h1>
     </div>
+
     <h1 class="title">漫画一覧</h1>
-    <form action="/cart/table" method="get">
-        <button type="submit" style="padding: 5px 10px; background-color:white; color:black; border: none; text-decoration: underline;">買い物かごページへ</button>
-        <input type="hidden" name="customerId" th:value="${customerId}">
-    </form>
-    <form action="/comics/recommend" method="get">
-        <button type="submit" style="padding: 5px 10px; background-color:white; color:black; border: none; text-decoration: underline;">おすすめページへ</button>
-        <input type="hidden" name="customerId" th:value="${customerId}">
-    </form>
-    <a th:href="@{/home}">HOMEへ戻る</a>
+    <div class="link-button-container">
+        <a th:href="@{/cart/table}" class="link-button">買い物かごページへ</a>
+        <a th:href="@{/comics/recommend}" class="link-button">今月のおすすめ</a>
+        <a th:href="@{/home}" class="link-button">HOME</a>
+    </div>
+
     <div th:if="${errorMessage}">
         <p th:text="${errorMessage}"></p>
     </div>
     <div th:if="${successMessage}">
         <p th:text="${successMessage}"></p>
     </div>
+
     <div class="sort-controls">
         <label for="sortOrder">表示順：</label>
         <select id="sortOrder" onchange="changeSortOrder()">
-            <option value="comicId" th:selected="${currentSort=='comicId'||currentSort==null}">デフォルト</option>
+            <option value="comicId" th:selected="${currentSort=='comicId'||currentSort==null}">デフォルト順</option>
             <option value="arrivalDate" th:selected="${currentSort=='arrivalDate'}">入荷日順</option>
             <option value="rentalCount" th:selected="${currentSort=='rentalCount'}">レンタル回数順</option>
         </select>
     </div>
+
     <script>
-        function changeSortOrder(){
-            var sortOrder=document.getElementById("sortOrder").value;
-            window.location.href="/comics/table?sort="+sortOrder;
+        function changeSortOrder() {
+            var sortOrder = document.getElementById("sortOrder").value;
+            window.location.href = "/comics/table?sort=" + sortOrder;
         }
     </script>
+
     <table>
         <thead>
             <tr>
-            <th>タイトル</th>
-            <th>著者</th>
-            <th>ジャンル</th>
-            <th>レンタル状況</th>
-            <th>カートに追加</th>
-            <!-- <th style="width: 20%;">漫画個別ページ</th> -->
-            <th>表紙</th>
+                <th>タイトル</th>
+                <th>著者</th>
+                <th>ジャンル</th>
+                <th>レンタル状況</th>
+                <th>カートに追加</th>
+                <!-- <th style="width: 20%;">漫画個別ページ</th> -->
+                <th>表紙</th>
             </tr>
         </thead>
         <tbody>
@@ -122,33 +230,35 @@
             </tr>
             <tr th:each="comic:${comicList}">
                 <td>
-                     <a th:href="@{'/comics/detail/' + ${comic.comic_id} }" th:text="${comic.title}">タイトル</a>
+                    <a th:href="@{'/comics/detail/' + ${comic.comic_id} }" th:text="${comic.title}"
+                        class="comictitle">タイトル</a>
                 </td>
                 <td th:text="${comic.author}">著者</td>
                 <td th:text="${comic.category_name}">ジャンル</td>
                 <td>
-                    <span th:if="${comic.is_rented}">
+                    <span th:if="${comic.is_rented}" class="rented">
                         <a th:href="@{/rental/status}" th:text="レンタル中"></a>
                     </span>
-                    <span th:unless="${comic.is_rented}">未レンタル</span>
+                    <span th:unless="${comic.is_rented}" class="non-rented">未レンタル</span>
                 </td>
                 <td>
                     <form action="/comics/addToCart" method="post">
                         <input type="hidden" name="comicId" th:value="${comic.comic_id}">
                         <input type="hidden" name="customerId" th:value="${customerId}">
-                        <button type="submit" class="add-to-cart-button btn btn-border"><span>買い物かごへ入れる</span></button>
+                        <button type="submit" class="btn btn-border"><span>買い物かごへ入れる</span></button>
                     </form>
                 </td>
-                <!--<td><a th:href="'/comics/detail/'+${comic.comic_id}">詳細ページへ</a></td>-->
                 <td>
                     <img th:src="${comic.comic_image}" alt="表紙画像" class="comic-image">
                 </td>
             </tr>
         </tbody>
     </table>
+
     <div class="footer-section">
         <h4>ComicRental(solekia@teamB)</h4>
     </div>
+
 </body>
 
 </html>

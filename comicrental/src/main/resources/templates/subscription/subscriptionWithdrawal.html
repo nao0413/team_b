@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>サブスクリプション退会画面</title>
+    <link rel="stylesheet" href="/CSS/comicrental.css">
+    <link rel="stylesheet" href="/CSS/comictable.css">
     <style>
         body {
             /* 全体のコンテンツを中央寄せに */
@@ -97,7 +99,7 @@
 
         /* 「はい」ボタンのスタイル */
         form[action="/subscription/doWithdrawal"] button {
-            background-color: #dc3545; /* 赤系（danger） */
+            background-color: red;
             color: white;
             border: none;
             border-radius: 5px;
@@ -105,9 +107,9 @@
             margin-right: 15px; /* 「いいえ」ボタンとの間にスペース */
         }
         form[action="/subscription/doWithdrawal"] button:hover {
-            background-color: #c82333;
+            background-color: #a90717;
         }
-
+    
         /* 「いいえ」ボタンのスタイル */
         form[action="/subscription/list"] button {
             border: none;
@@ -115,6 +117,9 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             margin-left: 15px; /* 「はい」ボタンとの間にスペース */
+        }
+         form[action="/subscription/list"] button:hover {
+            background-color: grey;
         }
 
         form {
@@ -126,27 +131,31 @@
 </head>
 
 <body>
+     <div class="header-section">
+        <h1>漫画レンタル</h1>
+    </div>
     <h1 th:text="${page.title}">サブスクリプション　退会</h1>
     <div th:if="${errorMessage}">
         <p th:text="${errorMessage}"></p>
     </div>
     <h2 class="caveat">サブスクリプションを退会します。</h2>
     <h2 class="caveat">よろしいですか？</h2>
-    <div class="user-info-section">
+    <div class="user-info-section box-section">
         <h3>現在のユーザー情報</h3>
         <p th:if="${page.id != null}">会員番号：<span th:text=${page.id}></span></p>
         <p th:if="${page.name != null}">会員番号：<span th:text=${page.name}></span></p>
         <p>サブスクリプション状況：<span th:text="${page.subscribed ?'加入済み' : '未加入'}"></span></p>
     </div>
     <form action="/subscription/doWithdrawal" method="post">
-        <input type="hidden" name="customerId" th:value="${page.id}">
         <button type="submit">はい</button>
     </form>
     <form action="/subscription/list" method="get">
-        <input type="hidden" name="customerId" th:value="${page.id}">
         <button type="submit">いいえ</button>
     </form>
-    <h5>マイページへ戻る</h5>
+    <a th:href="@{/mypage}" class="link-button link-button-container">マイページへ</a>
+    <div class="footer-section">
+        <h4>ComicRental(solekia@teamB)</h4>
+    </div> 
 </body>
 
 </html>
