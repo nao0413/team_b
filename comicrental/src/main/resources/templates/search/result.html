@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>検索結果</title>
+    <link rel="stylesheet" href="/CSS/comicrental.css">
     <style>
         body {
             margin: 0;
@@ -79,6 +80,9 @@
     </style>
 </head>
 <body>
+    <div class="header-section">
+        <h1>漫画レンタル</h1>
+    </div>
 <h1>検索結果</h1>
 
 <!-- 結果なし -->
@@ -95,14 +99,11 @@
             </span>
         </a>
         <!-- カート追加ボタン -->
-        
-                    <form action="/comics/addToCart" method="post">
+        <form action="/comics/addToCart" method="post">
                         <input type="hidden" name="comicId" th:value="${comic.comic_id}">
                         <input type="hidden" name="customerId" th:value="${customerId}">
                         <button type="submit" class="btn btn-border"><span>買い物かごへ入れる</span></button>
                     </form>
-                
-    </li>
 </ul>
 
 <!-- 検索に戻るボタン -->
@@ -111,5 +112,6 @@
 </div>
 <div class="footer-section">
         <h4>ComicRental(solekia@teamB)</h4>
+</div>
 </body>
 </html>
