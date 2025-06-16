@@ -3,106 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>買い物かご</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: sans-serif;
-        }
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Nico+Moji&family=RocknRoll+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 
-        .container {
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .header-section {
-            border-bottom: 2px solid #666;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .header-section h1 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .title-section {
-            padding: 10px 0;
-            text-align: center;
-        }
-
-        .title-section h2 {
-            margin: 0;
-            font-size: 28px;
-        }
-
-        .right-align {
-            text-align: right;
-            padding: 10px 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 15px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #eee;
-        }
-
-        .cart-image {
-            width: 100px;
-            height: auto;
-        }
-
-        .summary {
-            padding: 20px;
-            font-size: 18px;
-        }
-
-        .summary p {
-            margin: 5px 0;
-        }
-
-        .summary .total {
-            text-align: right;
-            padding-right: 20px;
-        }
-
-        .button-area {
-            padding: 20px;
-            text-align: center;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/your_kit_code.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
+<div class="header-section">
+  <h1><i class="fas fa-book-open" style="margin-right:10px;"></i>漫画レンタル</h1>
+</div>
+
+
 <div class="container">
 
-     <div th:if="${errorMessage}" style="color:red; font-weight:bold; text-align:center; padding: 10px;">
+  
+    <div th:if="${errorMessage}" style="color:red; font-weight:bold; text-align:center; padding: 10px;">
         <p th:text="${errorMessage}"></p>
     </div>
-    <div class="header-section">
-        <h1>漫画レンタル</h1>
-    </div>
 
+    
     <div class="title-section">
-        <h2>買い物かご</h2>
+       <h2 class="cart-title">🛒 買い物かご</h2>
     </div>
 
     <div class="right-align">
@@ -111,6 +35,7 @@
         </form>
     </div>
 
+    
     <table>
         <thead>
         <tr>
@@ -130,42 +55,38 @@
             <td>
                 <form method="post" th:action="@{/cart/delete}">
                     <input type="hidden" name="cart_id" th:value="${item.cart_id}" />
-                    <button type="submit">削除</button>
+                    <button type="submit" class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
 
-    <!-- サブスク加入者だけにレンタル残数を表示 -->
-<div class="summary">
-    <p th:if="${isSubscribed}">
-        今月のレンタル残数 あと <span th:text="${remainingLimit}"></span> 冊
-    </p>
-    <p class="total">合計冊数：<span th:text="${totalCount}"></span>冊</p>
-<div style="margin-top: 30px;">
-
-    
-    <div style="margin-top: 30px;">
-
-    
-    <div style="text-align: left; margin-bottom: 10px;">
-        <form action="/comics/table" method="get" style="display: inline;">
-            <button type="submit" style="font-size: 14px; padding: 8px 14px;">
-                漫画一覧ページへ
-            </button>
-        </form>
+  
+    <div class="summary">
+        <p th:if="${isSubscribed}" class="rental-limit">
+            今月のレンタル残数 あと <span th:text="${remainingLimit}" class="remaining-num"></span> 冊
+        </p>
+        <p class="total">合計冊数：<span th:text="${totalCount}"></span>冊</p>
     </div>
 
    
-    <div style="text-align: center;">
-        <form action="/cart/confirm" method="get" style="display: inline;">
-            <button type="submit" style="font-size: 16px; padding: 10px 20px;">
-                確認画面へ進む
-            </button>
+    <div class="button-area">
+        <form action="/comics/table" method="get">
+            <button type="submit">漫画一覧ページへ</button>
+        </form>
+        <form action="/cart/confirm" method="get">
+            <button type="submit">確認画面へ進む</button>
         </form>
     </div>
 
+</div>
+
+
+<div class="footer-section">
+  <h4>ComicRental(solekia@teamB)</h4>
 </div>
 </body>
 </html>
