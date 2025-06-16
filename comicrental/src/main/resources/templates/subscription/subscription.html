@@ -6,19 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>サブスクリプション状況確認画面</title>
-</head>
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>サブスクリプション状況確認画面</title>
+    <link rel="stylesheet" href="/CSS/comicrental.css">
+    <link rel="stylesheet" href="/CSS/comictable.css">
     <style>
         body {
             /* 全体のコンテンツを中央寄せに */
-            text-align: center;
+            text-align: left;
             /* ページ全体の上下左右の余白を調整 */
             margin: 20px;
             /* 行の高さを調整して読みやすくする */
@@ -27,13 +20,13 @@
 
         h1 {
             /* メインタイトルを大きくし、下に十分な余白を取る */
-            font-size: 2.5em;
+            font-size: 1.5em;
             margin-bottom: 30px;
         }
 
         h2 {
             /* 各セクションの見出しを調整し、上下に余白を取る */
-            font-size: 1.8em;
+            font-size: 1.5em;
             margin-top: 40px;
             margin-bottom: 20px;
         }
@@ -61,13 +54,30 @@
             box-sizing: border-box;
         }
 
+        .link-button-container {
+            display: inline-block;
+            /* ★インラインブロックにすることで、内容の幅に合わせる */
+            /* width: auto; */
+            /* 基本的にinline-blockならautoになるので不要 */
+            padding: 8px 20px;
+            /* ★ボタンの内側の余白を調整 */
+            background-color: #E64545;
+            /* ★背景色（ヘッダーの赤に合わせるなど） */
+            color: white;
+            /* ★文字色 */
+            border-radius: 5px;
+            /* 角丸 */
+            text-decoration: none;
+            /* 下線を削除 */
+            font-weight: bold;
+            /* 太字 */
+            margin-top: 15px;
+            /* 上の要素との余白 */
+        }
+        
         .mypage {
-            /* mypageブロックの上下の余白と、左右を自動にして中央寄せにする */
-            margin: 30px auto;
-            /* mypageブロックの内側の余白 */
-            padding: 25px;
             /* mypageブロックの最大幅を設定し、コンテンツが広がりすぎないようにする */
-            max-width: 500px;
+            max-width: 100%;
             /* mypageブロック内のテキストを左寄せに */
             text-align: left;
         }
@@ -75,7 +85,7 @@
         .mypage h4,
         .mypage p {
             /* mypageブロック内の見出しは中央寄せにする */
-            text-align: center;
+            text-align: left;
         }
 
         hr {
@@ -85,25 +95,18 @@
             width: 80%;
         }
 
-        button {
-            /* ボタンの内側の余白を調整して大きく見せる */
-            padding: 12px 25px;
-            /* ボタンの文字サイズを調整 */
-            font-size: 1.1em;
-            /* ボタンの上に余白を取る */
-            margin-top: 15px;
-            /* ボタンがインラインブロック要素として扱われるように */
-            display: inline-block;
-        }
-
         form {
             /* 各フォームの下に余白を取る */
             margin-bottom: 20px;
         }
     </style>
+</head>
 
 <body>
-    <h1 th:text="${page.title}">サブスクリプション状況</h1>
+    <div class="header-section">
+        <h1>漫画レンタル</h1>
+    </div>
+
     <div th:if="${successMessage}">
         <p th:text="${successMessage}"></p>
     </div>
@@ -115,24 +118,30 @@
     <div th:if="${infoMessage}">
         <p th:text="${infoMessage}"></p>
     </div>
-    <div class="mypage">
-        <h4 th:if="${page.id !=null}"> 会員番号:<span th:text="${page.id}"></span></h4>
-        <h4 th:if="${page.name !=null}">名前:<span th:text="${page.name}"></span></h4>
-        <h4>サブスクリプション状況:<span th:text="${page.subscribed ? '加入済み':'未加入'}"></span></h4>
-        <p>| <a th:href="@{/mypage}">マイページ</a> |</p> 
+
+    <div class="box-section">
+        <h1 th:text="${page.title}">サブスクリプション状況</h1>
+        <div class="mypage">
+            <h4 th:if="${page.id !=null}"> 会員番号:<span th:text="${page.id}"></span></h4>
+            <h4 th:if="${page.name !=null}">名前:<span th:text="${page.name}"></span></h4>
+            <h4>サブスクリプション状況:<span th:text="${page.subscribed ? '加入済み':'未加入'}"></span></h4>
+            <a th:href="@{/mypage}" class="link-button link-button-container">マイページ</a>
+        </div>
     </div>
-    <hr>
-    <h2 class="join">サブスクリプション　加入</h2>
-    <form action="/subscription/join" method="get">
-        <button type="submit">加入ページへ</button>
-        <input type="hidden" name="customerId" th:value="${page.id}"><!--hidden-->
-    </form>
-    <hr>
-    <h2 class="Withdrawal">サブスクリプション　退会</h2>
-    <form action="/subscription/withdrawal" method="get">
-        <button type="submit">退会ページへ</button>
-        <input type="hidden" name="customerId" th:value="${page.id}">
-    </form>
+
+    <div class="join box-section">
+        <h2>サブスクリプション　加入</h2>
+        <a th:href="@{/subscription/join}" class="link-button link-button-container">加入ページへ</a>
+    </div>
+
+    <div class="Withdrawal box-section">
+        <h2>サブスクリプション　退会</h2>
+        <a th:href="@{/subscription/withdrawal}" class="link-button link-button-container">退会ページへ</a>
+    </div>
+
+    <div class="footer-section">
+        <h4>ComicRental(solekia@teamB)</h4>
+    </div>
 </body>
 
 </html>
