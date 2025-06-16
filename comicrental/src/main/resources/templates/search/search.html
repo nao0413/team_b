@@ -3,15 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>漫画検索</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fdfdfd;
+        }
+
+        .container {
+            text-align: center;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 250px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            background-color: #337ab7;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #286090;
+        }
+    </style>
 </head>
 <body>
-<h1>漫画タイトル検索</h1>
+    <div class="container">
+        <h1>漫画タイトル検索</h1>
 
-<form th:action="@{/search/result}" method="get">
-    <label for="title">タイトル:</label>
-    <input type="text" id="title" name="title" required>
-    <button type="submit">検索</button>
-</form>
-
+        <form th:action="@{/search/result}" method="get">
+            <label for="title">タイトル:</label><br>
+            <input type="text" id="title" name="title" required><br>
+            <button type="submit">検索</button>
+        </form>
+    </div>
 </body>
 </html>
