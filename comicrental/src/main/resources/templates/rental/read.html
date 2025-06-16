@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>読む - 漫画レンタル</title>
+    <link rel="stylesheet" href="/CSS/comicrental.css">
 </head>
 <body>
+    <div class="header-section">
+        <h1>漫画レンタル</h1>
+    </div>
 <h1 th:text="'『' + ${comic.title} + '』を読む'">タイトル</h1>
 
 <div style="text-align: center;">
@@ -18,6 +22,7 @@
 <a th:href="@{/rental/status}">← レンタル状況へ戻る</a>
 <div class="footer-section">
         <h4>ComicRental(solekia@teamB)</h4>
+</div>
 </body>
 </html>
 
