@@ -38,46 +38,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>会員情報 - メニュー</title>
+    <title>マイページ</title>
+    <style>
+        body {
+            font-family: "Meiryo UI";
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .header-section {
+            /*border-bottom: 3px solid white;*/
+            background-color: #E64545;
+            font-family: "Meiryo UI";
+            color: black;
+            padding: 13px;
+            text-align: center;
+        }
+
+        .header-section h1 {
+            font-size: 1.4em;
+            margin: 0;
+            color: #fff;
+            text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px 0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px 0px #000, 0px -1px 0px #000, 2px 2px 0px #000;
+        }
+
+        .footer-section {
+            background-color: #E64545;
+            font-family: "Meiryo UI";
+            color: black;
+            padding: 13px;
+        }
+
+        .footer-section h4 {
+            font-size: 1em;
+            color: #fff;
+            text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px 0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px 0px #000, 0px -1px 0px #000, 2px 2px 0px;
+        }
+
+        .page-content-wrapper {
+            width: 100%;
+            max-width: 500px;
+            /* 全体のコンテンツの最大幅 (調整してください) */
+            margin: 30px auto;
+            /* 上下に30px、左右中央寄せ */
+            padding: 0;
+            /* 左右の余白は不要 */
+            box-sizing: border-box;
+            /* display: flex;
+            flex-direction: column;
+            gap: 20px; */
+            /* セクション間の余白 */
+        }
+
+        .mypage-section {
+            background-color: white;
+            /* セクションの背景色を白に */
+            border: 1px solid #ccc;
+            /* 枠線 */
+            border-radius: 5px;
+            /* 角丸 */
+            margin-bottom: 20px;
+            /* 各セクションの下に余白 */
+            padding: 20px;
+            /* 内側の余白 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* 軽い影 */
+        }
+
+        .mypage-section h2 {
+            font-size: 1.2em;
+            /* セクションタイトルの文字サイズ */
+            color: #333;
+            margin-top: 0;
+            /* デフォルトマージンをリセット */
+            margin-bottom: 15px;
+            /* 下に余白 */
+            border-bottom: 1px solid #eee;
+            /* 下線 */
+            padding-bottom: 10px;
+            /* 下線との間に余白 */
+        }
+
+        /* ------------------------------------- */
+        /* 会員情報セクション */
+        /* ------------------------------------- */
+        .member-info-item.last-info-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid black;
+            /* ★ここに黒い線を追加★ */
+            padding-bottom: 2px;
+            /* 線と入力フィールドの間に余白 */
+            margin-bottom: 15px;
+            /* 線と次のセクションの間に余白 *
+            /* 各入力フィールドの下に余白 */
+        }
+
+        .member-info-item label {
+            display: block;
+            /* ラベルをブロック要素にして改行 */
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+            /* ラベルと入力欄の間に余白 */
+            font-size: 10px;
+        }
+
+        .member-info-item input[type="text"],
+        .member-info-item input[type="email"] {
+            width: calc(100% - 20px);
+            /* パディングを考慮した幅 */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            box-sizing: border-box;
+            /* パディングを含めて幅を計算 */
+        }
+
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            /* ボタンを縦に並べる */
+            gap: 10px;
+            /* ボタン間の余白 */
+        }
+
+        .menu-buttons button {
+            width: 100%;
+            padding: 8px 15px;
+            color: #333;
+            border: 1px solid #ccc;
+            /* ボタンの枠線 */
+            border-radius: 4px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+            box-sizing: border-box;
+            text-align: left;
+            /* ボタン内のテキストを左揃えに */
+        }
+
+        .menu-buttons button:hover {
+            background-color: #e0e0e0;
+            /* ホバーで少し濃く */
+            border-color: #999;
+        }
+    </style>
 </head>
 
 <body>
-    <div>
-        <h1>会員情報</h1>
-        <div>
-            <p>会員番号: <span th:text="${memberId}"></span></p>
-            <p>名前: <span th:text="${loggedInUsername}"></span></p>
-            <p>メールアドレス: <span th:text="${email}"></span></p>
-        </div>
+    <header class="header-section">
+        <h1>漫画レンタル</h1>
+    </header>
 
-        <h1>メニューボタン</h1>
-        <div>
-            <div>
+    <div class="page-content-wrapper">
+
+        <div class="mypage-section member-info-section">
+            <h2>会員情報</h2>
+            <div class="member-info-item last-info-item">
+                <p>　　会員番号: <span th:text="${memberId}"></span></p>
+                <p>　　　　　名前: <span th:text="${loggedInUsername}"></span></p>
+                <p>メールアドレス: <span th:text="${email}"></span></p>
+            </div>
+
+            <!-- <div class="mypage-section menu-button-section"> -->
+            <h2>メニューボタン</h2>
+            <div class="menu-buttons">
                 <form th:action="@{/home}" method="get"> <button type="submit">ホーム画面</button>
                 </form>
-            </div>
-            <div>
+
                 <form th:action="@{/cart/table}" method="get"> <button type="submit">買い物かご</button>
                 </form>
-            </div>
-            <div>
+
                 <form th:action="@{/rental/status}" method="get"> <button type="submit">レンタル状況</button>
                 </form>
-            </div>
-            <div>
+
                 <form th:action="@{/subscription/list}" method="get"> <button type="submit">サブスクリプション</button>
                 </form>
-            </div>
-            <div>
+
                 <form th:action="@{/password/request}" method="get"> <button type="submit">パスワード変更</button>
                 </form>
-            </div>
-            <div>
+
                 <form th:action="@{/login/logout}" method="get"> <button type="submit">ログアウト</button>
                 </form>
             </div>
+            <!-- </div> -->
         </div>
     </div>
+    <footer class="footer-section">
+        <h4>ComicRental(solekia@teamB)</h4>
+    </footer>
 </body>
 
 </html>

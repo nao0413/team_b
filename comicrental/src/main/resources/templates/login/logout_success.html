@@ -8,10 +8,7 @@
     <style>
         /* 全体的な設定 */
         body {
-            font-family: sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-family: "Meiryo UI";
             min-height: 100vh;
             margin: 0;
             padding: 0;
@@ -22,12 +19,58 @@
             /* ボディ内のテキストを中央揃え */
         }
 
+        .header-section {
+            /*border-bottom: 3px solid white;*/
+            background-color: #E64545;
+            font-family: "Meiryo UI";
+            color: black;
+            padding: 13px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .header-section h1 {
+            font-size: 1.4em;
+            margin: 0;
+            color: #fff;
+            text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px 0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px 0px #000, 0px -1px 0px #000, 2px 2px 0px #000;
+        }
+
+        .footer-section {
+            background-color: #E64545;
+            font-family: "Meiryo UI";
+            color: black;
+            padding: 13px;
+            position: fixed;
+            /* 要素をビューポートに対して固定 */
+            bottom: 0;
+            /* 画面の最下部に配置 */
+            left: 0;
+            /* 画面の左端に配置 */
+            width: 100%;
+            /* 画面の幅いっぱいに広げる */
+            box-sizing: border-box;
+        }
+
+        .footer-section h4 {
+            font-size: 1em;
+            color: #fff;
+            text-align: left;
+            text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px 0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px 0px #000, 0px -1px 0px #000, 2px 2px 0px;
+        }
+
         /* ページ全体のコンテンツをラップする、幅を制限するdiv */
         .page-content-wrapper {
+            /* 新しいクラス名 */
             width: 100%;
             max-width: 800px;
+            /* 買い物かごページのような最大幅 */
+            /* 背景色、枠線、影は各セクションやbodyで制御するのでここでは不要 */
             padding: 0;
+            /* このラッパー自体のパディングは0 */
             box-sizing: border-box;
+            margin: 0 auto;
         }
 
         /* 各セクションの共通スタイル */
@@ -35,6 +78,7 @@
             width: 100%;
             box-sizing: border-box;
             padding: 15px 40px;
+            /* 各セクションの上下左右パディング */
             text-align: center;
             color: #333;
         }
@@ -44,15 +88,17 @@
             font-size: 1.8em;
             font-weight: bold;
             border-bottom: 2px solid black;
-            /* 黒い線 */
+            /* ★★★ 黒い線 ★★★ */
             margin-bottom: 0;
+            /* 下に余白をつけない */
         }
 
-        /* 「ログアウト」タイトル */
+        /* 「アカウントの新規作成」タイトル */
         .header-title-sub {
             font-size: 1.5em;
             font-weight: bold;
             margin-top: 0;
+            /* 上に余白をつけない */
             border-bottom: 1px solid #eee;
             /* 下に薄い線 */
         }
@@ -60,13 +106,14 @@
         /* メッセージコンテナ */
         .message-container {
             padding: 30px 40px;
+            /* メッセージ部分のパディング */
         }
 
         /* メッセージ */
         .message {
             font-size: 1.2em;
             margin-top: 0;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         /* リンク */
@@ -77,6 +124,7 @@
             display: inline-block;
             margin-top: 0;
             margin-bottom: 30px;
+            padding-top: 30px;
         }
 
         a:hover {
@@ -86,13 +134,30 @@
 </head>
 
 <body>
-    <div>
+    <header class="header-section">
         <h1>漫画レンタル</h1>
-        <h2>ログアウト</h2>
-        <p class="message">ログアウトしました。</p>
-        <br>
-        <a th:href="@{~/login/loginpage}">ログインページに戻る</a>
+    </header>
+
+    <div class="page-content-wrapper">
+        <!-- <div class="section-segment header-title-main">
+            漫画レンタル
+        </div> -->
+
+        <div class="section-segment header-title-sub">
+            ログアウト
+        </div>
+
+        <div class="section-segment message-container">
+            <p class="message" th:if="${registrationSuccess}" th:text="${registrationSuccess}">ログアウトしました。</p>
+            <!-- <p class="message" th:unless="${registrationSuccess}">アカウントが作成されました。</p>> -->
+
+            <a th:href="@{/login/loginpage}">ログインページに戻る</a>
+        </div>
     </div>
+
+    <footer class="footer-section">
+        <h4>ComicRental(solekia@teamB)</h4>
+    </footer>
 </body>
 
 </html>
