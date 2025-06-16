@@ -4,40 +4,99 @@
 <head>
     <meta charset="UTF-8">
     <title>ホーム - 漫画レンタル</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: sans-serif;
+            margin: 0 auto;
+            max-width: 1000px;
+        }
+
+        nav {
+            margin: 20px 0;
+        }
+
+        h2 {
+            margin-top: 40px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .comic-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 10px 0;
+            list-style: none;
+        }
+
+        .comic-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 150px;
+        }
+
+        .comic-item img {
+            width: 100px;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            margin: 10px 0;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        a:hover {
+            color: darkred;
+        }
+    </style>
 </head>
 <body>
-<h1>ようこそ、漫画レンタルへ！</h1>
+    <h1>ようこそ、漫画レンタルへ！</h1>
 
-<nav>
-    <a th:href="@{/mypage}">マイページ</a> |
-    <a th:href="@{/search}">検索</a> |
-    <a th:href="@{/comics/table}">漫画一覧</a>
-</nav>
+    <nav>
+        <a th:href="@{/mypage}">マイページ</a><br> |
+        <a th:href="@{/search}">検索</a><br> |
+        <a th:href="@{/comics/table}">漫画一覧</a>
+    </nav>
 
-<h2>おすすめ漫画</h2>
-<button onclick="location.href='/comics/recommend'">おすすめを見る</button>
+    <h2>おすすめ漫画</h2>
+    <button onclick="location.href='/comics/recommend'">おすすめを見る</button>
 
+    <h2>人気タイトル</h2>
+    <ul class="comic-list">
+        <li class="comic-item" th:each="comic : ${popularComics}">
+            <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
+                <img th:src="${comic.comicImage}" alt="表紙画像">
+                <div>
+                    <span th:text="${comic.title}"></span><br>
+                    <span th:text="'(' + ${comic.rentaltimes} + '回)'"></span>
+                </div>
+            </a>
+        </li>
+    </ul>
 
-
-<h2>人気タイトル</h2>
-<ul>
-    <li th:each="comic : ${popularComics}">
-        <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
-            <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
-            <span th:text="${comic.title}"></span>（<span th:text="${comic.rentaltimes}"></span>回）
-        </a>
-    </li>
-</ul>
-
-<h2>最近入荷</h2>
-<ul>
-    <li th:each="comic : ${recentComics}">
-        <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
-            <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
-            <span th:text="${comic.title}"></span>（入荷日: <span th:text="${comic.arrivalDate}"></span>）
-        </a>
-    </li>
-</ul>
-
+    <h2>最近入荷</h2>
+    <ul class="comic-list">
+        <li class="comic-item" th:each="comic : ${recentComics}">
+            <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
+                <img th:src="${comic.comicImage}" alt="表紙画像">
+                <div>
+                    <span th:text="${comic.title}"></span><br>
+                    <span th:text="'入荷日: ' + ${comic.arrivalDate}"></span>
+                </div>
+            </a>
+        </li>
+    </ul>
 </body>
 </html>
