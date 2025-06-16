@@ -3,22 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>トップページ - 漫画レンタル</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: sans-serif;
+        }
+        nav {
+            margin-bottom: 20px;
+        }
+        .ranking-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 40px;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .comic-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 120px;
+        }
+        .comic-item img {
+            width: 80px;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
     <h1>漫画レンタルへようこそ！</h1>
 
     <nav>
-        <a th:href="@{/login/loginpage}">ログイン</a> |
-        <a th:href="@{/account/create}">新規アカウント登録</a> |
+        <a th:href="@{/login/loginpage}">ログイン</a><br>
+        <a th:href="@{/account/create}">新規アカウント登録</a>
     </nav>
 
     <h2>人気漫画ランキング</h2>
-    <ol>
-        <li th:each="comic, stat : ${topComics}">
-            <strong th:text="${stat.count} + '位:'"></strong>
-            <span th:text="${comic.title}"></span>（<span th:text="${comic.author}"></span>）<br>
-            <img th:src="${comic.comicImage}" alt="表紙画像" width="80">
-        </li>
-    </ol>
+    <div class="ranking-container">
+        <div class="comic-item" th:each="comic, stat : ${topComics}">
+            <strong th:text="${stat.count} + '位'"></strong>
+            <span th:text="${comic.title}"></span>
+            <span th:text="${comic.author}"></span>
+            <img th:src="${comic.comicImage}" alt="表紙画像">
+        </div>
+    </div>
 </body>
 </html>
