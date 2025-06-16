@@ -3,6 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>現在のレンタル状況</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        li img {
+            width: 80px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .info {
+            flex-grow: 1;
+        }
+
+        .info strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .info span {
+            display: block;
+        }
+
+        a.read-link {
+            padding: 6px 12px;
+            background-color: #337ab7;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        a.read-link:hover {
+            background-color: #286090;
+        }
+
+        .back-link {
+            margin: 30px 0;
+        }
+
+        p {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <h1>現在のレンタル状況</h1>
@@ -13,18 +86,20 @@
 <!-- レンタル中がある場合 -->
 <ul th:if="${!#lists.isEmpty(currentRentals)}">
     <li th:each="rental : ${currentRentals}">
-
-        <img th:src="${rental.comicImage}" alt="表紙画像" width="80">
-
-        <strong th:text="${rental.title}"></strong><br>
-        貸出日: <span th:text="${#dates.format(rental.rentalDate, 'yyyy/MM/dd')}"></span><br>
-        返却期限: <span th:text="${#dates.format(rental.returnDate, 'yyyy/MM/dd')}"></span>
-        <a th:href="@{/rental/read/{id}(id=${rental.comicId})}">読む</a>
+        <img th:src="${rental.comicImage}" alt="表紙画像">
+        <div class="info">
+            <strong th:text="${rental.title}">タイトル</strong>
+            <span>貸出日: <span th:text="${#dates.format(rental.rentalDate, 'yyyy/MM/dd')}"></span></span>
+            <span>返却期限: <span th:text="${#dates.format(rental.returnDate, 'yyyy/MM/dd')}"></span></span>
+        </div>
+        <a th:href="@{/rental/read/{id}(id=${rental.comicId})}" class="read-link">読む</a>
     </li>
 </ul>
 
 <!-- 戻るリンク -->
-<a th:href="@{/home}">← ホームに戻る</a>
+<div class="back-link">
+    <a th:href="@{/home}">← ホームに戻る</a>
+</div>
 
 </body>
 </html>
