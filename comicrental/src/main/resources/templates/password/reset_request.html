@@ -44,16 +44,83 @@
     <style>
         /* 全体的な設定 (create_new_account.html と共通) */
         body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: "Meiryo UI";
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 0px;
             background-color: #f8f8f8;
             /* ごく薄いグレーの背景 */
             box-sizing: border-box;
+        }
+
+        .header-section {
+            /*border-bottom: 3px solid white;*/
+            background-color: #E64545;
+            font-family: "Meiryo UI";
+            color: black;
+            padding: 13px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .header-section h1 {
+            font-size: 1.4em;
+            margin: 0;
+            color: #fff;
+            text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px 0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px 0px #000, 0px -1px 0px #000, 2px 2px 0px #000;
+        }
+
+        .footer-section {
+            background-color: #E64545;
+            font-family: "Meiryo UI";
+            color: black;
+            padding: 13px;
+            position: fixed;
+            /* 要素をビューポートに対して固定 */
+            bottom: 0;
+            /* 画面の最下部に配置 */
+            left: 0;
+            /* 画面の左端に配置 */
+            width: 100%;
+            /* 画面の幅いっぱいに広げる */
+            box-sizing: border-box;
+        }
+
+        .footer-section h4 {
+            font-size: 1em;
+            color: #fff;
+            text-align: left;
+            text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px 0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px 0px #000, 0px -1px 0px #000, 2px 2px 0px;
+        }
+
+        .main-content-wrapper {
+            /* ログインボックスの中央寄せを担当 */
+            display: flex;
+            /* Flexboxを使って中央寄せ */
+            justify-content: center;
+            align-items: center;
+            /* min-height: calc(100vh - ヘッダーの高さ); 
+       もしヘッダーの下にコンテンツを縦方向中央に配置したいなら設定 */
+            margin-top: 20px;
+            /* 必要であればヘッダーとの間に余白 */
+            margin-bottom: 20px;
+            /* 必要であれば下部に余白 */
+        }
+
+        /* .login-container の既存のmax-width: 420px; と margin: 50px auto; は、
+   .main-content-wrapper で中央寄せするのであれば不要になるか、
+   調整が必要になります。 */
+        .form-container {
+            width: 100%;
+            max-width: 420px;
+            /* これはそのまま残してOK */
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            /* margin: 50px auto; <-- .main-content-wrapper で中央寄せするなら削除 */
         }
 
         /* フォーム全体を囲むコンテナのスタイル (create_new_account.html と共通) */
@@ -157,13 +224,12 @@
 
         .links-container a {
             text-decoration: none;
-            color: #000;
+            color: #007bff;
             font-size: 0.95em;
             transition: color 0.2s ease;
         }
 
         .links-container a:hover {
-            color: #666;
             text-decoration: underline;
         }
 
@@ -179,36 +245,46 @@
 </head>
 
 <body>
-    <div class="form-container">
-        <div class="header-band">
+    <header class="header-section">
+        <h1>漫画レンタル</h1>
+    </header>
+
+    <div class="main-content-wrapper">
+        <div class="form-container">
+            <!-- <div class="header-band">
             <h1>漫画レンタル</h1>
-        </div>
+        </div> -->
 
-        <div class="content-area">
-            <h2>パスワードの変更</h2>
-            <p>登録されている名前とメールアドレスを入力してください。</p>
+            <div class="content-area">
+                <h2>パスワードの変更</h2>
+                <p>登録されている名前とメールアドレスを入力してください。</p>
 
-            <p class="error-text" th:if="${resetError}" th:text="${resetError}"></p>
-            <!-- <p th:if="${resetMessage}" th:text="${resetMessage}" style="color: green;"></p> -->
+                <p class="error-text" th:if="${resetError}" th:text="${resetError}"></p>
+                <!-- <p th:if="${resetMessage}" th:text="${resetMessage}" style="color: green;"></p> -->
 
-            <form th:action="@{/password/check}" th:object="${resetPasswordForm}" method="post">
-                <div class="input-group">
-                    <!-- <label for="name">名前</label><br> -->
-                    <input type="text" id="name" th:field="*{name}" placeholder="登録名" required>
+                <form th:action="@{/password/check}" th:object="${resetPasswordForm}" method="post">
+                    <div class="input-group">
+                        <!-- <label for="name">名前</label><br> -->
+                        <input type="text" id="name" th:field="*{name}" placeholder="登録名" required>
+                    </div>
+                    <div class="input-group">
+                        <!-- <label for="email">メールアドレス</label><br> -->
+                        <input type="email" id="email" th:field="*{email}" placeholder="登録メールアドレス" required>
+                    </div>
+                    <button type="submit">確認</button>
+                </form>
+
+                <div class="links-container">
+                    <a th:href="@{~/login/loginpage}">アカウントのログインはこちら</a>
+                    <a th:href="@{~/account/create}">アカウント新規作成はこちら</a>
                 </div>
-                <div class="input-group">
-                    <!-- <label for="email">メールアドレス</label><br> -->
-                    <input type="email" id="email" th:field="*{email}" placeholder="登録メールアドレス" required>
-                </div>
-                <button type="submit">確認</button>
-            </form>
-
-            <div class="links-container">
-                <a th:href="@{~/login/loginpage}">アカウントのログインはこちら</a>
-                <a th:href="@{~/account/create}">アカウント新規作成はこちら</a>
             </div>
         </div>
     </div>
+
+    <footer class="footer-section">
+        <h4>ComicRental(solekia@teamB)</h4>
+    </footer>
 </body>
 
 </html>
