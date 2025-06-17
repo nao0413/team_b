@@ -1,0 +1,83 @@
+/* 共通リンクボタン */
+.link-button {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 10px;
+    background-color: #E64545;
+    color: white;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 0.95em;
+}
+
+/* ボタンを中央横並び */
+.link-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* レンタル中ラベル */
+span.rented {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+span.rented a {
+    color: white;
+    text-decoration: none;
+}
+
+span.rented a:hover {
+    color: red;
+}
+
+/* 未レンタルラベル */
+span.non-rented {
+    background-color: #6c757d;
+    color: white;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+/* ボックス風セクション */
+.box-section {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin: 20px auto;
+    max-width: 800px;
+    text-align: left;
+}
+
+/* 漫画タイトルに下線 */
+.comic-title {
+    text-decoration: underline;
+}
+
+/* ヘッダー内リンク（右寄せ用） */
+.header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 30px;
+}
+
+.header-nav .right-links {
+    margin-left: auto;
+    display: flex;
+    gap: 20px;
+}
