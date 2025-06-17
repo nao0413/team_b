@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -68,53 +69,53 @@
             color: darkred;
         }
     </style>
+  
 </head>
 <body>
-    <div class="header-section">
-        <h1>漫画レンタル</h1>
-        <nav>
-            <a th:href="@{/mypage}">マイページ</a> |
-            <a th:href="@{/search}">検索</a>
-        </nav>
+  <div class="header-section">
+    <div class="header-title">漫画レンタル</div>
+    <div class="header-nav">
+      <a th:href="@{/mypage}">マイページ</a>
+      <a th:href="@{/search}">検索</a>
     </div>
+  </div>
 
-    <h1>ようこそ、漫画レンタルへ！</h1>
+  <h1>ようこそ、漫画レンタルへ！</h1>
 
-    <nav>
-        <a th:href="@{/comics/table}">漫画一覧</a>
-    </nav>
+  <!-- 🔽 漫画一覧 + おすすめリンク横並び -->
+  <div class="section-links">
+    <a th:href="@{/comics/table}">漫画一覧</a>
+    <a th:href="@{/comics/recommend}">おすすめを見る</a>
+  </div>
 
-    <h2>おすすめ漫画</h2>
-    <button onclick="location.href='/comics/recommend'">おすすめを見る</button>
+  <h2>人気タイトル</h2>
+  <ul class="comic-list">
+    <li class="comic-item" th:each="comic : ${popularComics}">
+      <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
+        <img th:src="${comic.comicImage}" alt="表紙画像">
+        <div>
+          <span th:text="${comic.title}"></span><br>
+          <span th:text="'(' + ${comic.rentaltimes} + '回)'"></span>
+        </div>
+      </a>
+    </li>
+  </ul>
 
-    <h2>人気タイトル</h2>
-    <ul class="comic-list">
-        <li class="comic-item" th:each="comic : ${popularComics}">
-            <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
-                <img th:src="${comic.comicImage}" alt="表紙画像">
-                <div>
-                    <span th:text="${comic.title}"></span><br>
-                    <span th:text="'(' + ${comic.rentaltimes} + '回)'"></span>
-                </div>
-            </a>
-        </li>
-    </ul>
+  <h2>最近入荷</h2>
+  <ul class="comic-list">
+    <li class="comic-item" th:each="comic : ${recentComics}">
+      <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
+        <img th:src="${comic.comicImage}" alt="表紙画像">
+        <div>
+          <span th:text="${comic.title}"></span><br>
+          <span th:text="'入荷日: ' + ${comic.arrivalDate}"></span>
+        </div>
+      </a>
+    </li>
+  </ul>
 
-    <h2>最近入荷</h2>
-    <ul class="comic-list">
-        <li class="comic-item" th:each="comic : ${recentComics}">
-            <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
-                <img th:src="${comic.comicImage}" alt="表紙画像">
-                <div>
-                    <span th:text="${comic.title}"></span><br>
-                    <span th:text="'入荷日: ' + ${comic.arrivalDate}"></span>
-                </div>
-            </a>
-        </li>
-    </ul>
-
-    <div class="footer-section">
-        <h4>ComicRental(solekia@teamB)</h4>
-    </div>
+  <div class="footer-section">
+    <h4>ComicRental(solekia@teamB)</h4>
+  </div>
 </body>
 </html>
