@@ -45,6 +45,13 @@ public class AccountController {
             return "account/create_new_account"; // エラーメッセージ付きでフォームに戻る
         }
 
+        LoginModel existing = accountMapper.findByNameOrEmail(form.getName(), form.getEmail());
+
+        if (existing != null) {
+            model.addAttribute("error", "この名前またはメールアドレスは既に登録されています。");
+            return "account/create_new_account";
+        }
+
         // 既に同じユーザー名が存在しないかチェック (Mapperにメソッドを追加)
         // LoginModel existingUser = accountMapper.findByUsername(form.getName());
         // if (existingUser != null) {

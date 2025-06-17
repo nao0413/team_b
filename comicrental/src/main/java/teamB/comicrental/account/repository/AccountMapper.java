@@ -36,4 +36,8 @@ public interface AccountMapper {
                         +
                         "FROM customer WHERE customer_id = #{userId}")
         LoginModel findByUserId(@Param("userId") Integer userId);
+
+        @Select("SELECT customer_name AS username, customer_email AS email "
+                        + "FROM customer WHERE customer_name = #{name} OR customer_email = #{email}")
+        LoginModel findByNameOrEmail(@Param("name") String name, @Param("email") String email);
 }

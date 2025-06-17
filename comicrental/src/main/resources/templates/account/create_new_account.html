@@ -262,6 +262,7 @@
                 <h2>アカウント新規作成</h2>
 
                 <p class="error-text" th:if="${createAccountError}" th:text="${createAccountError}"></p>
+                <p class="error-text" th:if="${error}" th:text="${error}"></p>
 
                 <form th:action="@{/account/register}" th:object="${createAccountForm}" method="post">
                     <div class="input-group">
@@ -274,7 +275,8 @@
                     </div>
                     <div class="input-group">
                         <!-- <label for="password">パスワード</label><br> -->
-                        <input type="password" id="password" th:field="*{password}" placeholder="パスワード" required>
+                        <input type="password" id="password" th:field="*{password}" placeholder="パスワード(８文字以内の英数字または記号)"
+                            required>
                     </div>
                     <div class="input-group">
                         <!-- <label for="passwordConfirm">パスワード再入力</label><br> -->

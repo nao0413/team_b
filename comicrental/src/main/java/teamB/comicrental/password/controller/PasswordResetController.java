@@ -159,7 +159,7 @@ public class PasswordResetController {
             return "redirect:/password/success"; // パスワード変更確認画面にリダイレクト
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("newPasswordError", "パスワードの更新中にエラーが発生しました。再度お試しください。");
+            model.addAttribute("newPasswordError", "エラーが発生しました。再度お試しください。");
             return "password/reset_password";
         }
     }

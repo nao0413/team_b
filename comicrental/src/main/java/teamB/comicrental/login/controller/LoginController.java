@@ -71,7 +71,8 @@ public class LoginController {
 
     // URL: http://localhost:8080/login/logout_success
     @GetMapping("/logout_success")
-    public String showLogoutSuccessPage() {
+    public String showLogoutSuccessPage(Model model) {
+        model.addAttribute("registrationSuccess", true);
         return "login/logout_success";
 
     }
