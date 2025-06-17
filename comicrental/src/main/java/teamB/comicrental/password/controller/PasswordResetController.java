@@ -103,7 +103,7 @@ public class PasswordResetController {
             // 次のステップ（新しいパスワード入力画面）へリダイレクト
             return "redirect:/password/reset"; // ★★★ ここを変更 ★★★
         } else {
-            model.addAttribute("resetError", "入力された名前とメールアドレスに一致するユーザーは見つかりませんでした。");
+            model.addAttribute("resetError", "入力された内容に一致するユーザーは見つかりませんでした。");
             return "password/reset_request";
         }
     }

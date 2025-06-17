@@ -187,12 +187,15 @@
         input[type="password"],
         input[type="email"] {
             /* emailタイプも追加 */
-            width: 100%;
+            width: calc(100% - 24px);
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 1em;
             box-sizing: border-box;
+            display: block;
+            /* block要素でないとmargin:autoが効きません */
+            margin: 0 auto;
         }
 
         /* ボタンのスタイル (loginpage.html と共通) */
