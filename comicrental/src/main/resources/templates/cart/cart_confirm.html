@@ -3,108 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>レンタル内容の確認</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: sans-serif;
-        }
-
-        .container {
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .header-section {
-            border-bottom: 2px solid #666;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .header-section h1 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .title-section {
-            padding: 10px 0;
-            text-align: center;
-        }
-
-        .title-section h2 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 15px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #eee;
-        }
-
-        .cart-image {
-            width: 100px;
-            height: auto;
-        }
-
-        .summary {
-            padding: 20px;
-            font-size: 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .button-area {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .button-area button {
-            padding: 10px 25px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 10px;
-        }
-
-        .back-link {
-            padding: 0 20px 20px;
-            text-align: left;
-        }
-
-        .back-link a {
-            font-size: 14px;
-            color: blue;
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/cart_confirm.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nico+Moji&family=RocknRoll+One&family=Noto+Sans+JP&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="container">
+<div class="wrapper"><!-- ✅ wrapperで全体を囲む -->
 
+  <!-- ヘッダー -->
+  <div class="header-section">
+    <h1><i class="fas fa-book-open" style="margin-right:10px;"></i>漫画レンタル</h1>
+  </div>
 
-    <!-- ヘッダー -->
-    <div class="header-section">
-        <h1>漫画レンタル</h1>
-    </div>
+  <!-- メインコンテンツ -->
+  <div class="container">
 
     <!-- タイトル -->
     <div class="title-section">
-        <h2>レンタル内容の確認</h2>
-         <p th:if="${errorMessage}" th:text="${errorMessage}" style="color:red; margin-top: 10px;"></p>
+        <h2 class="page-title">📄 レンタル内容の確認</h2>
+        <p th:if="${errorMessage}" th:text="${errorMessage}" class="error-message"></p>
     </div>
 
     <!-- 商品一覧 -->
@@ -127,58 +44,38 @@
         </tbody>
     </table>
 
-   
-    <div class="back-link">
-        <form method="get" th:action="@{/cart}" style="display: inline;">
-            <button type="submit" style="padding: 10px 20px; font-size: 14px;">買い物かごに戻る</button>
-        </form>
-
-
-    </div>
-
     <!-- 合計冊数 -->
     <div class="summary">
-        <div></div>
-        <div>合計冊数：<span th:text="${totalCount}"></span>冊</div>
+        合計冊数：<span th:text="${totalCount}"></span>冊
     </div>
 
-<div th:if="${isSubscribed}" style="text-align: center; margin-top: 30px;">
-    <form th:action="@{/cart/complete}" method="post">
-        <button type="submit" style="
-            padding: 15px 40px;
-            font-size: 18px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        ">
-            レンタル確定
-        </button>
-    </form>
-</div>
-<div th:if="${not isSubscribed}" style="display: flex; justify-content: center; margin-top: 30px;">
-    <div style="
-        background-color: #ffe5e5;
-        border: 2px solid #ff4d4d;
-        border-radius: 10px;
-        padding: 20px 30px;
-        text-align: center;
-        max-width: 500px;
-    ">
-        <p style="color: #d8000c; font-size: 16px; margin-bottom: 15px;">
-            ⚠ サブスクリプション未登録のため、レンタルできません。
-        </p>
-        <a th:href="@{/subscription/join(customerId=${customerId})}" style="
-            display: inline-block;
-            background-color: #007BFF;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        ">
-            → サブスク登録はこちら
-        </a>
+    <!-- ボタン -->
+    <div class="button-area">
+        <form method="get" th:action="@{/cart}">
+            <button type="submit">買い物かごに戻る</button>
+        </form>
+
+        <form th:action="@{/cart/complete}" method="post" th:if="${isSubscribed}">
+            <button type="submit" class="confirm-button">レンタル確定</button>
+        </form>
     </div>
-</div>
+
+    <!-- サブスク未加入表示 -->
+    <div th:if="${not isSubscribed}" class="subsc-notice">
+      <div class="subsc-icon">⚠</div>
+      <div class="subsc-text">
+        <p class="subsc-main">サブスクリプション未登録のため、レンタルはご利用いただけません。</p>
+        <a th:href="@{/subscription/join(customerId=${customerId})}" class="subsc-link">👉 サブスク登録はこちら</a>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+
+  <!-- ✅ 常に最下部に表示されるフッター -->
+  <div class="footer-section">
+    <h4>ComicRental(solekia@teamB)</h4>
+  </div>
+
+</div><!-- /wrapper -->
+</body>
+</html>

@@ -1,0 +1,137 @@
+/* ============================== */
+/* 🌟 cart_complete.css 改訂版    */
+/* ============================== */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Zen Maru Gothic", "M PLUS Rounded 1c", "Meiryo UI", sans-serif;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+}
+
+/* wrapper全体の高さ管理 */
+.wrapper {
+  padding-top: 60px;  /* ヘッダー分 */
+  padding-bottom: 60px; /* フッター分 */
+    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* 中央に寄せる */
+  align-items: center;
+  padding: 50px 20px 60px;  /* 上：ヘッダー、下：フッター余白 */
+  box-sizing: border-box;
+  overflow: hidden;         /* スクロールを抑える */
+}
+/* ヘッダー固定 */
+.header-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #E64545;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.header-section h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-shadow: 1px 1px 0px #000,
+               1px 2px 0px #000,
+              -1px -1px 0px #000,
+               2px -1px 0px #000,
+               0px 1px 0px #000;
+}
+
+/* コンテンツ中央配置・大きめ表示 */
+.container {
+  flex: 1;
+  max-width: 900px;
+  padding: 60px 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* タイトル大きく */
+.title-section h2 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: #E64545;
+  font-family: "Nico Moji", "RocknRoll One", sans-serif;
+  text-shadow: 2px 2px 0 #000;
+}
+
+/* メッセージ大きく＆読みやすく */
+.summary {
+  font-size: 20px;
+  line-height: 2.2;
+  margin-bottom: 40px;
+  font-family: "Zen Maru Gothic", "M PLUS Rounded 1c", "Meiryo", sans-serif;
+}
+
+.summary p {
+  margin: 14px 0;
+}
+
+/* ボタン */
+.button-area {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.button-area button {
+  background-color: #E64545;
+  color: white;
+  border: none;
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "RocknRoll One", sans-serif;
+  box-shadow: 3px 3px 0 #333;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.button-area button:hover {
+  background-color: #ff6b6b;
+  transform: scale(1.05);
+}
+
+/* フッター固定 */
+.footer-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #E64545;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.footer-section h4 {
+  margin: 0;
+  font-size: 1rem;
+  text-align: left;
+  text-shadow: 1px 1px 0px #000,
+               1px 2px 0px #000,
+              -1px -1px 0px #000,
+               2px -1px 0px #000,
+               0px 1px 0px #000;
+}
