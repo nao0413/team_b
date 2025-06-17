@@ -99,7 +99,7 @@
             </span>
         </a>
         <!-- カート追加ボタン -->
-        <form action="/comics/addToCart" method="post">
+        <form th:action="@{/comics/addToCartFromSearch}" method="post">
     <input type="hidden" name="comicId" th:value="${comic.comic_id}">
     <input type="hidden" name="customerId" th:value="${customerId}">
     <input type="hidden" name="redirectUrl" th:value="@{/search/result(title=${param.title})}">
