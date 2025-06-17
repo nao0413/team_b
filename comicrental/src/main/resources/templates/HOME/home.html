@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ホーム - 漫画レンタル</title>
+  <link rel="stylesheet" href="/CSS/comicrental.css">
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      margin: 0 auto;
+      max-width: 1000px;
+    }
+
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,7 +82,84 @@
             color: darkred;
         }
     </style>
-  
+ 
+    .header-section {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .header-nav {
+      font-size: 14px;
+    }
+
+    .header-nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: black;
+    }
+
+    .header-nav a:hover {
+      color: darkred;
+    }
+
+    .section-links {
+      margin: 20px 0;
+    }
+
+    .section-links a {
+      margin: 0 10px;
+      text-decoration: underline;
+      color: blue;
+      font-size: 15px;
+    }
+
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+    }
+
+    .comic-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 10px 0;
+      list-style: none;
+    }
+
+    .comic-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 150px;
+    }
+
+    .comic-item img {
+      width: 100px;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .comic-item span:first-child {
+      text-decoration: underline;
+    }
+
+    .footer-section {
+      margin-top: 50px;
+    }
+  </style>
+
 </head>
 <body>
   <div class="header-section">
