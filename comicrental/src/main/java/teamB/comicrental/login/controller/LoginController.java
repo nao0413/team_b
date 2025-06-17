@@ -42,7 +42,7 @@ public class LoginController {
             session.setAttribute("loggedInUserId", user.getUserId());
             return "redirect:/home";
         } else {
-            model.addAttribute("error", "ユーザー名またはパスワードが間違っています。");
+            model.addAttribute("error", "名前またはパスワードが間違っています。");
             return "login/loginpage";
         }
     }

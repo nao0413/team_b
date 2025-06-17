@@ -118,17 +118,27 @@
 
         /* リンク */
         a {
-            color: #007bff;
+            background-color: #E64545;
+            color: white;
+            border-radius: 15px;
             text-decoration: none;
             font-size: 1em;
             display: inline-block;
             margin-top: 0;
-            margin-bottom: 30px;
+            /* margin-bottom: 30px; */
             padding-top: 30px;
+            padding: 8px 15px;
+            margin: 10px;
+            position: relative;
+            /* 相対位置指定を有効にする */
+            top: 40px;
         }
 
         a:hover {
-            text-decoration: underline;
+            transform: translateY(-3px);
+            /* 上に3px移動させる */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            /* 影を大きく、濃くする */
         }
     </style>
 </head>

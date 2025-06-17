@@ -125,6 +125,8 @@
         /* 会員情報セクション */
         /* ------------------------------------- */
         .member-info-item.last-info-item {
+            font-family: "Meiryo UI";
+            font-weight: bold;
             margin-bottom: 15px;
             border-bottom: 1px solid black;
             /* ★ここに黒い線を追加★ */
@@ -136,6 +138,7 @@
         }
 
         .member-info-item label {
+            font-family: "Meiryo UI";
             display: block;
             /* ラベルをブロック要素にして改行 */
             font-weight: bold;
@@ -147,6 +150,8 @@
 
         .member-info-item input[type="text"],
         .member-info-item input[type="email"] {
+            font-weight: bold;
+            font-family: "Meiryo UI";
             width: calc(100% - 20px);
             /* パディングを考慮した幅 */
             padding: 10px;
@@ -166,11 +171,16 @@
         }
 
         .menu-buttons button {
+            font-family: "Meiryo UI";
             width: 100%;
             padding: 8px 15px;
-            color: #333;
+            /* color: #333; */
+            color: white;
+            /* ★文字色 */
             border: 1px solid #ccc;
             /* ボタンの枠線 */
+            background-color: #E64545;
+            /* ★背景色（ヘッダーの赤に合わせるなど） */
             border-radius: 4px;
             font-size: 1.1em;
             cursor: pointer;
@@ -181,9 +191,12 @@
         }
 
         .menu-buttons button:hover {
-            background-color: #e0e0e0;
-            /* ホバーで少し濃く */
-            border-color: #999;
+            /* background-color: #e0e0e0; */
+            transform: translateY(-3px);
+            /* 上に3px移動させる */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            /* 影を大きく、濃くする */
+
         }
     </style>
 </head>
@@ -198,8 +211,8 @@
         <div class="mypage-section member-info-section">
             <h2>会員情報</h2>
             <div class="member-info-item last-info-item">
-                <p>　　会員番号: <span th:text="${memberId}"></span></p>
-                <p>　　　　　名前: <span th:text="${loggedInUsername}"></span></p>
+                <p>　　 会員番号: <span th:text="${memberId}"></span></p>
+                <p>　　　　　 名前: <span th:text="${loggedInUsername}"></span></p>
                 <p>メールアドレス: <span th:text="${email}"></span></p>
             </div>
 

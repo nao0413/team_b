@@ -157,24 +157,34 @@
 
         /* リンク */
         a {
-            color: #007bff;
+            background-color: #E64545;
+            color: white;
+            border-radius: 15px;
             text-decoration: none;
             font-size: 1em;
             display: inline-block;
-            margin-top: 0;
-            margin-bottom: 30px;
+            /* margin-top: 0;
+            margin-bottom: 30px; */
             padding-top: 30px;
+            padding: 8px 15px;
+            margin: 10px;
+            position: relative;
+            /* 相対位置指定を有効にする */
+            top: 40px;
         }
 
         a:hover {
-            text-decoration: underline;
+            transform: translateY(-3px);
+            /* 上に3px移動させる */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            /* 影を大きく、濃くする */
         }
 
         /* 注意書き */
         .note {
             font-size: 0.9em;
             color: #777;
-            margin-top: 0;
+            margin-top: 30px;
             /* 上に余白をつけない */
             border-top: 1px solid #eee;
             /* 上部に薄い線 */
@@ -203,6 +213,10 @@
         <div class="section-segment message-container">
             <p class="message" th:if="${registrationSuccess}" th:text="${registrationSuccess}">アカウントが作成されました。</p>
             <!-- <p class="message" th:unless="${registrationSuccess}">アカウントが作成されました。</p>> -->
+
+
+            <!-- <p>　　　　　名前: <span th:text="${createdAccountForm.name}"></span></p>
+            <p>メールアドレス: <span th:text="${createdAccountForm.email}"></span></p> -->
 
             <a th:href="@{/login/loginpage}">アカウントのログインはこちら</a>
         </div>
