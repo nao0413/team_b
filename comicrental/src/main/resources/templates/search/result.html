@@ -102,7 +102,7 @@
         <form th:action="@{/comics/addToCartFromSearch}" method="post">
     <input type="hidden" name="comicId" th:value="${comic.comic_id}">
     <input type="hidden" name="customerId" th:value="${customerId}">
-    <input type="hidden" name="redirectUrl" th:value="@{/search/result(title=${param.title})}">
+    <input type="hidden" name="redirectUrl" th:value="'/search/result?title=' + ${param.title}">
     <button type="submit" class="btn btn-border"><span>買い物かごへ入れる</span></button>
 </form>
 </ul>
