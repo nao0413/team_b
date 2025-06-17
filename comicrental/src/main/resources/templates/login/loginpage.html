@@ -128,7 +128,7 @@
         /* ログインコンテナのスタイル */
         .login-container {
             width: 100%;
-            max-width: 420px;
+            max-width: 380px;
             background-color: #ffffff;
             /* 白い背景 */
             border: 1px solid #e0e0e0;
@@ -253,6 +253,7 @@
 
             <div class="form-content">
                 <h2>ログイン</h2>
+                <p class="error-text" th:if="${error}" th:text="${error}"></p>
                 <form th:action="@{/login}" th:object="${loginPageModel}" method="post">
                     <div>
                         <input type="text" th:field="*{username}" placeholder="名前">
@@ -267,7 +268,7 @@
                     <a th:href="@{~/password/request}">パスワードを忘れた方はこちら</a>
                 </div>
                 <!-- <p th:if="${error}" th:text="${error}"></p> -->
-                <p class="error-text" th:if="${error}" th:text="${error}"></p>
+                <!-- <p class="error-text" th:if="${error}" th:text="${error}"></p> -->
             </div>
         </div>
     </div>
