@@ -1,4 +1,4 @@
-
+/* 全体設定 */
 body {
   background: #fff;
   color: #333;
@@ -8,9 +8,8 @@ body {
   padding: 0;
 }
 
-
 .header-section {
-
+    /*border-bottom: 3px solid white;*/
     background-color: #E64545;
     font-family: "Meiryo UI";
     color: black;
@@ -29,7 +28,7 @@ body {
     background-color: #E64545;
     font-family: "Meiryo UI";
     color: black;
-    padding: 13px;
+    padding: 5px;
 }
 .footer-section h4{
     font-size: 1em;
@@ -38,38 +37,41 @@ body {
       0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px
       0px #000, 0px -1px 0px #000, 2px 2px 0px;
 }
+
 body{
     background-color: white;
     font-family: "Meiryo UI";
     font-size: 16px;
 }
-.title{
-    text-align: center;
-    font-size: 2em; 
-    margin: 0; 
-    color:#f8f8ff;
-    text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px
-      0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px
-      0px #000, 0px -1px 0px #000, 2px 2px 0px #000;
+/* タイトル */
+.title {
+  text-align: center;
+  font-size: 2em; 
+  margin: 0; 
+  color: #f8f8ff;
+  text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px
+    0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px
+    0px #000, 0px -1px 0px #000, 2px 2px 0px #000;
 }
+
+/* ボックスサイズ調整 */
 *,
 *:before,
 *:after {
-  -webkit-box-sizing: inherit;
   box-sizing: inherit;
 }
-
 html {
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 62.5%;
 }
 
+/* タイトルセクション */
 .title-section {
   text-align: center;
   padding: 8px 0;  
 }
 
+/* カートタイトル */
 .cart-title {
   font-size: 40px;
   color: #E64545;
@@ -81,6 +83,7 @@ html {
   margin: 0;  
 }
 
+/* アニメーション */
 @keyframes flashZoom {
   0% {
     transform: scale(0.3) rotate(-20deg);
@@ -102,14 +105,14 @@ html {
   }
 }
 
-
-
+/* コンテナレイアウト */
 .container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
 }
 
+/* テーブル */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -118,25 +121,31 @@ table {
 }
 th, td {
   border: 1px solid #E64545;
-  padding: 12px;
+  padding: 6px 8px;  /* ← 上下左右のpaddingを圧縮 */
   text-align: center;
-  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-size: 1.3rem;  /* ← 少し小さくして高さ調整 */
+  font-family: "Noto Sans JP", "M PLUS Rounded 1c", "Zen Maru Gothic", "Meiryo UI", sans-serif;
+  color: #333;
 }
 th {
   background-color: #FFF3F3;
   color: #E64545;
   font-weight: bold;
+  font-size: 1.8rem;
+  font-family: "Nico Moji", "RocknRoll One", "M PLUS Rounded 1c", sans-serif;
+  letter-spacing: 1px;
+  padding: 14px;
 }
-tbody tr {
-  animation: fadeInUp 0.6s ease both;
-  opacity: 0;
+td {
+  font-size: 1.8rem;
+  font-family: "Noto Sans JP", "M PLUS Rounded 1c", "Zen Maru Gothic", "Meiryo UI", sans-serif;
+  padding: 14px;
+  color: #333;
 }
-tbody tr:nth-child(1) { animation-delay: 0.1s; }
-tbody tr:nth-child(2) { animation-delay: 0.2s; }
 
-
+/* 漫画画像 */
 .cart-image {
-  max-height: 140px;
+  max-height: 100px;  /* ← 高さを小さくすることで縦の圧縮 */
   width: auto;
   border: 2px solid #E64545;
   display: block;
@@ -147,14 +156,22 @@ tbody tr:nth-child(2) { animation-delay: 0.2s; }
   transform: scale(1.08) rotate(-2deg);
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
 }
+.summary {
+  margin-top: 10px;
+  padding: 6px;
+  font-size: 15px;
+}
+.summary p {
+  margin: 2px 0;
+}
 
-
+/* ボタン */
 button {
   background-color: #E64545;
   color: #fff;
   border: none;
-  padding: 10px 20px;
-  font-size: 15px;
+  padding: 18px 35px;
+  font-size: 1.6rem;
   font-weight: bold;
   border-radius: 6px;
   box-shadow: 2px 2px 0 #333;
@@ -172,11 +189,11 @@ button:active {
   transform: scale(0.95);
 }
 
+/* ボタン配置 */
 .right-align {
   text-align: right;
   margin-bottom: 10px;
 }
-
 .button-area {
   margin-top: 30px;
   text-align: center;
@@ -186,8 +203,7 @@ button:active {
   margin: 10px;
 }
 
-
-
+/* 削除 */
 .delete-btn {
   background-color: #E64545;
   color: #fff;
@@ -224,7 +240,7 @@ button:active {
   opacity: 0.9;
 }
 
-
+/* 合計・レンタル制限表示 */
 .summary {
   margin-top: 20px;
   padding: 10px;
@@ -236,6 +252,7 @@ button:active {
 .summary .total {
   text-align: right;
   font-weight: bold;
+  font-size: 2.0rem; 
 }
 .rental-limit {
   background: #fff3f3;
@@ -255,7 +272,7 @@ button:active {
   text-shadow: 1px 1px 2px #000;
 }
 
-
+/* アニメーション */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -274,23 +291,24 @@ button:active {
   50%  { transform: rotate(-20deg) scale(1.2); }
   100% { transform: rotate(0deg) scale(1); }
 }
-th {
-  background-color: #FFF3F3;
-  color: #E64545;
-  font-weight: bold;
-  font-size: 1.8rem;
-  font-family: "Nico Moji", "RocknRoll One", "M PLUS Rounded 1c", sans-serif;
-  letter-spacing: 1px;
-  padding: 14px;
-  border: 1px solid #E64545;
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-td {
-  font-size: 1.6rem;
-  font-family: "Noto Sans JP", "M PLUS Rounded 1c", "Zen Maru Gothic", "Meiryo UI", sans-serif;
-  padding: 14px;
-  text-align: center;
-  color: #333;
-  border: 1px solid #E64545;
+.container {
+  flex: 1;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
 }
 
+table {
+  width: 100%;
+  min-width: 900px; /* ← 最小幅も少し狭く */
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 2px solid #E64545;
+}

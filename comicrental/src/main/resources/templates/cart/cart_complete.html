@@ -1,96 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>レンタル完了</title>  <!-- レンタル完了ページ -->
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: sans-serif;
-        }
-
-        .container {
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .header-section {
-            border-bottom: 2px solid #666;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .header-section h1 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .title-section {
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        .title-section h2 {
-            margin: 0;
-            font-size: 28px;
-        }
-
-        .summary {
-            padding: 20px;
-            text-align: center;
-            font-size: 18px;
-        }
-
-        .summary p {
-            margin: 10px 0;
-        }
-
-        .button-area {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .button-area form {
-            display: inline-block;
-            margin: 0 10px;
-        }
-
-        .button-area button {
-            padding: 10px 25px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>レンタル完了</title>
+  <link rel="stylesheet" th:href="@{/css/cart.complete.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nico+Moji&family=RocknRoll+One&family=Noto+Sans+JP&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <div class="header-section">
-        <h1>漫画レンタル</h1>
-    </div>
+<div class="wrapper">
 
+  <!-- ヘッダ-- -->
+  <div class="header-section">
+    <h1><i class="fas fa-book-open"></i> 漫画レンタル</h1>
+  </div>
+
+  <!-- メイン -->
+  <div class="container">
     <div class="title-section">
-        <h2>レンタル完了</h2>
+      <h2>🎉 レンタル完了</h2>
     </div>
 
     <div class="summary">
-        <p>ご利用ありがとうございます</p>
-        <p>閲覧可能期間：<span th:text="${#dates.format(rentalExpire, 'yyyy年MM月dd日')}"></span> まで</p>
-        <p>今月のレンタル残数：あと <span th:text="${remainingLimit}"></span> 冊</p>
+      <p>ご利用ありがとうございます</p>
+      <p>閲覧可能期間：<span th:text="${#dates.format(rentalExpire, 'yyyy年MM月dd日')}"></span> まで</p>
+      <p>今月のレンタル残数：あと <span th:text="${remainingLimit}"></span> 冊</p>
     </div>
 
     <div class="button-area">
-       <form method="get" th:action="@{/mypage}">
-    <button type="submit">マイページへ</button>
-</form>
-        <form method="get" th:action="@{/home}">
-            <button type="submit">HOMEへ戻る</button>
-        </form>
+      <form method="get" th:action="@{/mypage}">
+        <button type="submit">マイページへ</button>
+      </form>
+      <form method="get" th:action="@{/home}">
+        <button type="submit">HOMEへ戻る</button>
+      </form>
     </div>
+  </div>
+
+  <!-- フッター -->
+  <div class="footer-section">
+    <h4>ComicRental(solekia@teamB)</h4>
+  </div>
+
 </div>
 </body>
 </html>

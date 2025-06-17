@@ -11,82 +11,81 @@
     <script src="https://kit.fontawesome.com/your_kit_code.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <!-- wrapper  -->
+  <div class="wrapper">
 
-<div class="header-section">
-  <h1><i class="fas fa-book-open" style="margin-right:10px;"></i>漫画レンタル</h1>
-</div>
-
-
-<div class="container">
-
-  
-    <div th:if="${errorMessage}" style="color:red; font-weight:bold; text-align:center; padding: 10px;">
-        <p th:text="${errorMessage}"></p>
+    <!-- ヘッダー -->
+    <div class="header-section">
+      <h1><i class="fas fa-book-open" style="margin-right:10px;"></i>漫画レンタル</h1>
     </div>
 
-    
-    <div class="title-section">
-       <h2 class="cart-title">🛒 買い物かご</h2>
+    <!-- コンテンツ本体 -->
+    <div class="container">
+
+      <div th:if="${errorMessage}" style="color:red; font-weight:bold; text-align:center; padding: 10px;">
+          <p th:text="${errorMessage}"></p>
+      </div>
+
+      <div class="title-section">
+         <h2 class="cart-title">🛒 買い物かご</h2>
+      </div>
+
+      <div class="right-align">
+          <form method="post" th:action="@{/cart/deleteAll}">
+              <button type="submit">すべて削除</button>
+          </form>
+      </div>
+
+      <table>
+          <thead>
+          <tr>
+              <th>商品</th>
+              <th>タイトル</th>
+              <th>巻</th>
+              <th>閲覧可能期限</th>
+              <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="item : ${cartList}">
+              <td><img th:src="@{${item.comic_image}}" alt="漫画画像" class="cart-image"></td>
+              <td th:text="${item.title}"></td>
+              <td th:text="${item.volume} + '巻'"></td>
+              <td th:text="${#dates.format(item.rental_expire, 'yyyy年MM月dd日')}"></td>
+              <td>
+                  <form method="post" th:action="@{/cart/delete}">
+                      <input type="hidden" name="cart_id" th:value="${item.cart_id}" />
+                      <button type="submit" class="delete-btn">
+                          <i class="fas fa-trash"></i>
+                      </button>
+                  </form>
+              </td>
+          </tr>
+          </tbody>
+      </table>
+
+      <div class="summary">
+          <p th:if="${isSubscribed}" class="rental-limit">
+              今月のレンタル残数 あと <span th:text="${remainingLimit}" class="remaining-num"></span> 冊
+          </p>
+          <p class="total">合計冊数：<span th:text="${totalCount}"></span>冊</p>
+      </div>
+
+      <div class="button-area">
+          <form action="/comics/table" method="get">
+              <button type="submit">漫画一覧ページへ</button>
+          </form>
+          <form action="/cart/confirm" method="get">
+              <button type="submit">確認画面へ進む</button>
+          </form>
+      </div>
+
+    </div> <!-- /.container -->
+
+    <!-- フッター -->
+    <div class="footer-section">
+      <h4>ComicRental(solekia@teamB)</h4>
     </div>
 
-    <div class="right-align">
-        <form method="post" th:action="@{/cart/deleteAll}">
-            <button type="submit">すべて削除</button>
-        </form>
-    </div>
-
-    
-    <table>
-        <thead>
-        <tr>
-            <th>商品</th>
-            <th>タイトル</th>
-            <th>巻</th>
-            <th>閲覧可能期限</th>
-            <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${cartList}">
-            <td><img th:src="@{${item.comic_image}}" alt="漫画画像" class="cart-image"></td>
-            <td th:text="${item.title}"></td>
-            <td th:text="${item.volume} + '巻'"></td>
-            <td th:text="${#dates.format(item.rental_expire, 'yyyy年MM月dd日')}"></td>
-            <td>
-                <form method="post" th:action="@{/cart/delete}">
-                    <input type="hidden" name="cart_id" th:value="${item.cart_id}" />
-                    <button type="submit" class="delete-btn">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-  
-    <div class="summary">
-        <p th:if="${isSubscribed}" class="rental-limit">
-            今月のレンタル残数 あと <span th:text="${remainingLimit}" class="remaining-num"></span> 冊
-        </p>
-        <p class="total">合計冊数：<span th:text="${totalCount}"></span>冊</p>
-    </div>
-
-   
-    <div class="button-area">
-        <form action="/comics/table" method="get">
-            <button type="submit">漫画一覧ページへ</button>
-        </form>
-        <form action="/cart/confirm" method="get">
-            <button type="submit">確認画面へ進む</button>
-        </form>
-    </div>
-
-</div>
-
-
-<div class="footer-section">
-  <h4>ComicRental(solekia@teamB)</h4>
-</div>
+  </div> <!-- /.wrapper -->
 </body>
-</html>
