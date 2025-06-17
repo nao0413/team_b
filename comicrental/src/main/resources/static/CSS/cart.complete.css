@@ -13,7 +13,7 @@ body {
 
 /* wrapper全体の高さ管理 */
 .wrapper {
-  padding-top: 60px;  /* ヘッダー分 */
+  padding-top: 60px;  /* ヘッダー */
   padding-bottom: 60px; /* フッター分 */
     min-height: 100vh;
   display: flex;

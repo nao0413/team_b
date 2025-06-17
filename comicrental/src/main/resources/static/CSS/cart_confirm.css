@@ -107,7 +107,7 @@ th:nth-child(2), td:nth-child(2) { width: 45%; }
 th:nth-child(3), td:nth-child(3) { width: 10%; }
 th:nth-child(4), td:nth-child(4) { width: 30%; }
 
-/* 画像 */
+/* 画 */
 .cart-image {
   max-height: 100px;
   width: auto;
