@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ホーム - 漫画レンタル</title>
-  <link rel="stylesheet" th:href="@{/CSS/comicrental.css}">
+  <link rel="stylesheet" href="/CSS/comicrental.css">
   <style>
     body {
       text-align: center;
+      font-family: sans-serif;
       margin: 0 auto;
       max-width: 1000px;
     }
@@ -46,40 +47,28 @@
       text-decoration: underline;
     }
 
-    .page-actions {
-      display: flex;
-      justify-content: flex-end;
-      margin: 10px 0 30px;
-      gap: 20px;
-    }
-
-    .page-actions a {
-      color: #007bff;
+    a {
       text-decoration: none;
-      font-weight: bold;
+      color: black;
     }
 
-    .page-actions a:hover {
-      text-decoration: underline;
+    a:hover {
+      color: darkred;
     }
   </style>
 </head>
 <body>
-
   <div class="header-section">
-    <h1>漫画レンタル</h1>
-    <nav>
+    <div class="header-title">漫画レンタル</div>
+    <div class="header-nav">
       <a th:href="@{/mypage}">マイページ</a>
       <a th:href="@{/search}">検索</a>
-    </nav>
+      <a th:href="@{/comics/table}">漫画一覧</a>
+      <a th:href="@{/comics/recommend}">おすすめを見る</a>
+    </div>
   </div>
 
   <h1>ようこそ、漫画レンタルへ！</h1>
-
-  <div class="page-actions">
-    <a th:href="@{/comics/table}">漫画一覧</a>
-    <a th:href="@{/comics/recommend}">おすすめを見る</a>
-  </div>
 
   <h2>人気タイトル</h2>
   <ul class="comic-list">
@@ -110,6 +99,5 @@
   <div class="footer-section">
     <h4>ComicRental(solekia@teamB)</h4>
   </div>
-
 </body>
 </html>
