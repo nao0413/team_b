@@ -37,10 +37,10 @@
                 width: 100%;
                 border-collapse: collapse;
                 margin-top: 20px;
+                 margin-bottom: 20px;
                 table-layout: fixed;
                 border: 1px solid #ddd;
                 /* テーブル全体に枠線を追加 */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 border-radius: 8px;
                 overflow: hidden;
                 /* 中の文字がはみ出さないようにする */
@@ -180,14 +180,12 @@
 <body>
     <div class="header-section">
         <h1>漫画レンタル</h1>
+        |<a th:href="@{/home}">  HOME  </a>| 
+        <a th:href="@{/comics/recommend}">  今月のおすすめ  </a>|  
+        <a th:href="@{/cart/table}">  買い物かごページへ  </a>|
     </div>
 
     <h1 class="title">漫画一覧</h1>
-    <div class="link-button-container">
-        <a th:href="@{/cart/table}" class="link-button">買い物かごページへ</a>
-        <a th:href="@{/comics/recommend}" class="link-button">今月のおすすめ</a>
-        <a th:href="@{/home}" class="link-button">HOME</a>
-    </div>
 
     <div th:if="${errorMessage}">
         <p th:text="${errorMessage}"></p>

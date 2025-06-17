@@ -54,26 +54,7 @@
             box-sizing: border-box;
         }
 
-        .link-button-container {
-            display: inline-block;
-            /* ★インラインブロックにすることで、内容の幅に合わせる */
-            /* width: auto; */
-            /* 基本的にinline-blockならautoになるので不要 */
-            padding: 8px 20px;
-            /* ★ボタンの内側の余白を調整 */
-            background-color: #E64545;
-            /* ★背景色（ヘッダーの赤に合わせるなど） */
-            color: white;
-            /* ★文字色 */
-            border-radius: 5px;
-            /* 角丸 */
-            text-decoration: none;
-            /* 下線を削除 */
-            font-weight: bold;
-            /* 太字 */
-            margin-top: 15px;
-            /* 上の要素との余白 */
-        }
+
         
         .mypage {
             /* mypageブロックの最大幅を設定し、コンテンツが広がりすぎないようにする */
@@ -105,38 +86,38 @@
 <body>
     <div class="header-section">
         <h1>漫画レンタル</h1>
+        |<a th:href="@{/mypage}">  マイページ  </a>|
     </div>
 
-    <div th:if="${successMessage}">
+    <div th:if="${successMessage}" class="message success">
         <p th:text="${successMessage}"></p>
     </div>
 
-    <div th:if="${errorMessage}">
+    <div th:if="${errorMessage}" class="message error">
         <p th:text="${errorMessage}"></p>
     </div>
 
-    <div th:if="${infoMessage}">
+    <div th:if="${infoMessage}" class="message info">
         <p th:text="${infoMessage}"></p>
     </div>
 
     <div class="box-section">
-        <h1 th:text="${page.title}">サブスクリプション状況</h1>
+        <h2 th:text="${page.title}">サブスクリプション状況</h2>
         <div class="mypage">
-            <h4 th:if="${page.id !=null}"> 会員番号:<span th:text="${page.id}"></span></h4>
-            <h4 th:if="${page.name !=null}">名前:<span th:text="${page.name}"></span></h4>
+            <h4 th:if="${page.id !=null}"> 　　　　　　　会員番号:<span th:text="${page.id}"></span></h4>
+            <h4 th:if="${page.name !=null}">　　　　　　　　　　名前:<span th:text="${page.name}"></span></h4>
             <h4>サブスクリプション状況:<span th:text="${page.subscribed ? '加入済み':'未加入'}"></span></h4>
-            <a th:href="@{/mypage}" class="link-button link-button-container">マイページ</a>
         </div>
     </div>
 
     <div class="join box-section">
         <h2>サブスクリプション　加入</h2>
-        <a th:href="@{/subscription/join}" class="link-button link-button-container">加入ページへ</a>
+        <a th:href="@{/subscription/join}" class="comicdetail-button">加入ページへ</a>
     </div>
 
     <div class="Withdrawal box-section">
         <h2>サブスクリプション　退会</h2>
-        <a th:href="@{/subscription/withdrawal}" class="link-button link-button-container">退会ページへ</a>
+        <a th:href="@{/subscription/withdrawal}" class="comicdetail-button">退会ページへ</a>
     </div>
 
     <div class="footer-section">

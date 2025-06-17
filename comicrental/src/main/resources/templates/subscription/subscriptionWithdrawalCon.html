@@ -18,80 +18,66 @@
             line-height: 1.6;
         }
 
-        h1 {
+        h2 {
             /* メインタイトルを大きくし、下に十分な余白を取る */
-            font-size: 2.5em;
+            font-size: 1.3em;
             margin-bottom: 30px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        h2.notification {
+        .notification {
             /* 通知メッセージを調整し、上下に余白を取る */
             font-size: 2em;
             /* 退会完了を明確に伝えるため、少し大きめに */
             margin-top: 30px;
             margin-bottom: 15px;
-            /* 各メッセージ間の間隔 */
-        }
-
-        p {
-            /* メッセージの文字サイズを調整 */
-            font-size: 1.1em;
-            /* メッセージの下に余白を取る */
-            margin-bottom: 25px;
-            /* 他の要素との間隔を確保 */
-            /* メッセージの内側に余白を設定 */
-            padding: 10px;
-            /* メッセージボックスが内容に合わせて幅を調整し、中央寄せになるように */
-            display: inline-block;
-            /* メッセージボックスの最大幅を設定 */
-            max-width: 600px;
-            /* 幅を100%にして、小さい画面でも適切に表示されるように */
-            width: 100%;
-            /* パディングとボーダーを要素の合計幅/高さに含める */
-            box-sizing: border-box;
-        }
-
-        button {
-            /* ボタンの内側の余白を調整して大きく見せる */
-            padding: 12px 25px;
-            /* ボタンの文字サイズを調整 */
-            font-size: 1.1em;
-            /* ボタンの上に余白を取る */
-            margin-top: 30px;
-            /* 通知メッセージとの間にスペース */
-            /* ボタンを中央に配置 */
-            display: block;
+            max-width: 500px;
+            text-align: center;
             margin-left: auto;
             margin-right: auto;
         }
 
-        h5 {
-            /* 「マイページへ戻る」の文字サイズと余白を調整 */
-            font-size: 1em;
-            margin-top: 40px;
-            /* ボタンとの間に十分なスペースを空ける */
-            margin-bottom: 20px;
+        
+        p.message.success {
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: center;
+            margin: 20px auto;
+            /* 中央寄せ */
+            padding: 15px 20px;
+            border-radius: 8px;
+            max-width: 800px;
+            /* メッセージボックスの最大幅 */
+            box-sizing: border-box;
+            /* パディングとボーダーを幅に含める */
+            color: #155724;
+            /* 濃い緑の文字 */
+            background-color: #d4edda;
+            /* 薄い緑の背景 */
+            border: 1px solid #c3e6cb;
         }
     </style>
 </head>
 
 <body>
-     <div class="header-section">
+    <div class="header-section">
         <h1>漫画レンタル</h1>
+        |<a th:href="@{/subscription/list}">  サブスクリプション状況確認画面へ  </a>|
+        <a th:href="@{/mypage}">  マイページへ  </a>|
     </div>
-    <h1 th:text="${page.title}">サブスクリプション　退会</h1>
     <div th:if="${successMessage}">
-        <p th:text="${successMessage}"></p>
+        <p th:text="${successMessage}" class="message success"></p>
     </div>
-    <h2 class="notification">サブスクリプションを退会しました。</h2>
-    <h2 class="notification">ご利用ありがとうございました。</h2>
-    <div class="link-button-container">
-    <a th:href="@{/subscription/list}" class="link-button link-button-container">サブスクリプション状況確認画面へ</a>
-    <a th:href="@{/mypage}" class="link-button link-button-container">マイページへ</a>
+    <div class="box-section">
+        <h2 th:text="${page.title}">サブスクリプション　退会</h2>
+        <h2 class="notification">ご利用ありがとうございました。</h2>
+        <h2 class="notification">またのご利用お待ちしております。</h2>
     </div>
     <div class="footer-section">
         <h4>ComicRental(solekia@teamB)</h4>
-    </div> 
+    </div>
 </body>
 
 </html>
