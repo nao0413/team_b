@@ -3,78 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ホーム - 漫画レンタル</title>
   <link rel="stylesheet" href="/CSS/comicrental.css">
-  <style>
-    body {
-      text-align: center;
-      font-family: sans-serif;
-      margin: 0 auto;
-      max-width: 1000px;
-    }
-
-    h2 {
-      margin-top: 40px;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 5px;
-    }
-
-    .comic-list {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
-      padding: 10px 0;
-      list-style: none;
-    }
-
-    .comic-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 150px;
-    }
-
-    .comic-item img {
-      width: 100px;
-      height: auto;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    .comic-item span {
-      text-decoration: underline;
-    }
-
-    .page-actions {
-      display: flex;
-      justify-content: flex-end;
-      margin: 10px 0 30px;
-      gap: 20px;
-    }
-
-    .page-actions a {
-      color: #007bff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .page-actions a:hover {
-      text-decoration: underline;
-    }
-
-    a {
-      text-decoration: none;
-      color: black;
-    }
-
-    a:hover {
-      color: darkred;
-    }
-  </style>
 </head>
 <body>
+
+  <!-- ヘッダー -->
   <div class="header-section">
     <div class="header-title">漫画レンタル</div>
     <div class="header-nav">
@@ -83,41 +17,47 @@
     </div>
   </div>
 
+  <!-- タイトル -->
   <h1>ようこそ、漫画レンタルへ！</h1>
 
-  <div class="page-actions">
-    <a th:href="@{/comics/table}">漫画一覧</a>
-    <a th:href="@{/comics/recommend}">おすすめを見る</a>
+  <!-- 一覧・おすすめリンク -->
+  <div class="home-link-area">
+    <a th:href="@{/comics/table}" class="home-link">漫画一覧</a>
+    <a th:href="@{/comics/recommend}" class="home-link">おすすめを見る</a>
   </div>
 
+  <!-- 人気タイトル -->
   <h2>人気タイトル</h2>
   <ul class="comic-list">
     <li class="comic-item" th:each="comic : ${popularComics}">
-      <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
+      <a th:href="@{'/comics/detail/' + ${comic.comic_id}}">
         <img th:src="${comic.comicImage}" alt="表紙画像">
         <div>
-          <span th:text="${comic.title}"></span><br>
+          <span class="comic-title" th:text="${comic.title}"></span><br>
           <span th:text="'(' + ${comic.rentaltimes} + '回)'"></span>
         </div>
       </a>
     </li>
   </ul>
 
+  <!-- 最近入荷 -->
   <h2>最近入荷</h2>
   <ul class="comic-list">
     <li class="comic-item" th:each="comic : ${recentComics}">
-      <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
+      <a th:href="@{'/comics/detail/' + ${comic.comic_id}}">
         <img th:src="${comic.comicImage}" alt="表紙画像">
         <div>
-          <span th:text="${comic.title}"></span><br>
+          <span class="comic-title" th:text="${comic.title}"></span><br>
           <span th:text="'入荷日: ' + ${comic.arrivalDate}"></span>
         </div>
       </a>
     </li>
   </ul>
 
+  <!-- フッター -->
   <div class="footer-section">
-    <h4>ComicRental(solekia@teamB)</h4>
+    <h4>ComicRental (solekia@teamB)</h4>
   </div>
+
 </body>
 </html>
