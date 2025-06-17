@@ -14,34 +14,6 @@
       max-width: 1000px;
     }
 
-    
-
-
-    .header-nav a:hover {
-      text-decoration: underline;
-    }
-
-    .page-actions {
-      display: flex;
-      justify-content: flex-end;
-      margin: 10px 0 30px;
-      gap: 20px;
-    }
-
-    .page-actions a {
-      color: #007bff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .page-actions a:hover {
-      text-decoration: underline;
-    }
-
-    h1 {
-      margin-top: 30px;
-    }
-
     h2 {
       margin-top: 40px;
       border-bottom: 2px solid #ccc;
@@ -75,12 +47,21 @@
       text-decoration: underline;
     }
 
-    .footer-section {
-      margin-top: 40px;
-      padding: 20px;
-      background-color: #E64545;
-      border-top: 1px solid #ccc;
-      color: white;
+    .page-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin: 10px 0 30px;
+      gap: 20px;
+    }
+
+    .page-actions a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .page-actions a:hover {
+      text-decoration: underline;
     }
 
     a {
@@ -94,8 +75,6 @@
   </style>
 </head>
 <body>
-
-  <!-- ヘッダー -->
   <div class="header-section">
     <div class="header-title">漫画レンタル</div>
     <div class="header-nav">
@@ -106,7 +85,6 @@
 
   <h1>ようこそ、漫画レンタルへ！</h1>
 
-  <!-- ページ内リンク（右寄せ） -->
   <div class="page-actions">
     <a th:href="@{/comics/table}">漫画一覧</a>
     <a th:href="@{/comics/recommend}">おすすめを見る</a>
@@ -138,10 +116,8 @@
     </li>
   </ul>
 
-  <!-- フッター -->
   <div class="footer-section">
     <h4>ComicRental(solekia@teamB)</h4>
   </div>
-
 </body>
 </html>
