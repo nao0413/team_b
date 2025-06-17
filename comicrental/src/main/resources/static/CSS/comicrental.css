@@ -7,12 +7,25 @@
     text-align: center;
 }
 .header-section h1 {
-    font-size: 1.4em; 
+    font-size: 1.8em; 
     margin: 0; 
+    text-align: center;
     color: #fff;
     text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px
       0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px
       0px #000, 0px -1px 0px #000, 2px 2px 0px #000;
+}
+.header-section a {
+    font-size: 1em;
+    text-align: center;
+    margin: 0; 
+    color: #fff;
+    text-decoration: none;
+}
+.header-section a:hover {
+    font-size: 1em; 
+    margin: 0; 
+    color:blue;
 }
 .footer-section{
     background-color: #E64545;
@@ -124,8 +137,10 @@ button.btn-border span {
 }
 
 button.btn-border:hover {
-  margin: 4px 4px 12px;
+  margin: 0;
   padding: 6px;
+  transform: translate(4px, 4px);
+  box-shadow: none;
 }
 
 
