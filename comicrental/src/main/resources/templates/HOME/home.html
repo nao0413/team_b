@@ -5,11 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ホーム - 漫画レンタル</title>
-  <link rel="stylesheet" href="/CSS/comicrental.css">
+  <link rel="stylesheet" th:href="@{/CSS/comicrental.css}">
   <style>
     body {
       text-align: center;
-      font-family: sans-serif;
       margin: 0 auto;
       max-width: 1000px;
     }
@@ -63,24 +62,16 @@
     .page-actions a:hover {
       text-decoration: underline;
     }
-
-    a {
-      text-decoration: none;
-      color: black;
-    }
-
-    a:hover {
-      color: darkred;
-    }
   </style>
 </head>
 <body>
+
   <div class="header-section">
-    <div class="header-title">漫画レンタル</div>
-    <div class="header-nav">
+    <h1>漫画レンタル</h1>
+    <nav>
       <a th:href="@{/mypage}">マイページ</a>
       <a th:href="@{/search}">検索</a>
-    </div>
+    </nav>
   </div>
 
   <h1>ようこそ、漫画レンタルへ！</h1>
@@ -119,6 +110,6 @@
   <div class="footer-section">
     <h4>ComicRental(solekia@teamB)</h4>
   </div>
+
 </body>
 </html>
-
