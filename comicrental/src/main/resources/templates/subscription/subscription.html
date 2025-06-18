@@ -101,18 +101,18 @@
     <div class="box-section subsc">
         <h2 th:text="${page.title}">サブスクリプション状況</h2>
         <div class="mypage">
-            <h4 th:if="${page.id !=null}"> 　　　　　　　会員番号:<span th:text="${page.id}"></span></h4>
-            <h4 th:if="${page.name !=null}">　　　　　　　　　　名前:<span th:text="${page.name}"></span></h4>
+            <h4 th:if="${page.id !=null}">会員番号:<span th:text="${page.id}"></span></h4>
+            <h4 th:if="${page.name !=null}">名前:<span th:text="${page.name}"></span></h4>
             <h4>サブスクリプション状況:<span th:text="${page.subscribed ? '加入済み':'未加入'}"></span></h4>
         </div>
     </div>
 
-    <div class="join box-section">
+    <div class="join box-section" th:if="${!page.subscribed}">
         <h2>サブスクリプション　加入</h2>
         <a th:href="@{/subscription/join}" class="comicdetail-button">加入ページへ</a>
     </div>
 
-    <div class="Withdrawal box-section">
+    <div class="Withdrawal box-section" th:if="${page.subscribed}">
         <h2>サブスクリプション　退会</h2>
         <a th:href="@{/subscription/withdrawal}" class="comicdetail-button">退会ページへ</a>
     </div>

@@ -25,7 +25,7 @@
             appearance: none;
 
             background-color: #f8f8f8;
-            color:black;
+            color: black;
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 8px 10px;
@@ -33,156 +33,161 @@
             /* サイトのフォントに合わせる */
             outline: none;
         }
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 20px;
-                 margin-bottom: 20px;
-                table-layout: fixed;
-                border: 1px solid #ddd;
-                /* テーブル全体に枠線を追加 */
-                border-radius: 8px;
-                overflow: hidden;
-                /* 中の文字がはみ出さないようにする */
-            }
 
-            th,
-            td {
-                padding: 10px 15px;
-                text-align: left;
-                vertical-align: middle;
-                white-space: normal;
-                border-bottom: 1px solid #ddd;
-                border-right: 1px solid #ddd;
-            }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            table-layout: fixed;
+            border: 1px solid #ddd;
+            /* テーブル全体に枠線を追加 */
+            border-radius: 8px;
+            overflow: hidden;
+            /* 中の文字がはみ出さないようにする */
+        }
 
-            th {
-                background-color: #E64545;
-                color: white;
-                font-weight: bold;
-                /* ヘッダーのテキストを太字に */
-                font-size: 1.1em;
-                text-align: center;
-                padding: 15px 10px;
-                border-bottom: 3px solid #333;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-                letter-spacing: 0.05em;
-            }
+        th,
+        td {
+            padding: 10px 15px;
+            text-align: center;
+            vertical-align: middle;
+            white-space: normal;
+            border-bottom: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+        }
 
-            /* 偶数行に背景色をつけてストライプにする */
-            tbody tr:nth-child(even) {
-                background-color: #FACAC8;
-                /* 偶数行の背景色 */
-            }
+        th {
+            background-color: #E64545;
+            color: white;
+            font-weight: bold;
+            /* ヘッダーのテキストを太字に */
+            font-size: 1.1em;
+            text-align: center;
+            padding: 15px 10px;
+            border-bottom: 3px solid #333;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.05em;
+        }
 
-            td a.comictitle {
-                color: #007bff;
-                text-decoration: none;
-                font-weight: 500;
-                font-size: 1.05em;
-            }
+        /* 偶数行に背景色をつけてストライプにする */
+        tbody tr:nth-child(even) {
+            background-color: #FACAC8;
+            /* 偶数行の背景色 */
+        }
 
-            td a:hover {
-                color: #ff0000;
-                text-decoration: underline;
-                /* ホバーで下線 */
-            }
+        td a.comictitle {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05em;
+        }
 
-            td {
-                font-weight: 300;
-            }
+        td a:hover {
+            color: #ff0000;
+            text-decoration: underline;
+            /* ホバーで下線 */
+        }
 
-            /* レンタル中 */
-            td span.rented {
-                background-color: #28a745;
-                color: white;
-                font-weight: bold;
-                padding: 3px 8px;
-                border-radius: 4px;
-                display: inline-block;
-            }
+        td {
+            font-weight: 300;
+        }
 
-            td span.rented a {
-                color: white;
-                text-decoration: none;
-            }
+        /* レンタル中 */
+        td span.rented {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
 
-            td span.rented a:hover {
-                color: red;
-                text-decoration: none;
-            }
+        td span.rented a {
+            color: white;
+            text-decoration: none;
+        }
 
-            /* 未レンタル */
-            td span.non-rented {
-                background-color: #6c757d;
-                color: white;
-                font-weight: bold;
-                padding: 3px 8px;
-                border-radius: 4px;
-                display: inline-block;
-            }
+        td span.rented a:hover {
+            color: red;
+            text-decoration: none;
+        }
 
-            /* 表紙画像 */
-            .comic-image {
-                max-width: 400px;
-                /* 画像の幅を調整 */
-                height: auto;
-                border: 1px solid #ddd;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-                border-radius: 4px;
-                /* 角丸 */
-            }
+        /* 未レンタル */
+        td span.non-rented {
+            background-color: #6c757d;
+            color: white;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
 
-            /* 影を少し強める */
-            /* 各列の幅を調整 */
-            th:nth-child(1),
-            td:nth-child(1) {
-                width: 20%;
-            }
+        /* 表紙画像 */
+        .comic-image {
+            max-width: 400px;
+            /* 画像の幅を調整 */
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            /* 角丸 */
+        }
 
-            th:nth-child(2),
-            td:nth-child(2) {
-                width: 15%;
-            }
+        td:nth-child(6) {
+            text-align: center;
+        }
 
-            th:nth-child(3),
-            td:nth-child(3) {
-                width: 20%;
-            }
+        /* 影を少し強める */
+        /* 各列の幅を調整 */
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 20%;
+        }
 
-            th:nth-child(4),
-            td:nth-child(4) {
-                width: 10%;
-            }
+        th:nth-child(2),
+        td:nth-child(2) {
+            width: 20%;
+        }
 
-            th:nth-child(5),
-            td:nth-child(5) {
-                width: 15%;
-            }
+        th:nth-child(3),
+        td:nth-child(3) {
+            width: 15%;
+        }
 
-            th:nth-child(6),
-            td:nth-child(6) {
-                width: 20%;
-            }
+        th:nth-child(4),
+        td:nth-child(4) {
+            width: 20%;
+        }
 
-            /* 画像のサイズ調整 */
-            .comic-image {
-                max-width: 70px;
-                height: auto;
-                border: 1px solid #ddd;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-                border-radius: 4px;
-                /* 角丸 */
-            }
+        th:nth-child(5),
+        td:nth-child(5) {
+            width: 10%;
+        }
+
+        th:nth-child(6),
+        td:nth-child(6) {
+            width: 15%;
+        }
+
+        /* 画像のサイズ調整 */
+        .comic-image {
+            max-width: 70px;
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            /* 角丸 */
+        }
     </style>
 </head>
 
 <body>
     <div class="header-section">
         <h1>漫画レンタル</h1>
-        |<a th:href="@{/home}">  HOME  </a>| 
-        <a th:href="@{/comics/recommend}">  おすすめを見る  </a>|  
-        <a th:href="@{/cart/table}">  買い物かごページへ  </a>|
+        |<a th:href="@{/home}"> HOME </a>|
+        <a th:href="@{/comics/recommend}"> おすすめを見る </a>|
+        <a th:href="@{/cart/table}"> 買い物かごページへ </a>|
     </div>
 
     <h1 class="title">漫画一覧</h1>
@@ -213,13 +218,12 @@
     <table>
         <thead>
             <tr>
+                <th>表紙</th>
                 <th>タイトル</th>
                 <th>著者</th>
                 <th>ジャンル</th>
                 <th>レンタル状況</th>
                 <th>カートに追加</th>
-                <!-- <th style="width: 20%;">漫画個別ページ</th> -->
-                <th>表紙</th>
             </tr>
         </thead>
         <tbody>
@@ -227,6 +231,9 @@
                 <td colspan="7">漫画が見つかりませんでした。</td>
             </tr>
             <tr th:each="comic:${comicList}">
+                <td>
+                    <img th:src="${comic.comic_image}" alt="表紙画像" class="comic-image">
+                </td>
                 <td>
                     <a th:href="@{'/comics/detail/' + ${comic.comic_id} }" th:text="${comic.title}"
                         class="comictitle">タイトル</a>
@@ -245,9 +252,6 @@
                         <input type="hidden" name="customerId" th:value="${customerId}">
                         <button type="submit" class="btn btn-border"><span>買い物かごへ入れる</span></button>
                     </form>
-                </td>
-                <td>
-                    <img th:src="${comic.comic_image}" alt="表紙画像" class="comic-image">
                 </td>
             </tr>
         </tbody>
