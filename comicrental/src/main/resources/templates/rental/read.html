@@ -11,7 +11,7 @@
     <div class="header-section">
         <h1>漫画レンタル</h1>
     </div>
-<h1 th:text="'『' + ${comic.title} + '』を読む'">タイトル</h1>
+<h1 class="title" th:text="'『' + ${comic.title} + '』を読む'">タイトル</h1>
 
 <div style="text-align: center;">
     <div th:each="i : ${#numbers.sequence(1, 10)}">
