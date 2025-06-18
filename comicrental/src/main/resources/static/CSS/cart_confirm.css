@@ -1,19 +1,27 @@
 /* ========================= */
-/* 🌟 cart_confirm.css - 統一デザイン 完全版 */
+/* 🌟 cart_confirm.css - 統一デザイン 完全版（Meiryo UI） */
 /* ========================= */
 
 /* 基本設定 */
 body {
   background-color: #fff;
   color: #333;
-  font-family: "Zen Maru Gothic", "M PLUS Rounded 1c", "Meiryo UI", sans-serif;
+  font-family: "Meiryo UI", sans-serif;
   font-size: 16px;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
-/* コンテンツ全体の中央寄せ・余白調整 */
+/* コンテナ全体 */
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
+  flex: 1;
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
@@ -24,11 +32,12 @@ body {
   background-color: #E64545;
   color: #fff;
   width: 100%;
-  height: 50px; 
+  height: 50px;
   display: flex;
- justify-content: center;  /* ← 左右中央寄せ */
-  align-items: center;      /* ← 上下中央寄せ */
+  justify-content: center;
+  align-items: center;
   padding: 0 20px;
+  font-family: "Meiryo UI", sans-serif;
 }
 
 .header-section h1 {
@@ -46,8 +55,9 @@ body {
 /* フッター */
 .footer-section {
   background-color: #E64545;
-  padding: 20px 20px; /* ← 高さをアップ（元10px） */
+  padding: 20px 20px;
   color: #fff;
+  font-family: "Meiryo UI", sans-serif;
 }
 
 .footer-section h4 {
@@ -70,7 +80,7 @@ body {
 .page-title {
   font-size: 30px;
   color: #E64545;
-  font-family: "Nico Moji", "RocknRoll One", "M PLUS Rounded 1c", sans-serif;
+  font-family: "Meiryo UI", sans-serif;
   text-shadow: 2px 2px 0 #000;
   margin: 0;
 }
@@ -82,6 +92,7 @@ table {
   margin-top: 20px;
   border: 2px solid #E64545;
   table-layout: fixed;
+  font-family: "Meiryo UI", sans-serif;
 }
 
 th, td {
@@ -89,8 +100,8 @@ th, td {
   padding: 6px;
   text-align: center;
   font-size: 1.2rem;
-  font-family: "Noto Sans JP", "M PLUS Rounded 1c", "Zen Maru Gothic", "Meiryo UI", sans-serif;
   color: #333;
+  font-family: "Meiryo UI", sans-serif;
 }
 
 th {
@@ -98,7 +109,6 @@ th {
   color: #E64545;
   font-weight: bold;
   font-size: 1.4rem;
-  font-family: "Nico Moji", "RocknRoll One", "M PLUS Rounded 1c", sans-serif;
   letter-spacing: 1px;
 }
 
@@ -107,7 +117,7 @@ th:nth-child(2), td:nth-child(2) { width: 45%; }
 th:nth-child(3), td:nth-child(3) { width: 10%; }
 th:nth-child(4), td:nth-child(4) { width: 30%; }
 
-/* 画 */
+/* 画像 */
 .cart-image {
   max-height: 100px;
   width: auto;
@@ -116,7 +126,6 @@ th:nth-child(4), td:nth-child(4) { width: 30%; }
   margin: 0 auto;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .cart-image:hover {
   transform: scale(1.08) rotate(-2deg);
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
@@ -128,6 +137,7 @@ th:nth-child(4), td:nth-child(4) { width: 30%; }
   font-weight: bold;
   font-size: 1.2rem;
   margin-top: 20px;
+  font-family: "Meiryo UI", sans-serif;
 }
 
 /* ボタンエリア */
@@ -147,16 +157,16 @@ th:nth-child(4), td:nth-child(4) { width: 30%; }
   background-color: #E64545;
   color: white;
   border: none;
-  padding: 15px 27px;       /* ← 高さと横幅 */
-  font-size: 1.0rem;        /* ← フォント大きめに統一 */
+  padding: 15px 27px;
+  font-size: 1.0rem;
   font-weight: bold;
   border-radius: 10px;
   box-shadow: 3px 3px 0 #333;
   cursor: pointer;
-  font-family: "RocknRoll One", sans-serif;
+  font-family: "Meiryo UI", sans-serif;
   letter-spacing: 1px;
-  text-decoration: none;    /* ← aタグなら必要 */
-  display: inline-block;    /* ← aタグのサイズをbuttonと同じに */
+  text-decoration: none;
+  display: inline-block;
   text-align: center;
   transition: transform 0.15s ease, background-color 0.3s ease;
 }
@@ -179,7 +189,7 @@ th:nth-child(4), td:nth-child(4) { width: 30%; }
   margin: 40px auto;
   max-width: 700px;
   box-shadow: 0 4px 12px rgba(230, 69, 69, 0.3);
-  font-family: "Zen Maru Gothic", "M PLUS Rounded 1c", sans-serif;
+  font-family: "Meiryo UI", sans-serif;
 }
 
 .subsc-icon {
@@ -191,6 +201,7 @@ th:nth-child(4), td:nth-child(4) { width: 30%; }
 .subsc-text {
   color: #333;
   text-align: left;
+  font-family: "Meiryo UI", sans-serif;
 }
 
 .subsc-main {
@@ -208,21 +219,10 @@ th:nth-child(4), td:nth-child(4) { width: 30%; }
   border-radius: 6px;
   box-shadow: 1px 1px 0 #aaa;
   transition: 0.2s;
+  font-family: "Meiryo UI", sans-serif;
 }
 
 .subsc-link:hover {
   background-color: #fdd;
   text-decoration: underline;
-}
-.wrapper {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.container {
-  flex: 1;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 20px;
 }
