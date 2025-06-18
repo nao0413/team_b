@@ -84,11 +84,12 @@
         <h1>漫画レンタル</h1>
     </div>
 <h1 class="title">検索結果</h1>
-<p th:if="${message}" 
-   th:text="${message}" 
-   th:classappend="${status == 'success'} ? 'message-success' : 'message-error'"
-   class="cart-message">
-</p>
+<div th:if="${errorMessage}">
+        <p th:text="${errorMessage}" class="message error"></p>
+    </div>
+    <div th:if="${successMessage}">
+        <p th:text="${successMessage}" class="message success"></p>
+    </div>
 <!-- 結果なし -->
 <p th:if="${#lists.isEmpty(results)}">お探しのものは見つかりませんでした。</p>
 
