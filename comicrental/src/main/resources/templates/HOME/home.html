@@ -82,14 +82,15 @@
   </style>
 </head>
 <body>
+  <div class="main-content" style="max-width:1000px; margin:0 auto;"></div>
   <div class="header-section" style="position: relative; width: 100%;">
   <h1>漫画レンタル</h1>
 
   <!-- 中央の白文字リンク -->
   <div class="nav-links" style="text-align: center; margin-top: 8px;">
-    <a th:href="@{/search}" style="color: white; text-decoration: none; margin: 0 10px;">検索｜</a>
-    <a th:href="@{/comics/table}" style="color: white; text-decoration: none; margin: 0 10px;">漫画一覧｜</a>
-    <a th:href="@{/comics/recommend}" style="color: white; text-decoration: none; margin: 0 10px;">おすすめを見る</a>
+    |<a th:href="@{/search}" style="color: white; text-decoration: none; margin: 0 10px;">検索</a>|
+    <a th:href="@{/comics/table}" style="color: white; text-decoration: none; margin: 0 10px;">漫画一覧</a>|
+    <a th:href="@{/comics/recommend}" style="color: white; text-decoration: none; margin: 0 10px;">おすすめを見る</a>|
   </div>
 
   <!-- 右上にマイページ -->
@@ -129,5 +130,6 @@
   <div class="footer-section" style="width: 100%;">
     <h4>ComicRental(solekia@teamB)</h4>
   </div>
+  <div class="footer-section">...</div>
 </body>
 </html>
