@@ -320,6 +320,6 @@ button:active {
 .number-highlight {
   font-size: 2em;
   font-weight: bold;
-  color: #E64545;  /* ← 黒から赤に変更！ */
+  color: #E64545;  
   margin: 0 4px;
 }
