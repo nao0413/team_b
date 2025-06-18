@@ -63,6 +63,26 @@
         button:hover {
             background-color: #E64545;
         }
+
+        a.read-link {
+            padding: 6px 12px;
+            background-color: #E64545;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        a.read-link:hover {
+            background-color: #E64545;
+        }
+
+        .back-link {
+            margin: 30px 0;
+        }
+
+        p {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -80,7 +100,10 @@
             </form>
         </div>
     </div>
-
+    <!-- 戻るリンク -->
+    <div style="margin: 30px 0; text-align: center;">
+    <a th:href="@{/home}" class="read-link">ホームに戻る</a>
+    </div>
     <div class="footer-section">
         <h4>ComicRental (solekia@teamB)</h4>
     </div>
