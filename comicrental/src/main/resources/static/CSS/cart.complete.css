@@ -1,53 +1,90 @@
 
 /* 画面全体レイアウト */
-html, body {
-  height: 100%;
-  margin: 0;
-  font-family: "Meiryo UI", sans-serif;
+/* 基本設定 */
+
+
+/* コンテナ全体 */
+body {
   background-color: #fff;
   color: #333;
+  font-family: "Meiryo UI", sans-serif;
   font-size: 16px;
+  margin: 0;
+  padding: 0;
+   overflow-x: hidden;  /* 横スクロール禁止 */
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .wrapper {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;  /* 画面の中央に配置 */
+  text-align: center; /* テキスト中央揃え */
+  
 }
+
 
 .container {
   flex: 1;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 40px 20px;
-  text-align: center;
-  font-family: "Meiryo UI", sans-serif;
+  padding: 0 20px;
 }
+
 
 /* ヘッダー */
 .header-section {
+  /*border-bottom: 3px solid white;*/
   background-color: #E64545;
-  color: #fff;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Meiryo UI", sans-serif;
+  width: 100%;
+  padding: 10px 0;
+  margin: 0;
+  font-family: "Meiryo UI";
+  color: black;
+  padding: 13px;
+  text-align: center;
 }
 
 .header-section h1 {
+  font-size: 1.8em;
   margin: 0;
-  font-size: 1.4rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-shadow: 1px 1px 0px #000,
-               1px 2px 0px #000,
-              -1px -1px 0px #000,
-               2px -1px 0px #000,
-               0px 1px 0px #000;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px 0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px 0px #000, 0px -1px 0px #000, 2px 2px 0px #000;
 }
 
+.header-section a {
+  font-size: 1em;
+  text-align: center;
+  margin: 0;
+  color: #fff;
+  text-decoration: none;
+}
+
+.header-section a:hover {
+  font-size: 1em;
+  margin: 0;
+  color: blue;
+}
+
+.footer-section {
+  background-color: #E64545;
+  font-family: "Meiryo UI";
+  color: black;
+  padding: 13px;
+  width: 100%;
+  padding: 10px 0;
+  margin: 0;
+}
+
+.footer-section h4 {
+  font-size: 1em;
+  color: #fff;
+  text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px 0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px 0px #000, 0px -1px 0px #000, 2px 2px 0px;
+}
 /* タイトル */
 .title-section h2 {
   font-size: 2.4rem;
