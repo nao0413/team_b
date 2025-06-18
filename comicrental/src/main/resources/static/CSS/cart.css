@@ -177,9 +177,8 @@ th {
   border-left: 6px solid #E64545;
   border-radius: 10px;
   padding: 12px 18px;
-  font-size: 18px;
+  font-size: 1.4em;
   font-weight: bold;
-  box-shadow: 3px 3px 0 #000;
   display: inline-block;
 }
 
@@ -271,4 +270,44 @@ button:active {
   0%   { transform: rotate(0deg) scale(1); }
   50%  { transform: rotate(-20deg) scale(1.2); }
   100% { transform: rotate(0deg) scale(1); }
+}
+.summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.rental-limit {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #E64545;
+  background-color: #fff5f5;
+  border: 2px solid #E64545;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-left: 0;       
+  margin-right: auto;   
+}
+
+.total-count {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #E64545;
+  background-color: #fff5f5;
+  border: 2px solid #E64545;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-left: auto;    /* ← 右に押しつける */
+  margin-right: 0;      /* ← 右端にぴったり */
+}
+
+.number-highlight {
+  font-size: 2em;
+  font-weight: bold;
+  color: #E64545;  /* ← 黒から赤に変更！ */
+  margin: 0 4px;
 }

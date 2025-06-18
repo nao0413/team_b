@@ -64,11 +64,13 @@
       </table>
 
       <div class="summary">
-          <p th:if="${isSubscribed}" class="rental-limit">
-              今月のレンタル残数 あと <span th:text="${remainingLimit}" class="remaining-num"></span> 冊
-          </p>
-          <p class="total">合計冊数：<span th:text="${totalCount}"></span>冊</p>
-      </div>
+    <p th:if="${isSubscribed}" class="rental-limit">
+        今月のレンタル残数 あと <span th:text="${remainingLimit}" class="remaining-num"></span> 冊
+    </p>
+   <p class="total-count">
+    合計冊数：<span th:text="${totalCount}" class="remaining-num"></span> 冊
+</p>
+</div>
 
       <div class="button-area">
           <form action="/comics/table" method="get">
