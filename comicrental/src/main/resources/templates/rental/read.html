@@ -6,6 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>読む - 漫画レンタル</title>
     <link rel="stylesheet" href="/CSS/comicrental.css">
+<style>
+.read-link {
+    padding: 6px 12px;
+    background-color: #E64545;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    display: inline-block;
+}
+.read-link:hover {
+    background-color: #bf3939;
+}
+</style>
+
 </head>
 <body>
     <div class="header-section">
@@ -19,7 +33,7 @@
     </div>
 </div>
 
-<a th:href="@{/rental/status}">← レンタル状況へ戻る</a>
+<a th:href="@{/rental/status}" class="read-link">レンタル状況へ戻る</a>
 <div class="footer-section">
         <h4>ComicRental(solekia@teamB)</h4>
 </div>
