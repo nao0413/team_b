@@ -96,14 +96,21 @@ h1 {
     /* 薄い枠線 */
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 40px;
+    padding: 10px;
     /* 内側の余白 */
-    margin: 20px auto;
+    margin: 30px auto;
     /* 上下に余白、左右中央揃え */
     max-width: 500px;
     /* ボックスの最大幅（適宜調整） */
     text-align: left;
+    padding-bottom: 30px
 }
+.box-section .box-content {
+    width: fit-content; 
+    margin: 0 auto; 
+    text-align: left; 
+}
+
 
 @keyframes fadeInUp {
     from {
@@ -174,6 +181,7 @@ h1 {
     letter-spacing: 1px;
     transition: transform 0.15s ease, background-color 0.3s ease;
     text-decoration: none;
+    margin-bottom: 20px;
 }
 
 .comicdetail-button:hover {

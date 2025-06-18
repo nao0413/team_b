@@ -116,6 +116,12 @@
     <div th:if="${#lists.isEmpty(recommendedComics)}" class="info-box">
         <p>おすすめ漫画が見つかりませんでした。</p>
     </div>
+    <div th:if="${errorMessage}">
+        <p th:text="${errorMessage}" class="message error"></p>
+    </div>
+    <div th:if="${successMessage}">
+        <p th:text="${successMessage}" class="message success"></p>
+    </div>
 
     <div th:each="comic:${recommendedComics}" class="container">
         <div class="comic-main-info">
@@ -138,7 +144,7 @@
         </div>
 
         <div class="button-group">
-            <form action="/comics/addToCart" method="post">
+            <form action="/comics/addToCartRecommend" method="post">
                 <input type="hidden" name="comicId" th:value="${comic.comic_id}">
                 <input type="hidden" name="customerId" th:value="${customerId}">
                 <button type="submit" class="btn btn-border"><span>買い物かごへ入れる</span></button>
