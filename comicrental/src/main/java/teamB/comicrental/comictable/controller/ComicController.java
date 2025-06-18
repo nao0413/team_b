@@ -77,6 +77,16 @@ public class ComicController {
       if (volume == null) {
          volume = 1;
       }
+      Cart existingCartItem = cartMapper.findCartItem(customerId, comicId, volume);
+      if (existingCartItem != null) {
+         redirectAttributes.addFlashAttribute("errorMessage", "この漫画はすでにカートに入っています。");
+         return "redirect:/comics/table";
+      }
+      boolean isRented = cartMapper.isComicRented(customerId, comicId);
+      if (isRented) {
+         redirectAttributes.addFlashAttribute("errorMessage", "この漫画は現在レンタル中です。");
+         return "redirect:/comics/table";
+      }
       // 買い物かごへ追加したい漫画の情報をセットする
       Cart cartItem = new Cart();
       cartItem.setCustomer_id(customerId);
@@ -112,6 +122,16 @@ public class ComicController {
       // 漫画の巻数がNULLの場合、１を設定する（今回は巻数の情報を入れてないため全て１になる）
       if (volume == null) {
          volume = 1;
+      }
+      Cart existingCartItem = cartMapper.findCartItem(customerId, comicId, volume);
+      if (existingCartItem != null) {
+         redirectAttributes.addFlashAttribute("errorMessage", "この漫画はすでにカートに入っています。");
+         return "redirect:/comics/table";
+      }
+      boolean isRented = cartMapper.isComicRented(customerId, comicId);
+      if (isRented) {
+         redirectAttributes.addFlashAttribute("errorMessage", "この漫画は現在レンタル中です。");
+         return "redirect:/comics/table";
       }
       // 買い物かごへ追加したい漫画の情報をセットする
       Cart cartItem = new Cart();
@@ -151,7 +171,16 @@ public class ComicController {
       if (volume == null) {
          volume = 1;
       }
-
+      Cart existingCartItem = cartMapper.findCartItem(customerId, comicId, volume);
+      if (existingCartItem != null) {
+         redirectAttributes.addFlashAttribute("errorMessage", "この漫画はすでにカートに入っています。");
+         return "redirect:/comics/table";
+      }
+      boolean isRented = cartMapper.isComicRented(customerId, comicId);
+      if (isRented) {
+         redirectAttributes.addFlashAttribute("errorMessage", "この漫画は現在レンタル中です。");
+         return "redirect:/comics/table";
+      }
       Cart cartItem = new Cart();
       cartItem.setCustomer_id(customerId);
       cartItem.setComic_id(comicId);
@@ -189,7 +218,16 @@ public class ComicController {
       if (volume == null) {
          volume = 1;
       }
-
+      Cart existingCartItem = cartMapper.findCartItem(customerId, comicId, volume);
+      if (existingCartItem != null) {
+         redirectAttributes.addFlashAttribute("errorMessage", "この漫画はすでにカートに入っています。");
+         return "redirect:/comics/table";
+      }
+      boolean isRented = cartMapper.isComicRented(customerId, comicId);
+      if (isRented) {
+         redirectAttributes.addFlashAttribute("errorMessage", "この漫画は現在レンタル中です。");
+         return "redirect:/comics/table";
+      }
       Cart cartItem = new Cart();
       cartItem.setCustomer_id(customerId);
       cartItem.setComic_id(comicId);
