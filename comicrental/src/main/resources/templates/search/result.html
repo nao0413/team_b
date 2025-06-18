@@ -91,13 +91,14 @@
 <!-- 結果あり -->
 <ul th:if="${!#lists.isEmpty(results)}">
     <li th:each="comic : ${results}">
-        <a th:href="@{'/comics/detail/' + ${comic.comic_id}}">
-            <img th:src="${comic.comicImage}" alt="表紙画像">
-            <span>
-                <strong th:text="${comic.title}"></strong><br>
-                <span th:text="${comic.author}"></span>
-            </span>
-        </a>
+        <a th:href="@{'/comics/detail/' + ${comic.comic_id}}" style="display: flex; align-items: center; text-decoration: none;">
+    <img th:src="${comic.comicImage}" alt="表紙画像">
+    <span>
+        <span style="color: blue; text-decoration: underline;" th:text="${comic.title}"></span><br>
+        <span th:text="${comic.author}"></span>
+    </span>
+</a>
+
         <!-- カート追加ボタン -->
         <form th:action="@{/comics/addToCartFromSearch}" method="post">
     <input type="hidden" name="comicId" th:value="${comic.comic_id}">
