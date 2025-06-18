@@ -126,12 +126,12 @@ public class ComicController {
       Cart existingCartItem = cartMapper.findCartItem(customerId, comicId, volume);
       if (existingCartItem != null) {
          redirectAttributes.addFlashAttribute("errorMessage", "この漫画はすでにカートに入っています。");
-         return "redirect:/comics/table";
+         return "redirect:/comics/detail/" + comicId;
       }
       boolean isRented = cartMapper.isComicRented(customerId, comicId);
       if (isRented) {
          redirectAttributes.addFlashAttribute("errorMessage", "この漫画は現在レンタル中です。");
-         return "redirect:/comics/table";
+         return "redirect:/comics/detail/" + comicId;
       }
       // 買い物かごへ追加したい漫画の情報をセットする
       Cart cartItem = new Cart();
@@ -174,12 +174,12 @@ public class ComicController {
       Cart existingCartItem = cartMapper.findCartItem(customerId, comicId, volume);
       if (existingCartItem != null) {
          redirectAttributes.addFlashAttribute("errorMessage", "この漫画はすでにカートに入っています。");
-         return "redirect:/comics/table";
+         return "redirect:/comics/recommend";
       }
       boolean isRented = cartMapper.isComicRented(customerId, comicId);
       if (isRented) {
          redirectAttributes.addFlashAttribute("errorMessage", "この漫画は現在レンタル中です。");
-         return "redirect:/comics/table";
+         return "redirect:/comics/recommend";
       }
       Cart cartItem = new Cart();
       cartItem.setCustomer_id(customerId);
@@ -221,12 +221,12 @@ public class ComicController {
       Cart existingCartItem = cartMapper.findCartItem(customerId, comicId, volume);
       if (existingCartItem != null) {
          redirectAttributes.addFlashAttribute("errorMessage", "この漫画はすでにカートに入っています。");
-         return "redirect:/comics/table";
+         return "redirect:" + redirectUrl;
       }
       boolean isRented = cartMapper.isComicRented(customerId, comicId);
       if (isRented) {
          redirectAttributes.addFlashAttribute("errorMessage", "この漫画は現在レンタル中です。");
-         return "redirect:/comics/table";
+         return "redirect:" + redirectUrl;
       }
       Cart cartItem = new Cart();
       cartItem.setCustomer_id(customerId);
