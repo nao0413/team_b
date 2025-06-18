@@ -159,3 +159,25 @@ button.btn-border:hover {
   transition: all 0.3s ease-out, background-size 0.3s ease-out, background-position 0.3s ease-out;
 }
 
+.cart-message {
+  padding: 12px 20px;
+  margin: 20px auto;
+  font-weight: bold;
+  border-radius: 6px;
+  text-align: center;
+  width: 80%;
+  max-width: 800px;
+  font-size: 1.4rem;
+}
+
+.message-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}

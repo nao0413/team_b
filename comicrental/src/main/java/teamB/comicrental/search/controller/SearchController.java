@@ -16,18 +16,20 @@ public class SearchController {
     @Autowired
     private TopComicMapper comicMapper;
 
-    // 検索フォーム表示用
     @GetMapping("/search")
     public String showSearchForm() {
-        return "search/search"; // ← 検索フォーム用のHTMLを用意
+        return "search/search";
     }
 
-    // 検索実行後の結果表示
     @GetMapping("/search/result")
-    public String searchByTitle(@RequestParam("title") String title, Model model) {
+    public String searchByTitle(@RequestParam("title") String title,
+                                 @RequestParam(value = "message", required = false) String message,
+                                 @RequestParam(value = "status", required = false) String status,
+                                 Model model) {
         List<Comic> results = comicMapper.findComicsByTitleLike("%" + title + "%");
         model.addAttribute("results", results);
+        model.addAttribute("message", message);
+        model.addAttribute("status", status); // 成功 or 失敗
         return "search/result";
     }
 }
-
