@@ -1,42 +1,38 @@
-/* ============================== */
-/* 🌟 cart_complete.css 改訂版    */
-/* ============================== */
 
-body {
+/* 画面全体レイアウト */
+html, body {
+  height: 100%;
   margin: 0;
-  padding: 0;
-  font-family: "Zen Maru Gothic", "M PLUS Rounded 1c", "Meiryo UI", sans-serif;
+  font-family: "Meiryo UI", sans-serif;
   background-color: #fff;
   color: #333;
   font-size: 16px;
 }
 
-/* wrapper全体の高さ管理 */
 .wrapper {
-  padding-top: 60px;  /* ヘッダー */
-  padding-bottom: 60px; /* フッター分 */
-    min-height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;  /* 中央に寄せる */
-  align-items: center;
-  padding: 50px 20px 60px;  /* 上：ヘッダー、下：フッター余白 */
-  box-sizing: border-box;
-  overflow: hidden;         /* スクロールを抑える */
 }
-/* ヘッダー固定 */
+
+.container {
+  flex: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+  font-family: "Meiryo UI", sans-serif;
+}
+
+/* ヘッダー */
 .header-section {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
   background-color: #E64545;
-  color: white;
+  color: #fff;
+  height: 50px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 100;
+  justify-content: center;
+  font-family: "Meiryo UI", sans-serif;
 }
 
 .header-section h1 {
@@ -52,36 +48,21 @@ body {
                0px 1px 0px #000;
 }
 
-/* コンテンツ中央配置・大きめ表示 */
-.container {
-  flex: 1;
-  max-width: 900px;
-  padding: 60px 30px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* タイトル大きく */
+/* タイトル */
 .title-section h2 {
-  font-size: 36px;
-  margin-bottom: 30px;
+  font-size: 2.4rem;
   color: #E64545;
-  font-family: "Nico Moji", "RocknRoll One", sans-serif;
-  text-shadow: 2px 2px 0 #000;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 1px #000;
+  font-family: "Meiryo UI", sans-serif;
 }
 
-/* メッセージ大きく＆読みやすく */
-.summary {
-  font-size: 20px;
-  line-height: 2.2;
-  margin-bottom: 40px;
-  font-family: "Zen Maru Gothic", "M PLUS Rounded 1c", "Meiryo", sans-serif;
-}
-
+/* レンタル完了メッセージ */
 .summary p {
-  margin: 14px 0;
+  font-size: 1.4rem;
+  margin: 10px 0;
+  font-family: "Meiryo UI", sans-serif;
 }
 
 /* ボタン */
@@ -89,20 +70,26 @@ body {
   display: flex;
   justify-content: center;
   gap: 30px;
-  flex-wrap: wrap;
+  margin-top: 40px;
+  font-family: "Meiryo UI", sans-serif;
+}
+
+.button-area form {
+  display: inline-block;
 }
 
 .button-area button {
   background-color: #E64545;
   color: white;
   border: none;
-  padding: 15px 35px;
+  padding: 15px 30px;
   font-size: 1.2rem;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 #333;
   cursor: pointer;
-  font-family: "RocknRoll One", sans-serif;
-  box-shadow: 3px 3px 0 #333;
+  font-family: "Meiryo UI", sans-serif;
+  letter-spacing: 1px;
   transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
@@ -111,24 +98,18 @@ body {
   transform: scale(1.05);
 }
 
-/* フッター固定 */
+/* フッター */
 .footer-section {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
   background-color: #E64545;
-  color: white;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
+  padding: 15px 20px;
+  color: #fff;
+  text-align: left;
+  font-family: "Meiryo UI", sans-serif;
 }
 
 .footer-section h4 {
   margin: 0;
   font-size: 1rem;
-  text-align: left;
   text-shadow: 1px 1px 0px #000,
                1px 2px 0px #000,
               -1px -1px 0px #000,

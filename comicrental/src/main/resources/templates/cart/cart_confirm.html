@@ -6,13 +6,16 @@
     <link rel="stylesheet" th:href="@{/css/cart_confirm.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nico+Moji&family=RocknRoll+One&family=Noto+Sans+JP&display=swap" rel="stylesheet">
-</head>
-<body>
-<div class="wrapper"><!-- ✅ wrapperで全体を囲む -->
 
-  <!-- ヘッダー-->
+  </head>
+<body>
+
+<!-- ✅ wrapper全体 -->
+<div class="wrapper">
+
+  <!-- ヘッダー -->
   <div class="header-section">
-    <h1><i class="fas fa-book-open" style="margin-right:10px;"></i>漫画レンタル</h1>
+    <h1>漫画レンタル</h1>
   </div>
 
   <!-- メインコンテンツ -->
@@ -20,7 +23,7 @@
 
     <!-- タイトル -->
     <div class="title-section">
-        <h2 class="page-title">📄 レンタル内容の確認</h2>
+        <h2 class="page-title">レンタル内容の確認</h2>
         <p th:if="${errorMessage}" th:text="${errorMessage}" class="error-message"></p>
     </div>
 
@@ -71,11 +74,12 @@
 
   </div><!-- /container -->
 
-  <!-- ✅ 常に最下部に表示されるフッター -->
-  <div class="footer-section">
-    <h4>ComicRental(solekia@teamB)</h4>
-  </div>
-
 </div><!-- /wrapper -->
+
+<!-- ✅ wrapperの外に出したフッター（画面全体に表示される） -->
+<div class="footer-section">
+  <h4>ComicRental(solekia@teamB)</h4>
+</div>
+
 </body>
 </html>
