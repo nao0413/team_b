@@ -7,6 +7,15 @@ body {
   margin: 0;
   padding: 0;
 }
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;  /* ← 画面の高さいっぱい */
+}
+
+.main-content {
+  flex: 1;  /* ← 空でも残りスペースを埋めて押し下げる */
+}
 
 .header-section {
   /*border-bottom: 3px solid white;*/
@@ -56,7 +65,9 @@ body {
   font-size: 1em;
   color: #fff;
   text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px 0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px 0px #000, 0px -1px 0px #000, 2px 2px 0px;
+  text-align: center;
 }
+
 /* タイトル */
 .title {
   text-align: center;
@@ -302,12 +313,13 @@ button:active {
   border-radius: 10px;
   padding: 10px 20px;
   margin-left: auto;    /* ← 右に押しつける */
-  margin-right: 0;      /* ← 右端にぴったり */
+  margin-right: 0;  
+   margin: 0 0 40px auto;   
 }
 
 .number-highlight {
   font-size: 2em;
   font-weight: bold;
-  color: #E64545;  /* ← 黒から赤に変更！ */
+  color: #E64545;  
   margin: 0 4px;
 }
