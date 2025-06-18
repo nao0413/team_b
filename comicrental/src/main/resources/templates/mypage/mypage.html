@@ -115,7 +115,7 @@
             /* デフォルトマージンをリセット */
             margin-bottom: 15px;
             /* 下に余白 */
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #d2d1d1;
             /* 下線 */
             padding-bottom: 10px;
             /* 下線との間に余白 */
@@ -192,6 +192,7 @@
         }
 
         .menu-buttons button:hover {
+            background-color: #f27373;
             /* background-color: #e0e0e0; */
             transform: translateY(-3px);
             /* 上に3px移動させる */
@@ -220,7 +221,7 @@
             <!-- <div class="mypage-section menu-button-section"> -->
             <h2>メニューボタン</h2>
             <div class="menu-buttons">
-                <form th:action="@{/home}" method="get"> <button type="submit">ホーム画面</button>
+                <form th:action="@{/home}" method="get"> <button type="submit">HOME</button>
                 </form>
 
                 <form th:action="@{/cart/table}" method="get"> <button type="submit">買い物かご</button>
