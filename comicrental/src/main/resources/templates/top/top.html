@@ -5,16 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>トップページ - 漫画レンタル</title>
-     <link rel="stylesheet" href="/CSS/comicrental.css">
-     <link rel="stylesheet" href="/CSS/comictable.css">
+    <link rel="stylesheet" href="/CSS/comicrental.css">
+    <link rel="stylesheet" href="/CSS/comictable.css">
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
+            display: flex;
+            flex-direction: column;
             text-align: center;
             font-family: sans-serif;
         }
+
         nav {
             margin-bottom: 20px;
         }
+
         .ranking-container {
             display: flex;
             justify-content: center;
@@ -24,18 +34,26 @@
             padding: 10px;
             margin-top: 20px;
         }
+
         .comic-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             min-width: 120px;
         }
+
         .comic-item img {
             width: 80px;
             height: auto;
             border: 1px solid #ccc;
             border-radius: 8px;
             margin-top: 5px;
+        }
+
+        .footer-section {
+            margin-top: auto;
+            background-color: #f4f4f4;
+            padding: 10px;
         }
     </style>
 </head>
@@ -47,7 +65,6 @@
 
     <nav>
         <a th:href="@{/login/loginpage}">ログイン</a><br>
-
         <a th:href="@{/account/create}">新規アカウント登録</a>
     </nav>
 
@@ -60,6 +77,7 @@
             <img th:src="${comic.comicImage}" alt="表紙画像">
         </div>
     </div>
+
     <div class="footer-section">
         <h4>ComicRental(solekia@teamB)</h4>
     </div>
