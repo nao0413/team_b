@@ -83,17 +83,16 @@
 </head>
 <body>
   <div class="header-section">
-    <h1>漫画レンタル</h1>
-    <div class="nav-row">
-      <div class="nav-center">
-        <a th:href="@{/search}">検索</a> |
-        <a th:href="@{/comics/table}">漫画一覧</a> |
-        <a th:href="@{/comics/recommend}">おすすめを見る</a>
-      </div>
-      <div class="nav-right">
-        <a th:href="@{/mypage}">マイページ</a>
-      </div>
-    </div>
+  <h1>漫画レンタル</h1>
+  <div class="nav-links" style="text-align: center; margin-top: 8px;">
+    <a th:href="@{/search}" style="color: white; text-decoration: none; margin: 0 10px;">検索</a>｜
+    <a th:href="@{/comics/table}" style="color: white; text-decoration: none; margin: 0 10px;">漫画一覧</a>｜
+    <a th:href="@{/comics/recommend}" style="color: white; text-decoration: none; margin: 0 10px;">おすすめを見る</a>
+  </div>
+  <div class="nav-right" style="position: absolute; top: 20px; right: 30px;">
+    <a th:href="@{/mypage}" style="color: white; font-weight: bold; text-decoration: none;">マイページ</a>
+  </div>
+  </div>
   </div>
 
   <h1>ようこそ、漫画レンタルへ！</h1>
