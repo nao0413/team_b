@@ -6,7 +6,7 @@
     margin: 20px auto; /* 中央寄せ */
     padding: 15px 20px;
     border-radius: 8px;
-    max-width: 800px; /* メッセージボックスの最大幅 */
+    max-width: 500px; /* メッセージボックスの最大幅 */
     box-sizing: border-box; /* パディングとボーダーを幅に含める */
 }
 
@@ -100,7 +100,7 @@ h1 {
     /* 内側の余白 */
     margin: 20px auto;
     /* 上下に余白、左右中央揃え */
-    max-width: 800px;
+    max-width: 500px;
     /* ボックスの最大幅（適宜調整） */
     text-align: left;
 }

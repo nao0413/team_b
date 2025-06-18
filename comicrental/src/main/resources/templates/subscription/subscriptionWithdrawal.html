@@ -145,28 +145,28 @@
         <h1>漫画レンタル</h1>
         |<a th:href="@{/mypage}">マイページへ  </a>|
     </div>
-    </div>
     <div class="box-section">
-    <h2 th:text="${page.title}">サブスクリプション　退会</h2>
-    <div th:if="${errorMessage}" class="message error">
-        <p th:text="${errorMessage}"></p>
-    </div>
+        <h2 th:text="${page.title}">サブスクリプション　退会</h2>
+        <div th:if="${errorMessage}" class="message error">
+            <p th:text="${errorMessage}"></p>
+        </div>
     <h2 class="caveat">サブスクリプションを退会します。</h2>
     <h2 class="caveat">よろしいですか？</h2>
-    <div class="user-info-section">
-        <h3>現在のユーザー情報</h3>
-        <p th:if="${page.id != null}">　　　　　　　　　　　　会員番号：<span th:text=${page.id}></span></p>
-        <p th:if="${page.name != null}">　　　　　　　　　　　　　　　名前：<span th:text=${page.name}></span></p>
-        <p>　　　　　サブスクリプション状況：<span th:text="${page.subscribed ?'加入済み' : '未加入'}"></span></p>
-    </div>
-    <div class="dialog-button-area">
-        <div class="confirmation-buttons">
-            <form action="/subscription/doWithdrawal" method="post">
-                <button type="submit" class="comicdetail-button">はい</button>
-            </form>
-            <form action="/subscription/list" method="get">
-                <button type="submit" class="comicdetail-button">いいえ</button>
-            </form>
+        <div class="user-info-section">
+            <h3>現在のユーザー情報</h3>
+            <p th:if="${page.id != null}">　　　　　　　　　　　　会員番号：<span th:text=${page.id}></span></p>
+            <p th:if="${page.name != null}">　　　　　　　　　　　　　　　名前：<span th:text=${page.name}></span></p>
+            <p>　　　　　サブスクリプション状況：<span th:text="${page.subscribed ?'加入済み' : '未加入'}"></span></p>
+        </div>
+        <div class="dialog-button-area">
+            <div class="confirmation-buttons">
+                <form action="/subscription/doWithdrawal" method="post">
+                    <button type="submit" class="comicdetail-button">はい</button>
+                </form>
+                <form action="/subscription/list" method="get">
+                    <button type="submit" class="comicdetail-button">いいえ</button>
+                </form>
+            </div>
         </div>
     </div>
     <div class="footer-section">
