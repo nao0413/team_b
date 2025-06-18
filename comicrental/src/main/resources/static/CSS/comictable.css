@@ -103,7 +103,7 @@ h1 {
     max-width: 500px;
     /* ボックスの最大幅（適宜調整） */
     text-align: left;
-    padding-bottom: 30px
+    padding-bottom: 60px
 }
 .box-section .box-content {
     width: fit-content; 

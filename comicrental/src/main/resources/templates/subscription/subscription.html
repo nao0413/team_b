@@ -52,6 +52,7 @@
             max-width: 100%;
             /* mypageブロック内のテキストを左寄せに */
             text-align: left;
+            border-bottom: 1px solid #ddd;
         }
 
         .mypage h4,
@@ -69,6 +70,11 @@
 
         form {
             /* 各フォームの下に余白を取る */
+            margin-bottom: 20px;
+        }
+        .subsc h2{
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
             margin-bottom: 20px;
         }
     </style>
@@ -92,7 +98,7 @@
         <p th:text="${infoMessage}"></p>
     </div>
 
-    <div class="box-section">
+    <div class="box-section subsc">
         <h2 th:text="${page.title}">サブスクリプション状況</h2>
         <div class="mypage">
             <h4 th:if="${page.id !=null}"> 　　　　　　　会員番号:<span th:text="${page.id}"></span></h4>
