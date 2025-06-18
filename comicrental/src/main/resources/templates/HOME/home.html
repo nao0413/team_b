@@ -43,28 +43,56 @@
       border-radius: 8px;
     }
 
-    .comic-item span {
+    .comic-item .title-link {
+      color: #007bff;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 20px;
+    }
+
+    .nav-center {
+      font-size: 1em;
+    }
+
+    .nav-center a {
+      color: black;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .nav-center a:hover {
       text-decoration: underline;
     }
 
-    a {
+    .nav-right a {
+      color: white;
       text-decoration: none;
-      color: black;
+      font-weight: bold;
     }
 
-    a:hover {
-      color: darkred;
+    .nav-right a:hover {
+      color: #ccc;
     }
   </style>
 </head>
 <body>
   <div class="header-section">
     <h1>漫画レンタル</h1>
-    <div class="header-nav">
-      <a th:href="@{/mypage}">マイページ</a>
-      <a th:href="@{/search}">検索</a>
-      <a th:href="@{/comics/table}">漫画一覧</a>
-      <a th:href="@{/comics/recommend}">おすすめを見る</a>
+    <div class="nav-row">
+      <div class="nav-center">
+        <a th:href="@{/search}">検索</a> |
+        <a th:href="@{/comics/table}">漫画一覧</a> |
+        <a th:href="@{/comics/recommend}">おすすめを見る</a>
+      </div>
+      <div class="nav-right">
+        <a th:href="@{/mypage}">マイページ</a>
+      </div>
     </div>
   </div>
 
@@ -76,8 +104,7 @@
       <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
         <img th:src="${comic.comicImage}" alt="表紙画像">
         <div>
-          <span th:text="${comic.title}"></span><br>
-          <span th:text="'(' + ${comic.rentaltimes} + '回)'"></span>
+          <span th:text="${comic.title}" class="title-link"></span><br>
         </div>
       </a>
     </li>
@@ -89,8 +116,7 @@
       <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
         <img th:src="${comic.comicImage}" alt="表紙画像">
         <div>
-          <span th:text="${comic.title}"></span><br>
-          <span th:text="'入荷日: ' + ${comic.arrivalDate}"></span>
+          <span th:text="${comic.title}" class="title-link"></span><br>
         </div>
       </a>
     </li>
