@@ -46,6 +46,7 @@
   font-size: 1em;
   color: #fff;
   text-shadow: 1px 1px 0px #000, 1px 2px 0px #000, -1px -1px 0px #000, -1px -1px 0px #000, 2px -1px 0px #000, 1px 0px 0px #000, 0px 1px 0px #000, -1px 0px 0px #000, 0px -1px 0px #000, 2px 2px 0px;
+  text-align: center;
 }
 
 body {
@@ -125,10 +126,12 @@ button.btn-border {
       transparent 2px,
       transparent 5px);
   background-size: 7px 7px;
+  background-position: 0 0;
 
   -webkit-backface-visibility: hidden;
 
   backface-visibility: hidden;
+  position: relative;
 }
 
 button.btn-border span {
@@ -143,11 +146,16 @@ button.btn-border span {
   border: 2px solid #000;
   border-radius: 0.5rem;
   background: #fff;
+  transform: scale(1); 
+  transition: transform 0.3s ease-out;
 }
 
+
 button.btn-border:hover {
-  margin: 0;
-  padding: 6px;
   transform: translate(4px, 4px);
   box-shadow: none;
+  background-size: 6px 6px;
+  background-position: 1px 1px;
+  transition: all 0.3s ease-out, background-size 0.3s ease-out, background-position 0.3s ease-out;
 }
+

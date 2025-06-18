@@ -181,17 +181,17 @@
     <div class="header-section">
         <h1>漫画レンタル</h1>
         |<a th:href="@{/home}">  HOME  </a>| 
-        <a th:href="@{/comics/recommend}">  今月のおすすめ  </a>|  
+        <a th:href="@{/comics/recommend}">  おすすめを見る  </a>|  
         <a th:href="@{/cart/table}">  買い物かごページへ  </a>|
     </div>
 
     <h1 class="title">漫画一覧</h1>
 
     <div th:if="${errorMessage}">
-        <p th:text="${errorMessage}"></p>
+        <p th:text="${errorMessage}" class="message error"></p>
     </div>
     <div th:if="${successMessage}">
-        <p th:text="${successMessage}"></p>
+        <p th:text="${successMessage}" class="message success"></p>
     </div>
 
     <div class="sort-controls">

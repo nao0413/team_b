@@ -135,6 +135,84 @@ public class ComicController {
       }
    }
 
+   @PostMapping("addToCartRecommend")
+   public String addToCartRecommend(@RequestParam("comicId") Integer comicId,
+         @RequestParam(value = "volume", required = false) Integer volume,
+         @RequestParam(value = "redirectUrl", required = false) String redirectUrl,
+         HttpSession session,
+         RedirectAttributes redirectAttributes) {
+      String loggedInUsername = (String) session.getAttribute("loggedInUser");
+      Integer customerId = (Integer) session.getAttribute("loggedInUserId");
+      if (loggedInUsername == null) {
+         redirectAttributes.addFlashAttribute("errorMessage", "ログインが必要です。");
+         return "redirect:/login/loginpage";
+      }
+
+      if (volume == null) {
+         volume = 1;
+      }
+
+      Cart cartItem = new Cart();
+      cartItem.setCustomer_id(customerId);
+      cartItem.setComic_id(comicId);
+      cartItem.setVolume(volume);
+      Date rentalExpireDate = Date.from(LocalDate.now().plusDays(7).atStartOfDay(ZoneId.systemDefault()).toInstant());
+      cartItem.setRental_expire(rentalExpireDate);
+      cartItem.setIs_deleted(false);
+
+      try {
+         // 買い物かごへ漫画を追加する処理
+         cartMapper.insert(cartItem);
+         redirectAttributes.addFlashAttribute("successMessage", "漫画をカートに追加しました！");
+         return "redirect:/comics/recommend";
+      } catch (Exception e) {
+         System.err.println("買い物かご登録エラー：" + e.getMessage());
+         e.printStackTrace();
+         redirectAttributes.addFlashAttribute("errorMessage", "カートへの追加に失敗しました。");
+         return "redirect:/comics/recommend";
+      }
+   }
+
+   @PostMapping("addToCartFromSearch")
+   public String addToCartFromSearch(@RequestParam("comicId") Integer comicId,
+         @RequestParam(value = "volume", required = false) Integer volume,
+         @RequestParam(value = "redirectUrl", required = false) String redirectUrl,
+         HttpSession session,
+         RedirectAttributes redirectAttributes) {
+      String loggedInUsername = (String) session.getAttribute("loggedInUser");
+      Integer customerId = (Integer) session.getAttribute("loggedInUserId");
+      if (loggedInUsername == null) {
+         redirectAttributes.addFlashAttribute("errorMessage", "ログインが必要です。");
+         return "redirect:/login/loginpage";
+      }
+
+      if (volume == null) {
+         volume = 1;
+      }
+
+      Cart cartItem = new Cart();
+      cartItem.setCustomer_id(customerId);
+      cartItem.setComic_id(comicId);
+      cartItem.setVolume(volume);
+      Date rentalExpireDate = Date.from(LocalDate.now().plusDays(7).atStartOfDay(ZoneId.systemDefault()).toInstant());
+      cartItem.setRental_expire(rentalExpireDate);
+      cartItem.setIs_deleted(false);
+
+      try {
+         cartMapper.insert(cartItem);
+         redirectAttributes.addFlashAttribute("successMessage", "漫画をカートに追加しました！");
+      } catch (Exception e) {
+         e.printStackTrace();
+         redirectAttributes.addFlashAttribute("errorMessage", "カートへの追加に失敗しました。");
+      }
+
+      if (redirectUrl != null && (redirectUrl.startsWith("/search") || redirectUrl.startsWith("/comics"))) {
+         return "redirect:" + redirectUrl;
+      } else {
+         return "redirect:/comics/table";
+      }
+   }
+
    @GetMapping("/detail/{comicId}")
    public String showComicDetail(Model model, @PathVariable("comicId") Integer comicId, HttpSession session,
          RedirectAttributes redirectAttributes) {
@@ -144,7 +222,7 @@ public class ComicController {
          redirectAttributes.addFlashAttribute("errorMessage", "ログインが必要です。");
          return "redirect:/login/loginpage";
       }
-      Optional<ComicModel> comicOptional = comicMapper.findByComicId(comicId,customerId);
+      Optional<ComicModel> comicOptional = comicMapper.findByComicId(comicId, customerId);
       if (comicOptional.isPresent()) {
          ComicModel comic = comicOptional.get();
          model.addAttribute("comic", comic);
@@ -172,45 +250,4 @@ public class ComicController {
       model.addAttribute("page", page);
       return "comictable/comicrecommend";
    }
-
-   @PostMapping("addToCartFromSearch")
-public String addToCartFromSearch(@RequestParam("comicId") Integer comicId,
-                                  @RequestParam(value = "volume", required = false) Integer volume,
-                                  @RequestParam(value = "redirectUrl", required = false) String redirectUrl,
-                                  HttpSession session,
-                                  RedirectAttributes redirectAttributes) {
-    String loggedInUsername = (String) session.getAttribute("loggedInUser");
-    Integer customerId = (Integer) session.getAttribute("loggedInUserId");
-    if (loggedInUsername == null) {
-        redirectAttributes.addFlashAttribute("errorMessage", "ログインが必要です。");
-        return "redirect:/login/loginpage";
-    }
-
-    if (volume == null) {
-        volume = 1;
-    }
-
-    Cart cartItem = new Cart();
-    cartItem.setCustomer_id(customerId);
-    cartItem.setComic_id(comicId);
-    cartItem.setVolume(volume);
-    Date rentalExpireDate = Date.from(LocalDate.now().plusDays(7).atStartOfDay(ZoneId.systemDefault()).toInstant());
-    cartItem.setRental_expire(rentalExpireDate);
-    cartItem.setIs_deleted(false);
-
-    try {
-        cartMapper.insert(cartItem);
-        redirectAttributes.addFlashAttribute("successMessage", "漫画をカートに追加しました！");
-    } catch (Exception e) {
-        e.printStackTrace();
-        redirectAttributes.addFlashAttribute("errorMessage", "カートへの追加に失敗しました。");
-    }
-
-    if (redirectUrl != null && (redirectUrl.startsWith("/search") || redirectUrl.startsWith("/comics"))) {
-        return "redirect:" + redirectUrl;
-    } else {
-        return "redirect:/comics/table";
-    }
-}
-
 }

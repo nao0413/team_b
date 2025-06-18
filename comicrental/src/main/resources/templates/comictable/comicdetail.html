@@ -110,18 +110,18 @@
 <body>
     <div class="header-section">
         <h1>漫画レンタル</h1>
-        |<a th:href="@{/home}">  HOME  </a> |
-        <a th:href="@{/comics/table}">  漫画一覧ページへ  </a>|
-        <a th:href="@{/cart/table}">  買い物かごページへ  </a>|
+        |<a th:href="@{/home}"> HOME </a> |
+        <a th:href="@{/comics/table}"> 漫画一覧ページへ </a>|
+        <a th:href="@{/cart/table}"> 買い物かごページへ </a>|
     </div>
 
     <h1 class="title">漫画個別ページ</h1>
 
     <div th:if="${errorMessage}">
-        <p th:text="${errorMessage}"></p>
+        <p th:text="${errorMessage}" class="message error"></p>
     </div>
     <div th:if="${successMessage}">
-        <p th:text="${successMessage}"></p>
+        <p th:text="${successMessage}" class="message success"></p>
     </div>
     <div class="comic-main-info">
         <div class="comic-detail-image">
@@ -136,13 +136,13 @@
                 <a th:href="@{/rental/status}" th:text="レンタル中"></a>
             </span>
             <span th:unless="${comic.is_rented}" class="non-rented">未レンタル</span>
+            <form action="/comics/addToCartDetail" method="post">
+                <input type="hidden" name="comicId" th:value="${comic.comic_id}">
+                <input type="hidden" name="customerId" th:value="${customerId}">
+                <button type="submit" class="btn btn-border"><span>カートに入れる</span></button>
+            </form>
         </div>
     </div>
-    <form action="/comics/addToCartDetail" method="post">
-        <input type="hidden" name="comicId" th:value="${comic.comic_id}">
-        <input type="hidden" name="customerId" th:value="${customerId}">
-        <button type="submit" class="btn btn-border"><span>カートに入れる</span></button>
-    </form>
 
     <div class="footer-section">
         <h4>ComicRental(solekia@teamB)</h4>
