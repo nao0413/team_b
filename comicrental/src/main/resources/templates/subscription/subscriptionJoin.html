@@ -126,38 +126,44 @@
             padding: 10px 20px;
             font-size: 1.1em;
         }
+
+        .box-section span {
+            color: red;
+            display: block;
+        }
     </style>
 </head>
 
 <body>
     <div class="header-section">
         <h1>漫画レンタル</h1>
-        |<a th:href="@{/subscription/list}">  サブスクリプション状況確認画面へ戻る  </a>|
-        |<a th:href="@{/mypage}">  マイページ  </a>|
+        |<a th:href="@{/subscription/list}"> サブスクリプション状況確認画面へ戻る </a>|
+        <div class="nav-right" style="position: absolute; top: 15px; right: 20px;">
+            <a th:href="@{/mypage}">マイページ</a>
+        </div>
+    </div>
+    <div th:if="${errorMessage}" class="message error">
+        <p th:text="${errorMessage}"></p>
     </div>
     <div class="box-section">
         <h2 th:text="${page.title}">サブスクリプション　加入</h2>
         <h2>シングルプラン　月額８００円　上限３０冊</h2>
-        <div th:if="${errorMessage}" class="message error">
-            <p th:text="${errorMessage}"></p>
-        </div>
-        <div th:if="${successMessage}" class="message success">
-            <p th:text="${successMessage}"></p>
-        </div>
         <form action="/subscription/doJoin" method="post">
-            <input type="hidden" name="customerId" th:value="${page.id}">
             <h2>クレジットカード情報</h2>
             <h4>クレジットカード番号</h4>
-            <input type="text" name="cardNumber" placeholder="例: 1234-5678-9012-3456" th:value="${page.cardNumber}"
-                required>
+            <input type="text" name="cardNumber" placeholder="例: 1234-5678-9012-3456" th:value="${page.cardNumber}">
+            <span th:if="${errors != null and errors.containsKey('cardNumber')}" th:text="${errors.cardNumber}"></span>
             <h4>使用名義</h4>
-            <input type="text" name="cardHolderName" placeholder="例: YAMADA TARO" th:value="${page.cardHolderName}"
-                required>
+            <input type="text" name="cardHolderName" placeholder="例: YAMADA TARO" th:value="${page.cardHolderName}">
+            <span th:if="${errors != null and errors.containsKey('cardHolderName')}"
+                th:text="${errors.cardHolderName}"></span>
             <h4>有効期限</h4>
-            <input type="text" name="expiryDate" placeholder="例: MM/YY" th:value="${page.expiryDate}" required>
+            <input type="text" name="expiryDate" placeholder="例: MM/YY" th:value="${page.expiryDate}">
+            <span th:if="${errors != null and errors.containsKey('expiryDate')}" th:text="${errors.expiryDate}"></span>
             <h4>セキュリティコード</h4>
-            <input type="password" name="securityCode" placeholder="例: 123" th:value="${page.securityCode}" required>
-
+            <input type="password" name="securityCode" placeholder="例: 123" th:value="${page.securityCode}">
+            <span th:if="${errors != null and errors.containsKey('securityCode')}"
+                th:text="${errors.securityCode}"></span>
             <button type="submit" class="comicdetail-button">加入</button>
         </form>
 

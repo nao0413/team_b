@@ -65,7 +65,9 @@
     <div class="header-section">
         <h1>漫画レンタル</h1>
         |<a th:href="@{/subscription/list}">  サブスクリプション状況確認画面へ  </a>|
-        <a th:href="@{/mypage}">  マイページへ  </a>|
+        <div class="nav-right" style="position: absolute; top: 15px; right: 20px;">
+            <a th:href="@{/mypage}">マイページ</a>
+        </div>
     </div>
     <div th:if="${successMessage}">
         <p th:text="${successMessage}" class="message success"></p>
