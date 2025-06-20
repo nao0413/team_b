@@ -1,8 +1,12 @@
 package teamB.comicrental.subscription.controller;
 
 import java.time.OffsetDateTime;
+import java.time.YearMonth;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 //import java.util.concurrent.Flow.Subscription;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -122,13 +126,55 @@ public class SubscController {
             redirectAttributes.addFlashAttribute("errorMessage", "ログインが必要です。");
             return "redirect:/login/loginpage";
         }
-        // 前のページからcustomer_idが受け取れた場合
+        Map<String, String> errors = new HashMap<>();
+        // 1. 必須チェック (isEmpty() または isBlank())
+        if (cardNumber == null || cardNumber.isEmpty()) {
+            errors.put("cardNumber", "カード番号は必須です。");
+        }
+        if (cardHolderName == null || cardHolderName.isEmpty()) {
+            errors.put("cardHolderName", "名義人は必須です。");
+        }
+        if (expiryDate == null || expiryDate.isEmpty()) {
+            errors.put("expiryDate", "有効期限は必須です。");
+        }
+        if (securityCode == null || securityCode.isEmpty()) {
+            errors.put("securityCode", "セキュリティコードは必須です。");
+        }
+        // 2. 形式チェック (正規表現や文字数制限)
+        if (cardNumber != null && !cardNumber.isEmpty() && !Pattern.matches("^\\d{4}-\\d{4}-\\d{4}-\\d{4}$", cardNumber)) {
+            errors.put("cardNumber", "カード番号はXXXX-XXXX-XXXX-XXXXの形で入力してください。");
+            }
+        if (cardHolderName != null && !cardHolderName.isEmpty() && cardHolderName.length() > 50) {
+            errors.put("cardHolderName", "名義人は50文字以内で入力してください。");
+        }
+        if (expiryDate != null && !expiryDate.isEmpty()
+                && !Pattern.matches("^(0[1-9]|1[0-2])\\/([0-9]{2})$", expiryDate)) {
+            errors.put("expiryDate", "有効期限はMM/YY形式で入力してください (例: 12/25)。");
+        }
+        if (securityCode != null && !securityCode.isEmpty() && !Pattern.matches("^[0-9]{3}$", securityCode)) {
+            errors.put("securityCode", "セキュリティコードは3桁の半角数字で入力してください。");
+        }
+        if (!errors.containsKey("expiryDate") && expiryDate != null && !expiryDate.isEmpty()) {
+            try {
+                String[] parts = expiryDate.split("/");
+                int month = Integer.parseInt(parts[0]);
+                int year = 2000 + Integer.parseInt(parts[1]); // YYを20YYに変換
+
+                YearMonth expiry = YearMonth.of(year, month);
+                if (expiry.isBefore(YearMonth.now())) { // 現在の年月より過去である場合
+                    errors.put("expiryDate", "有効期限が過ぎています。");
+                }
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                // ここでエラーになるのは形式が壊れている場合なので、既にPatternで弾かれているはずだが念のため
+                errors.put("expiryDate", "有効期限の形式が不正です。");
+            }
+        }
         // 一つでも入力されていない場所がある場合の処理
-        if (cardNumber.isEmpty() || cardHolderName.isEmpty() || expiryDate.isEmpty() || securityCode.isEmpty()) {
-            // 入力されていなかった場合のエラーメッセージ
-            model.addAttribute("errorMessage", "全てのクレジットカード情報を入力してください。");
+        if (!errors.isEmpty()) {
+            model.addAttribute("errors", errors);
+            model.addAttribute("errorMessage", "入力内容に誤りがあります。");
             SubscPageModel page = new SubscPageModel();
-            page.setTitle("サブスクリプション加入画面");
+            page.setTitle("サブスクリプション  加入");
             page.setCardNumber(cardNumber);
             page.setCardHolderName(cardHolderName);
             page.setExpiryDate(expiryDate);
@@ -238,14 +284,14 @@ public class SubscController {
         SubscPageModel page = new SubscPageModel();
         Optional<SubscModel> subscDataOptional = subscMapper.findById(customerId);
         if (subscDataOptional.isPresent()) {
-        SubscModel subscData = subscDataOptional.get();
-        page.setId(subscData.getCustomer_id());
+            SubscModel subscData = subscDataOptional.get();
+            page.setId(subscData.getCustomer_id());
         } else {
-        // データが見つからない場合（異常系だが、ページは開くように）
-        page.setTitle("退会手続き完了（ユーザー情報なし）");
-        page.setId(customerId); // customerIdは取得できるので設定しても良い
-    }
-        model.addAttribute("page",page);
-        return "subscription/subscriptionWithdrawalCon"; 
+            // データが見つからない場合（異常系だが、ページは開くように）
+            page.setTitle("退会手続き完了（ユーザー情報なし）");
+            page.setId(customerId); // customerIdは取得できるので設定しても良い
+        }
+        model.addAttribute("page", page);
+        return "subscription/subscriptionWithdrawalCon";
     }
 }
