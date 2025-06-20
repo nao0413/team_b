@@ -32,6 +32,16 @@
   color: blue;
 }
 
+.nav-right a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-right a:hover {
+  color: blue;
+}
+
 .footer-section {
   background-color: #E64545;
   font-family: "Meiryo UI";
@@ -146,7 +156,7 @@ button.btn-border span {
   border: 2px solid #000;
   border-radius: 0.5rem;
   background: #fff;
-  transform: scale(1); 
+  transform: scale(1);
   transition: transform 0.3s ease-out;
 }
 

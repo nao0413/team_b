@@ -185,10 +185,15 @@
 <body>
     <div class="header-section">
         <h1>漫画レンタル</h1>
+        |<a th:href="@{/search}"> 検索 </a>
         |<a th:href="@{/home}"> HOME </a>|
         <a th:href="@{/comics/recommend}"> おすすめを見る </a>|
         <a th:href="@{/cart/table}"> 買い物かごページへ </a>|
+        <div class="nav-right" style="position: absolute; top: 15px; right: 20px;">
+            <a th:href="@{/mypage}">マイページ</a>
+        </div>
     </div>
+
 
     <h1 class="title">漫画一覧</h1>
 
