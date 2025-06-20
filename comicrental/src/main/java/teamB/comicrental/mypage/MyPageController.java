@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpSession; // HttpSessionをインポート
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import teamB.comicrental.login.repository.LoginModel; // LoginModelをインポート (会員情報を取得するため)
 import teamB.comicrental.account.repository.AccountMapper; // AccountMapperをインポート (DBから会員情報を取得するため)
@@ -44,5 +45,19 @@ public class MyPageController {
         model.addAttribute("email", user.getEmail()); // 例: メールアドレス
 
         return "mypage/mypage"; // resources/templates/mypage/mypage.html を返す
+    }
+
+    @GetMapping("/logoutConfirm")
+    public String showLogoutConfirmPage() {
+        // ログアウト確認用のHTMLテンプレートを返す
+        // ファイル名を 'logout_confirmation.html' に変更
+        return "login/logout_confirmation"; // ★ここを変更しました
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpSession session, Model model) {
+        session.invalidate();
+        model.addAttribute("registrationSuccess", true);
+        return "/login/logout_success";
     }
 }
