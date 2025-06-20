@@ -241,6 +241,16 @@
             margin-top: -10px;
             margin-bottom: 10px;
         }
+
+        .nav-right a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-right a:hover {
+            color: blue;
+        }
     </style>
 </head>
 
@@ -248,6 +258,10 @@
     <header class="header-section">
         <h1>漫画レンタル</h1>
     </header>
+
+    <div class="nav-right" style="position: absolute; top: 15px; right: 20px;">
+        <a th:href="@{/mypage}">マイページ</a>
+    </div>
 
     <div class="main-content-wrapper">
         <div class="form-container">

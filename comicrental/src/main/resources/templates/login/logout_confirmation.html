@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ログアウト完了</title>
+    <title>ログアウト確認</title>
     <style>
         /* 全体的な設定 */
         body {
@@ -138,28 +138,64 @@
         a:hover {
             background-color: #f27373;
         }
+
+        .buttons {
+            display: flex;
+            /* Flexboxを有効にする */
+            justify-content: center;
+            /* 子要素を中央に配置 */
+            gap: 50px;
+            /* 子要素間のスペースを20pxにする */
+            margin-top: 20px;
+            /* 上部に余白を追加して、テキストとボタンの距離を確保 */
+        }
+
+        /* ★★★ここまで★★★ */
+
+        .buttons button {
+            font-family: "Meiryo UI";
+            background-color: #E64545;
+            color: white;
+            font-weight: bold;
+            border-radius: 15px;
+            font-size: 1em;
+            padding: 8px 15px;
+            border: none;
+        }
+
+        .buttons button:hover {
+            background-color: #f27373;
+        }
+
+        /* フォーム要素もflexアイテムとして扱われるようにする */
+        .buttons form {
+            display: flex;
+            /* フォーム自体をFlexアイテムとして振る舞わせる */
+        }
     </style>
-</head>
 
 <body>
+
     <header class="header-section">
         <h1>漫画レンタル</h1>
     </header>
 
     <div class="page-content-wrapper">
-        <!-- <div class="section-segment header-title-main">
-            漫画レンタル
-        </div> -->
 
         <div class="section-segment header-title-sub">
             ログアウト
         </div>
 
         <div class="section-segment message-container">
-            <p class="message" th:if="${registrationSuccess}">ログアウトしました。</p>
-            <!-- <p class="message" th:unless="${registrationSuccess}">アカウントが作成されました。</p>> -->
+            <!-- <p class="message" th:if="${registrationSuccess}">ログアウトしますか？</p> -->
+            <p class="message">ログアウトしますか？</p>
 
-            <a th:href="@{/top}">TOP画面へ</a>
+            <!-- <a th:href="@{/mypage}">戻る</a> -->
+        </div>
+        <div class="buttons">
+            <button class="cancel" onclick="window.history.back()">戻る</button>
+            <form th:action="@{/mypage/logout}" method="post"> <button type="submit">ログアウトする</button>
+            </form>
         </div>
     </div>
 
