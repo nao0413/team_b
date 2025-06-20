@@ -107,7 +107,7 @@
 
   <h2>人気タイトル</h2>
   <ul class="comic-list">
-    <li class="comic-item" th:each="comic stat : ${popularComics}">
+    <li class="comic-item" th:each="comic, stat : ${popularComics}">
       <span th:text="${stat.index + 1} + '位'" style="font-weight: bold; margin-bottom: 5px;"></span>
       <a th:href="@{'/comics/detail/'+ ${comic.comic_id}}">
         <img th:src="${comic.comicImage}" alt="表紙画像">
