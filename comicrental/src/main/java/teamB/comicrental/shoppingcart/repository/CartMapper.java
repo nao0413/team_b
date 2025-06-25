@@ -56,6 +56,6 @@ public interface CartMapper {
     @Select(" SELECT*FROM cart where customer_id=#{customerId} AND comic_id=#{comicId} AND volume=#{volume} AND is_deleted=FALSE")
     Cart findCartItem(@Param("customerId") Integer customerId,@Param("comicId") Integer comicId,@Param("volume")Integer volume);
 
-    @Select("SELECT EXISTS(SELECT 1 FROM rental where customer_id=#{customerId} AND comic_id=#{comicId})")
+    @Select("SELECT EXISTS(SELECT 1 FROM rental r_active where customer_id=#{customerId} AND comic_id=#{comicId} AND r_active.rental_status = 'レンタル中' AND r_active.rental_expire >= CURRENT_DATE)")
     boolean isComicRented(@Param("customerId")Integer customerId,@Param("comicId")Integer comicId);
 }

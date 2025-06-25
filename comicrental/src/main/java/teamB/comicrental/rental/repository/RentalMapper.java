@@ -3,6 +3,7 @@ package teamB.comicrental.rental.repository;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.Param;
 
 import teamB.comicrental.rental.model.Rental;
@@ -94,12 +95,25 @@ public interface RentalMapper {
             @Param("endDate") java.sql.Date endDate);
 
     @Select("""
-    SELECT comic_id, title, author, comic_image AS comicImage, rentaltimes, category_id AS genre, arrival_date AS arrivalDate
-    FROM comic
-    WHERE comic_id = #{comicId}
-""")
-Comic findComicById(@Param("comicId") int comicId);
+                SELECT comic_id, title, author, comic_image AS comicImage, rentaltimes, category_id AS genre, arrival_date AS arrivalDate
+                FROM comic
+                WHERE comic_id = #{comicId}
+            """)
+    Comic findComicById(@Param("comicId") int comicId);
 
-
-}
+    @Update("""
+            UPDATE rental
+            SET rental_status='期限切れ',
+                rental_end_date=CURRENT_DATE
+            WHERE rental_status='レンタル中'
+              AND rental_expire<CURRENT_DATE
+            """)
+    int updateExpiredRentals();
     
+    @Update("""
+        UPDATE comic
+        SET rentaltimes = rentaltimes + 1
+        WHERE comic_id = #{comicId}
+    """)
+    int incrementRentalTimes(@Param("comicId") int comicId);
+}
