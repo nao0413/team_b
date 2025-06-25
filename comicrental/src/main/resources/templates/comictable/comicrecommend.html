@@ -136,12 +136,12 @@
             <div class="comic-info">
                 <h1 th:text="${comic.title}">タイトル</h1>
                 <h2>著者:<span th:text="${comic.author}"></span></h2>
-                <h2>説明文:<span th:text="${comic.explanatory}"></span></h2>
+                <h2>ストーリー:<span th:text="${comic.explanatory}"></span></h2>
             </div>
         </div>
 
         <div class="info-main-info">
-            <h3 th:text="${comic.recommend_text}">紹介文</h3>
+            <h3>見どころ:<span th:text="${comic.recommend_text}"></span></h3>
             <div class="info-box recommend-image-box">
                 <span>こちらは公演のポスターです。</span>
                 <img th:src="${comic.recommend_image}" alt="おすすめ画像">

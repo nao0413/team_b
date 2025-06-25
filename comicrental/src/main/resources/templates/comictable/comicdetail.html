@@ -136,7 +136,7 @@
             <h1 th:text="${comic.title}">タイトル</h1>
             <p><strong>著者：</strong><span th:text="${comic.author}" class="comicinfo">著者名</span></p>
             <p><strong>ジャンル：</strong><span th:text="${comic.category_name}" class="comicinfo">ジャンル名</span></p>
-            <p><strong>説明：</strong><span th:text="${comic.explanatory}" class="comicinfo">この漫画はとっても面白いです！</span></p>
+            <p><strong>ストーリー：</strong><span th:text="${comic.explanatory}" class="comicinfo">この漫画はとっても面白いです！</span></p>
             <span th:if="${comic.is_rented}" class="rented">
                 <a th:href="@{/rental/status}" th:text="レンタル中"></a>
             </span>

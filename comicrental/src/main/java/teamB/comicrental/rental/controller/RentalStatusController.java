@@ -25,8 +25,8 @@ public class RentalStatusController {
     private RentalService rentalService;
 
     @GetMapping("/rental/status")
-    public String showRentalStatus(Model model,HttpSession session,RedirectAttributes redirectAttributes) {
-        Integer customerId=(Integer)session.getAttribute("loggedInUserId");
+    public String showRentalStatus(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        Integer customerId = (Integer) session.getAttribute("loggedInUserId");
         if (customerId == null) {
             redirectAttributes.addFlashAttribute("errorMessage", "ログインが必要です。");
             return "redirect:/login/loginpage";
@@ -42,8 +42,10 @@ public class RentalStatusController {
         rentalService.confirmRental(customer_id);
         return "redirect:/cart/complete";
     }
+
     @GetMapping("/rental/confirm")
-public String redirectToCart() {
-    return "redirect:/cart/cart_confirm"; 
-}
+    public String redirectToCart() {
+        return "redirect:/cart/cart_confirm";
+    }
+    
 }

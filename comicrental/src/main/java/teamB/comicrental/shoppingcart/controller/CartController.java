@@ -162,7 +162,8 @@ public class CartController {
             return "redirect:/cart/confirm";
         }
 
-        // レンタル登録処理
+        
+        
         rentalService.confirmRental(customer_id);
 
         // レンタル期限（例：7日後）
