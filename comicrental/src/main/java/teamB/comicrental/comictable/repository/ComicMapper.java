@@ -27,14 +27,14 @@ public interface ComicMapper {
                     c.category_id,
                     ca.category_name,
                     c.comic_image,
-                    CASE WHEN active_rental.comic_id IS NOT NULL THEN TRUE ELSE FALSE END AS isRented
+                    CASE WHEN active_rental.comic_id IS NOT NULL THEN TRUE ELSE FALSE END AS is_rented
                 FROM
                     comic c
                 LEFT JOIN category ca ON c.category_id = ca.category_id
                 LEFT JOIN (
                     SELECT
                         r_active.comic_id,
-                        r_active.customer_id 
+                        r_active.customer_id
                     FROM
                         rental r_active
                     WHERE
@@ -48,7 +48,34 @@ public interface ComicMapper {
     public List<ComicModel> findAllComicsWithCategoryAndRentalStatus(@Param("customerId") int customerId);
 
     // 詳細ページのため
-    @Select("select c.comic_id,c.title,c.author,c.explanatory,c.category_id,ca.category_name,c.comic_image,CASE WHEN r.rental_status='レンタル中' THEN TRUE ELSE FALSE END AS is_rented from comic c LEFT JOIN category ca ON c.category_id=ca.category_id LEFT JOIN rental r ON c.comic_id = r.comic_id AND r.customer_id = #{customerId} WHERE c.comic_id =#{comicId} LIMIT 1")
+    @Select("""
+                SELECT
+                    c.comic_id,
+                    c.title,
+                    c.author,
+                    c.explanatory,
+                    c.category_id,
+                    ca.category_name,
+                    c.comic_image,
+                    CASE WHEN active_rental.comic_id IS NOT NULL THEN TRUE ELSE FALSE END AS is_rented
+                FROM
+                    comic c
+                LEFT JOIN category ca ON c.category_id = ca.category_id
+                LEFT JOIN (
+                    SELECT
+                        r_active.comic_id,
+                        r_active.customer_id
+                    FROM
+                        rental r_active
+                    WHERE
+                        r_active.customer_id = #{customerId}
+                        AND r_active.rental_status = 'レンタル中'
+                        AND r_active.rental_expire >= CURRENT_DATE
+                    GROUP BY r_active.comic_id, r_active.customer_id
+                ) AS active_rental ON c.comic_id = active_rental.comic_id
+                WHERE c.comic_id =#{comicId}
+                ORDER BY c.comic_id
+                LIMIT 1""")
     public Optional<ComicModel> findByComicId(@Param("comicId") int comicId, @Param("customerId") Integer customerId);
 
     // 漫画紹介ページのため
