@@ -71,7 +71,7 @@ body {
 /* タイトル */
 .title {
   text-align: center;
-  font-size: 2em;
+  font-size: 2.6em;
   margin: 0;
   color: #f8f8ff;
   font-family: "Meiryo UI";
@@ -166,7 +166,7 @@ th {
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
 }
 
-/* サマリ領域 */
+
 .summary {
   margin-top: 20px;
   padding: 10px;
@@ -292,19 +292,9 @@ button:active {
   box-sizing: border-box;
 }
 
-.rental-limit {
-  font-size: 1.4em;
-  font-weight: bold;
-  color: #E64545;
-  background-color: #fff5f5;
-  border: 2px solid #E64545;
-  border-radius: 10px;
-  padding: 10px 20px;
-  margin-left: 0;       
-  margin-right: auto;   
-}
-
+.rental-limit,
 .total-count {
+  margin: 0;
   font-size: 1.4em;
   font-weight: bold;
   color: #E64545;
@@ -312,9 +302,6 @@ button:active {
   border: 2px solid #E64545;
   border-radius: 10px;
   padding: 10px 20px;
-  margin-left: auto;    /* ← 右に押しつける */
-  margin-right: 0;  
-   margin: 0 0 40px auto;   
 }
 
 .number-highlight {
