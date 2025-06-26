@@ -191,3 +191,22 @@ button.btn-border:hover {
   color: #721c24;
   border: 1px solid #f5c6cb;
 }
+
+html, body {
+    height: 100%;       /* 画面高さを100%に */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;  /* ビューポートの高さを満たす */
+}
+
+.main-content {
+    flex: 1 0 auto;     /* これが伸びてフッターを下に押し出す */
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;  /* 画面中央に配置 */
+}
