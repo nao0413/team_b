@@ -124,6 +124,7 @@ public class CartController {
         model.addAttribute("cartList", cartList);
         model.addAttribute("totalCount", cartService.getTotalCount(cartList));
         model.addAttribute("customerId", customer_id);
+        model.addAttribute("remainingLimit", maxLimit - (alreadyRented + cartCount));
         return "cart/cart_confirm";
     }
 

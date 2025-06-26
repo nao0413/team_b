@@ -85,22 +85,27 @@ text-align: center;
 }
 
 .page-title {
-  font-size: 30px;
-  color: #E64545;
+  
   font-family: "Meiryo UI", sans-serif;
+  font-size: 2.6em; 
+  color: #E64545;
+  text-align: center;
   text-shadow: 2px 2px 0 #000;
-  margin: 0;
+  margin: 40px 0 30px 0; 
 }
+
 
 /* テーブル */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 10px;
   border: 2px solid #E64545;
   table-layout: fixed;
   font-family: "Meiryo UI", sans-serif;
+
 }
+
 
 th, td {
   border: 1px solid #E64545;
@@ -165,7 +170,7 @@ th:nth-child(4), td:nth-child(4) { width: 30%; }
   color: white;
   border: none;
   padding: 15px 27px;
-  font-size: 1.0rem;
+  font-size: 1.2rem;
   font-weight: bold;
   border-radius: 10px;
   box-shadow: 3px 3px 0 #333;
@@ -232,4 +237,50 @@ th:nth-child(4), td:nth-child(4) { width: 30%; }
 .subsc-link:hover {
   background-color: #fdd;
   text-decoration: underline;
+}
+table {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0 10px;
+  box-sizing: border-box;
+  padding-left: 0px;   
+  padding-right: 0px;  
+}
+.rental-limit,
+.total-count {
+  margin: 0;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #E64545;
+  background-color: #fff5f5;
+  border: 2px solid #E64545;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.total-count {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #E64545;
+  background-color: #fff5f5;
+  border: 2px solid #E64545;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.remaining-num {
+  font-size: 24px;
+  font-weight: 900;
+  color: #ff0000;
+  text-shadow: 1px 1px 2px #000;
 }
