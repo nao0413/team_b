@@ -11,8 +11,15 @@
     <style>
         body {
             text-align: center;
+            min-height: 100vh; /* ★ビューポートの高さいっぱいになるように */
+            display: flex; 
+            flex-direction: column; /* ★子要素（wrapper）を縦に並べる */
         }
-
+        .comic-main-info{
+            flex-grow: 1; /* ★重要：この部分が利用可能な高さをすべて埋める */
+            padding: 20px 0; /* 上下の余白 */
+            max-width: 960px; /* 最大幅 */
+        }
         /* タイトル */
         h1 {
             font-size: 2em;
