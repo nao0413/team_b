@@ -1,144 +1,280 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>検索結果</title>
-    <link rel="stylesheet" href="/CSS/comicrental.css">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-            background-color: #fdfdfd;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>検索結果</title>
+<link rel="stylesheet" href="/CSS/comicrental.css" />
+<style>
+  /* --- ページ全体レイアウト --- */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
-        h1 {
-            margin-top: 40px;
-        }
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: "Meiryo UI", sans-serif;
+    background-color: #fdfdfd;
+    color: #333;
+    align-items: center;
+  }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            width: 80%;
-            max-width: 800px;
-        }
+  /* --- ヘッダー --- */
+  .header-section {
+    background-color: #e64545;
+    width: 100%;
+    padding: 13px 0;
+    text-align: center;
+  }
 
-        li {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 10px 20px;
-            margin-bottom: 15px;
-            background-color: white;
-        }
+  .header-section h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.8em;
+    text-shadow:
+      1px 1px 0 #000,
+      1px 2px 0 #000,
+      -1px -1px 0 #000,
+      2px -1px 0 #000,
+      0 1px 0 #000,
+      2px 2px 0 #000;
+  }
 
-        li img {
-            width: 80px;
-            height: auto;
-            margin-right: 20px;
-        }
+  /* --- メインコンテンツ --- */
+  main.main-content {
+    flex: 1 0 auto;
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto 40px auto; /* 下部に少し余白 */
+    box-sizing: border-box;
+  }
 
-        li a {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: #333;
-            flex-grow: 1;
-        }
+  h1.title {
+    font-size: 2.5rem;
+    color: #e64545;
+    letter-spacing: 0.2em;
+    text-shadow: 2px 2px 0 #000;
+    text-align: center;
+    margin-bottom: 30px;
+  }
 
-        form {
-            margin-left: 20px;
-        }
+  /* --- メッセージ表示 --- */
+  .message {
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-align: center;
+  }
 
-        button {
-            padding: 6px 12px;
-            border-radius: 6px;
-            background-color: #E64545;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+  .message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
 
-        button:hover {
-            background-color:none;
-        }
+  .message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
 
-        .back-button {
-            margin: 30px 0;
-        }
+  /* --- 検索結果リスト --- */
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
 
-        p {
-            text-align: center;
-        }
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    background-color: white;
+    box-sizing: border-box;
+  }
 
-        a.read-link {
-            padding: 6px 12px;
-            background-color: #E64545;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 6px;
-        }
+  li img {
+    width: 80px;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 4px;
+    object-fit: cover;
+  }
 
-        a.read-link:hover {
-            background-color: #E64545;
-        }
+  li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    flex-grow: 1;
+  }
 
-        .back-link {
-            margin: 30px 0;
-        }
+  li a span span {
+    color: blue;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
 
-        p {
-            text-align: center;
-        }
-    </style>
+  /* --- カート追加ボタン --- */
+  form {
+    margin-left: 20px;
+  }
+
+  button.btn-border {
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 0.5rem;
+    border: 2px solid #000;
+    background: repeating-linear-gradient(
+      -45deg,
+      #000,
+      #000 1px,
+      transparent 2px,
+      transparent 5px
+    );
+    background-size: 7px 7px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    color: #000;
+  }
+
+  button.btn-border span {
+    display: block;
+    padding: 0.8rem 1.5rem;
+    border: 2px solid #000;
+    border-radius: 0.5rem;
+    background: #fff;
+    transform: scale(1);
+    transition: transform 0.3s ease-out;
+  }
+
+  button.btn-border:hover {
+    transform: translate(4px, 4px);
+    background-size: 6px 6px;
+    background-position: 1px 1px;
+    color: #000;
+  }
+
+  /* --- 戻るボタンエリア --- */
+  .back-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0 0 0;
+  }
+
+  a.read-link,
+  button.read-link {
+    padding: 6px 12px;
+    background-color: #e64545;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+  }
+
+  a.read-link:hover,
+  button.read-link:hover {
+    background-color: #c23434;
+  }
+
+  /* --- フッター --- */
+  .footer-section {
+    background-color: #e64545;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+  }
+
+  .footer-section h4 {
+    margin: 0;
+    color: #fff;
+    font-size: 1rem;
+    text-shadow:
+      1px 1px 0 #000,
+      1px 2px 0 #000,
+      -1px -1px 0 #000,
+      2px -1px 0 #000,
+      0 1px 0 #000,
+      2px 2px 0 #000;
+  }
+</style>
 </head>
 <body>
-    <div class="header-section">
-        <h1>漫画レンタル</h1>
-    </div>
-<h1 class="title">検索結果</h1>
-<div th:if="${errorMessage}">
-        <p th:text="${errorMessage}" class="message error"></p>
+  <div class="header-section">
+    <h1>漫画レンタル</h1>
+  </div>
+
+  <main class="main-content">
+    <h1 class="title">検索結果</h1>
+
+    <div th:if="${errorMessage}">
+      <p th:text="${errorMessage}" class="message error"></p>
     </div>
     <div th:if="${successMessage}">
-        <p th:text="${successMessage}" class="message success"></p>
+      <p th:text="${successMessage}" class="message success"></p>
     </div>
-<!-- 結果なし -->
-<p th:if="${#lists.isEmpty(results)}">お探しのものは見つかりませんでした。</p>
 
-<!-- 結果あり -->
-<ul th:if="${!#lists.isEmpty(results)}">
-    <li th:each="comic : ${results}">
-        <a th:href="@{'/comics/detail/' + ${comic.comic_id}}" style="display: flex; align-items: center; text-decoration: none;">
-    <img th:src="${comic.comicImage}" alt="表紙画像">
-    <span>
-        <span style="color: blue; text-decoration: underline;" th:text="${comic.title}"></span><br>
-        <span th:text="${comic.author}"></span>
-    </span>
-</a>
+    <!-- 結果なし -->
+    <p th:if="${#lists.isEmpty(results)}">お探しのものは見つかりませんでした。</p>
 
-        <!-- カート追加ボタン -->
-       <form th:action="@{/comics/addToCartFromSearch}" method="post">
-            <input type="hidden" name="comicId" th:value="${comic.comic_id}">
-            <input type="hidden" name="customerId" th:value="${customerId}">
-            <input type="hidden" name="redirectUrl" th:value="'/search/result?title=' + ${param.title}">
-            <button type="submit" class="btn btn-border"><span>買い物かごへ入れる</span></button>
+    <!-- 結果あり -->
+    <ul th:if="${!#lists.isEmpty(results)}">
+      <li th:each="comic : ${results}">
+        <a th:href="@{'/comics/detail/' + ${comic.comic_id}}">
+          <img th:src="${comic.comicImage}" alt="表紙画像" />
+          <span>
+            <span th:text="${comic.title}"></span><br />
+            <span th:text="${comic.author}"></span>
+          </span>
+        </a>
+        <form th:action="@{/comics/addToCartFromSearch}" method="post">
+          <input type="hidden" name="comicId" th:value="${comic.comic_id}" />
+          <input type="hidden" name="customerId" th:value="${customerId}" />
+          <input
+            type="hidden"
+            name="redirectUrl"
+            th:value="'/search/result?title=' + ${param.title}"
+          />
+          <button type="submit" class="btn btn-border">
+            <span>買い物かごへ入れる</span>
+          </button>
         </form>
-</ul>
+      </li>
+    </ul>
 
-<div class="back-buttons" style="display: flex; justify-content: center; gap: 20px; margin: 30px 0;">
-    <button onclick="location.href='/search'" class="read-link">検索に戻る</button>
-    <a th:href="@{/home}" class="read-link" style="display: inline-block; padding: 6px 12px; text-align: center;">ホームに戻る</a>
-</div>
-<div class="footer-section">
-        <h4>ComicRental(solekia@teamB)</h4>
-</div>
+    <div class="back-buttons">
+      <button onclick="location.href='/search'" class="read-link">
+        検索に戻る
+      </button>
+      <a th:href="@{/home}" class="read-link">ホームに戻る</a>
+    </div>
+  </main>
+
+  <div class="footer-section">
+    <h4>ComicRental(solekia@teamB)</h4>
+  </div>
 </body>
 </html>
