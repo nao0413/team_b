@@ -11,8 +11,6 @@ import jakarta.servlet.http.HttpSession;
 import teamB.comicrental.rental.RentalService;
 import teamB.comicrental.rental.model.Rental;
 import teamB.comicrental.rental.repository.RentalMapper;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
