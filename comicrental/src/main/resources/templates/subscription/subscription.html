@@ -9,6 +9,58 @@
     <link rel="stylesheet" href="/CSS/comicrental.css">
     <link rel="stylesheet" href="/CSS/comictable.css">
     <style>
+        body {
+            min-height: 100vh;
+            /* ★ビューポートの高さいっぱいになるように */
+            display: flex;
+            /* ★Flexコンテナにする */
+            flex-direction: column;
+        }
+
+        div.message.success,
+        /* successMessageのdiv */
+        div.message.error,
+        /* errorMessageのdiv */
+        div.message.info {
+            /* infoMessageのdiv */
+            width: 100%;
+            /* ★親（wrapper-info）の利用可能な幅いっぱいに広がる */
+            flex-shrink: 0;
+            /* ★親のFlexコンテナがスペース不足でも縮まないようにする */
+            margin: 0 auto;
+            /* ★中央寄せにする (margin autoはdisplay:flexの子にも効く) */
+            padding: 0;
+            /* ★メッセージpタグのパディングを邪魔しないようリセット */
+            /* box-sizing: border-box; */
+            /* HTML/bodyで既に設定済みなら不要 */
+        }
+
+        .wrapper {
+            /* HTMLでbodyの直下にあるwrapperクラス */
+            display: flex;
+            /* ★wrapperもFlexコンテナにする */
+            flex-direction: column;
+            /* ★wrapperの子要素（header, main-content, footer）を縦に並べる */
+            min-height: 100vh;
+            /* ★wrapperがビューポートの高さいっぱいになるように */
+            width: 100%;
+            align-items: center;
+        }
+
+        .wrapper-info {
+            flex-grow: 1;
+            /* ★重要：この部分が利用可能な高さをすべて埋める */
+            max-width: 960px;
+            /* 最大幅 */
+            width: 100%;
+            /* 上下の余白 */
+            display: flex;
+            /* Flexコンテナであることは維持 */
+            flex-direction: column;
+            /* 子要素を縦に並べる */
+
+        }
+
         h1 {
             /* メインタイトルを大きくし、下に十分な余白を取る */
             font-size: 1.5em;
@@ -46,7 +98,7 @@
         }
 
 
-        
+
         .mypage {
             /* mypageブロックの最大幅を設定し、コンテンツが広がりすぎないようにする */
             max-width: 100%;
@@ -72,7 +124,8 @@
             /* 各フォームの下に余白を取る */
             margin-bottom: 20px;
         }
-        .subsc h2{
+
+        .subsc h2 {
             border-bottom: 1px solid #ddd;
             padding-bottom: 15px;
             margin-bottom: 20px;
@@ -81,46 +134,47 @@
 </head>
 
 <body>
-    <div class="header-section">
-        <h1>漫画レンタル</h1>
-        <div class="nav-right" style="position: absolute; top: 15px; right: 20px;">
-            <a th:href="@{/mypage}">マイページ</a>
+    <div class="wrapper">
+        <div class="header-section">
+            <h1>漫画レンタル</h1>
+            <div class="nav-right" style="position: absolute; top: 15px; right: 20px;">
+                <a th:href="@{/mypage}">マイページ</a>
+            </div>
         </div>
-    </div>
+        <div class="wrapper-info">
+            <div th:if="${successMessage}" class="message success">
+                <p th:text="${successMessage}"></p>
+            </div>
 
-    <div th:if="${successMessage}" class="message success">
-        <p th:text="${successMessage}"></p>
-    </div>
+            <div th:if="${errorMessage}" class="message error">
+                <p th:text="${errorMessage}"></p>
+            </div>
 
-    <div th:if="${errorMessage}" class="message error">
-        <p th:text="${errorMessage}"></p>
-    </div>
+            <div th:if="${infoMessage}" class="message info">
+                <p th:text="${infoMessage}"></p>
+            </div>
+            <div class="box-section subsc">
+                <h2 th:text="${page.title}">サブスクリプション状況</h2>
+                <div class="mypage">
+                    <h4 th:if="${page.id !=null}">会員番号:<span th:text="${page.id}"></span></h4>
+                    <h4 th:if="${page.name !=null}">名前:<span th:text="${page.name}"></span></h4>
+                    <h4>サブスクリプション状況:<span th:text="${page.subscribed ? '加入済み':'未加入'}"></span></h4>
+                </div>
+            </div>
 
-    <div th:if="${infoMessage}" class="message info">
-        <p th:text="${infoMessage}"></p>
-    </div>
+            <div class="join box-section" th:if="${!page.subscribed}">
+                <h2>サブスクリプション　加入</h2>
+                <a th:href="@{/subscription/join}" class="comicdetail-button">加入ページへ</a>
+            </div>
 
-    <div class="box-section subsc">
-        <h2 th:text="${page.title}">サブスクリプション状況</h2>
-        <div class="mypage">
-            <h4 th:if="${page.id !=null}">会員番号:<span th:text="${page.id}"></span></h4>
-            <h4 th:if="${page.name !=null}">名前:<span th:text="${page.name}"></span></h4>
-            <h4>サブスクリプション状況:<span th:text="${page.subscribed ? '加入済み':'未加入'}"></span></h4>
+            <div class="Withdrawal box-section" th:if="${page.subscribed}">
+                <h2>サブスクリプション　退会</h2>
+                <a th:href="@{/subscription/withdrawal}" class="comicdetail-button">退会ページへ</a>
+            </div>
         </div>
-    </div>
-
-    <div class="join box-section" th:if="${!page.subscribed}">
-        <h2>サブスクリプション　加入</h2>
-        <a th:href="@{/subscription/join}" class="comicdetail-button">加入ページへ</a>
-    </div>
-
-    <div class="Withdrawal box-section" th:if="${page.subscribed}">
-        <h2>サブスクリプション　退会</h2>
-        <a th:href="@{/subscription/withdrawal}" class="comicdetail-button">退会ページへ</a>
-    </div>
-
-    <div class="footer-section">
-        <h4>ComicRental(solekia@teamB)</h4>
+        <div class="footer-section">
+            <h4>ComicRental(solekia@teamB)</h4>
+        </div>
     </div>
 </body>
 

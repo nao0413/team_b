@@ -103,7 +103,10 @@ h1 {
     max-width: 500px;
     /* ボックスの最大幅（適宜調整） */
     text-align: left;
-    padding-bottom: 60px
+    padding-bottom: 60px;
+    width: 100%; /* 親の利用可能な幅を占めるが、max-widthで制限される */
+    flex-shrink: 0; /* ★ 親のFlexコンテナがスペース不足でも縮まないようにする */
+    flex-basis: auto;
 }
 .box-section .box-content {
     width: fit-content; 
