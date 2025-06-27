@@ -10,11 +10,11 @@ body {
 .wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;  /* ← 画面の高さいっぱい */
+  min-height: 100vh;  
 }
 
 .main-content {
-  flex: 1;  /* ← 空でも残りスペースを埋めて押し下げる */
+  flex: 1;  
 }
 
 .header-section {
@@ -282,15 +282,22 @@ button:active {
   50%  { transform: rotate(-20deg) scale(1.2); }
   100% { transform: rotate(0deg) scale(1); }
 }
+/* 基本：右寄せ（合計冊数だけ表示時） */
 .summary {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
+
+/* サブスク加入時は左右に振り分け */
+.summary.both {
+  justify-content: space-between;
+}
+
 
 .rental-limit,
 .total-count {
